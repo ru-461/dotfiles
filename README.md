@@ -8,7 +8,7 @@ My settings and any more.
 git clone https://github.com/ryu-461/dotfiles
 
 # Run bootstrap.sh
-bash bootstrap.sh
+zsh bootstrap.sh
 ```
 
 Happy Hacking!!
