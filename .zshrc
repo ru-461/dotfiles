@@ -62,6 +62,7 @@ fi
 eval "$(gh completion -s zsh)"
 
 #################################  ALIASES  #################################
+
 # System
 
 # dotfiles
@@ -235,6 +236,7 @@ fi
 alias eship='code ~/.config/starship.toml'
 
 #################################  FUNCTIONS  #################################
+
 # homebrew upgrade
 _brewautoupgrade() {
   echo "Upgrading formula..."
