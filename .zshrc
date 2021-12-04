@@ -35,7 +35,7 @@ zstyle ':completion:*' use-compctl false
 zstyle ':completion:*' verbose true
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
-  
+
 # HomeBrew
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/sbin:$PATH"
@@ -63,6 +63,10 @@ eval "$(gh completion -s zsh)"
 
 #################################  ALIASES  #################################
 # System
+
+# dotfiles
+alias dot='code ~/dotfiles'
+
 alias re='$SHELL -l'
 alias c='clear'
 alias q='exit'
