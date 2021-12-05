@@ -41,6 +41,7 @@ echo "==========================================================================
 echo "Start Deployment."
 
 # Create simlink
+dotfiles=(.zshrc)
 for file in "${dotfiles[@]}"; do
   [[ "$f" == ".git" ]] && continue
   [[ "$f" == ".gitignore" ]] && continue
