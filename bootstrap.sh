@@ -11,7 +11,7 @@ echo "Start Installation."
 if [ $ENV == 'Darwin' ]; then
   echo "Your environment is a Mac. Start deployment for macOS."
   # Run install script
-  sh ./setup-scripts/install-mac.sh
+  sh ./install-scripts/install-mac.sh
 elif [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
   echo "Your environment is a Windows Subsystem for Linux. Start deployment for WSL."
   cd $HOME
