@@ -20,7 +20,7 @@ elif [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
   sudo apt install git -y
   # Clone dotfile repository locally
   git clone https://github.com/ryu-461/dotfiles.git
-  chmod +x $DOTBASE/setup-scripts/install-linux.sh
+  chmod +x $DOTBASE/setup-scripts/install-wsl.sh
   # Run install script
   sh $DOTBASE/install-scripts/install-wsl.sh
 elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
