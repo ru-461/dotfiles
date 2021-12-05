@@ -9,11 +9,11 @@ echo "==========================================================================
 echo "Start Installation."
 # Environmental determination Mac or WSL or Linux
 if [ $ENV == 'Darwin' ]; then
-  echo "Your environment is a Mac. Start deployment for macOS."
+  echo "Your environment is a Mac, Start deployment for macOS."
   # Run install script
   sh ./install-scripts/install-mac.sh
 elif [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
-  echo "Your environment is a Windows Subsystem for Linux. Start deployment for WSL."
+  echo "Your environment is a Windows Subsystem for Linux, Start deployment for WSL."
   cd $HOME
   # Update packages
   sudo apt update -y && sudo apt upgrade -y
@@ -22,10 +22,10 @@ elif [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
   git clone https://github.com/ryu-461/dotfiles.git
   cd dotfiles
   # Run install script
-  sh ./setup-scripts/install-wsl.sh
+  sh ./install-scripts/install-wsl.sh
 elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
   cd $HOME
-  echo "Your environment is a Start deployment for Linux."
+  echo "Your environment is a Linux, Start deployment for Linux."
   # Update packages
   sudo apt update -y && sudo apt upgrade -y
   sudo apt install git -y
