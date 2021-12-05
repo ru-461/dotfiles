@@ -36,38 +36,48 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
-# HomeBrew
-export PATH="/opt/homebrew/bin:$PATH"
-export PATH="/opt/homebrew/sbin:$PATH"
+case ${OSTYPE} in
+    darwin*)
+    # brew
+    export PATH="/opt/homebrew/bin:$PATH"
+    export PATH="/opt/homebrew/sbin:$PATH"
+
+    # Flutter
+    export PATH="$PATH:/Users/$USER/dev/flutter/bin"
+    ;;
+    linux*)
+    # brew
+    eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+    ;;
+esac
 
 # Volta
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
-# Flutter
-export PATH="$PATH:/Users/$USER/dev/flutter/bin"
-
 # anyenv
 eval "$(anyenv init - no--rehash)"
 
 # pyenv
-export PYENV_ROOT="$HOME/.anyenv/envs/pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
+if [[ $(command -v pyenv) ]]; then
+  export PYENV_ROOT="$HOME/.anyenv/envs/pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init --path)"
+  if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+  fi
 fi
 
 # GitHub CLI
-eval "$(gh completion -s zsh)"
+if [[ $(command -v pyenv) ]]; then
+  eval "$(gh completion -s zsh)"
+fi
 
 #################################  ALIASES  #################################
 
-# System
-
 # dotfiles
 alias dot='code ~/dotfiles'
-
+# System
 alias re='$SHELL -l'
 alias c='clear'
 alias q='exit'
@@ -122,11 +132,6 @@ alias g='git'
 alias dsstore='find . -name '.DS_Store' -type f -ls -delete'
 alias delds='find . -name ".DS_Store" -type f -ls -delete'
 
-function _delstores () {
-    sudo find $1 \( -name '.DS_Store' -or -name '._*' -or -name 'Thumbs.db' -or -name 'Desktop.ini' \) -delete -print;
-}
-alias delstores=_delstores
-
 # .zshrc
 if [[ $(command -v rg) ]]; then
   alias agzsh='alias | rg zsh'
@@ -172,7 +177,7 @@ alias yrun='yarn run'
 alias ysrun='yarn -s run'
 alias ydev='yarn dev'
 
-# HomeBrew
+# Homebrew
 if [[ $(command -v rg) ]]; then
   alias agbrew='alias | rg brew'
 else
@@ -189,6 +194,11 @@ alias brewo='brew outdated'
 alias brews='brew search'
 alias brewu='brew upgrade'
 alias brewx='brew uninstall'
+
+# anyenv
+alias aganyenv='alias | rg anyenv'
+alias ae='anyenv'
+alias aeu='anyenv update'
 
 # mas
 if [[ $(command -v rg) ]]; then
@@ -237,7 +247,12 @@ alias eship='code ~/.config/starship.toml'
 
 #################################  FUNCTIONS  #################################
 
-# homebrew upgrade
+function _delstores () {
+    sudo find $1 \( -name '.DS_Store' -or -name '._*' -or -name 'Thumbs.db' -or -name 'Desktop.ini' \) -delete -print;
+}
+alias delstores=_delstores
+
+# brew upgrade
 _brewautoupgrade() {
   echo "Upgrading formula..."
   echo -e "\e[1;3;33mbrew upgrade\e[m"
@@ -247,6 +262,16 @@ _brewautoupgrade() {
   echo -e "\e[1;3;33mbrew doctor\e[m"
   brew doctor
   echo "done. "
+}
+
+# apt upgrade
+_aptautoupgrade() {
+  echo "upgrading packages..."
+  echo -e "\e[1;3;32mapt update & apt upgrade\e[m"
+  aptu -y
+  echo -e "\e[1;3;32mapt autoremove\e[m"
+  aptar
+  echo "done."
 }
 
 # mas upgrade
