@@ -32,6 +32,7 @@ elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
   # Clone dotfile repository locally
   git clone https://github.com/ryu-461/dotfiles.git
   # Run install script
+  cd dotfiles
   sh ./setup-scripts/install-linux.sh
 else
   exit 1
