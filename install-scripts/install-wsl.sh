@@ -1,9 +1,8 @@
 # #!/usr/bin/env zsh
 # set -eux
 
-# install Homebrew
-which -s brew
-if [[ $? != 0 ]] ; then
+# install Linuxbrew
+if [[ $(command -v brew) ]]; then
     echo "Linuxbrew is missing, install a new one."
     sudo apt install build-essential curl file git
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
