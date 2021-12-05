@@ -41,7 +41,7 @@ case ${OSTYPE} in
     # brew
     export PATH="/opt/homebrew/bin:$PATH"
     export PATH="/opt/homebrew/sbin:$PATH"
-
+    alias brew="PATH=/opt/homebrew/bin:/opt/homebrew/sbin  brew "
     # Flutter
     export PATH="$PATH:/Users/$USER/dev/flutter/bin"
     ;;
@@ -60,12 +60,12 @@ eval "$(anyenv init - no--rehash)"
 
 # pyenv
 if [[ $(command -v pyenv) ]]; then
-  export PYENV_ROOT="$HOME/.anyenv/envs/pyenv"
-  export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init --path)"
-  if command -v pyenv 1>/dev/null 2>&1; then
-    eval "$(pyenv init -)"
-  fi
+	export PYENV_ROOT="$HOME/.anyenv/envs/pyenv"
+	export PATH="$PYENV_ROOT/bin:$PATH"
+	eval "$(pyenv init --path)"
+	if command -v pyenv 1>/dev/null 2>&1; then
+		eval "$(pyenv init -)"
+	fi
 fi
 
 # GitHub CLI
@@ -183,7 +183,6 @@ if [[ $(command -v rg) ]]; then
 else
   alias agbrew='alias | grep brew'
 fi
-alias brew="PATH=/opt/homebrew/bin:/opt/homebrew/sbin  brew "
 alias brewa='_brewautoupgrade'
 alias brewL='brew leaves'
 alias brewc='brew cleanup'
