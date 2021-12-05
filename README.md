@@ -29,13 +29,13 @@ cd dotfiles
 
 ```shell
 # Run bootstrap scrpt
-bash <(curl -sL raw.github.com/ryu-461/dotfiles/bootstrap.sh)
+bash <(curl -sL raw.githubusercontent.com/ryu-461/dotfiles/main/bootstrap.sh)
 ```
 
 ### Linux
 
 ```shell
 # Run bootstrap scrpt
-bash <(curl -sL raw.github.com/ryu-461/dotfiles/bootstrap.sh)
+bash <(curl -sL raw.githubusercontent.com/ryu-461/dotfiles/main/bootstrap.sh)
 ```
 Happy Hacking!!
