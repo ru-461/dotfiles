@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -ue
 
@@ -44,7 +44,6 @@ for file in "${dotfiles[@]}"; do
   [[ "$file" == ".git" ]] && continue
   [[ "$file" == ".gitignore" ]] && continue
   [[ "$file" == ".DS_Store" ]] && continue
-  echo "Deploying $file => $HOME"
   ln -svf ~/dotfiles/${file} ~/${file}
 done
 

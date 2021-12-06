@@ -1,5 +1,6 @@
-# #!/usr/bin/env zsh
-# set -eux
+#!/usr/bin/env bash
+
+set -ue
 
 # Install Linuxbrew
 if !(type "brew" > /dev/null 2>&1); then

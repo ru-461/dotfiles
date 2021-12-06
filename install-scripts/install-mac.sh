@@ -1,6 +1,6 @@
-# #!/usr/bin/env zsh
-# set -eux
+#!/usr/bin/env bash
 
+set -ue
 # install Homebrew
 which -s brew
 if [[ $? != 0 ]] ; then
