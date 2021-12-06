@@ -38,18 +38,18 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 # OS judgment
 case ${OSTYPE} in
-	darwin*)
-	# brew
-	export PATH="/opt/homebrew/bin:$PATH"
-	export PATH="/opt/homebrew/sbin:$PATH"
-	alias brew="PATH=/opt/homebrew/bin:/opt/homebrew/sbin  brew "
-	# Flutter
-	export PATH="$PATH:/Users/$USER/dev/flutter/bin"
-	;;
-	linux*)
-	# brew
-	eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-	;;
+  darwin*)
+  # brew
+  export PATH="/opt/homebrew/bin:$PATH"
+  export PATH="/opt/homebrew/sbin:$PATH"
+  alias brew="PATH=/opt/homebrew/bin:/opt/homebrew/sbin  brew "
+  # Flutter
+  export PATH="$PATH:/Users/$USER/dev/flutter/bin"
+  ;;
+  linux*)
+  # brew
+  eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+  ;;
 esac
 
 # Volta
@@ -61,17 +61,17 @@ eval "$(anyenv init - no--rehash)"
 
 # pyenv
 if [[ $(command -v pyenv) ]]; then
-	export PYENV_ROOT="$HOME/.anyenv/envs/pyenv"
-	export PATH="$PYENV_ROOT/bin:$PATH"
-	eval "$(pyenv init --path)"
-	if command -v pyenv 1>/dev/null 2>&1; then
-		eval "$(pyenv init -)"
-	fi
+  export PYENV_ROOT="$HOME/.anyenv/envs/pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init --path)"
+  if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+  fi
 fi
 
 # GitHub CLI
 if [[ $(command -v pyenv) ]]; then
-	eval "$(gh completion -s zsh)"
+  eval "$(gh completion -s zsh)"
 fi
 
 #################################  ALIASES  #################################
@@ -89,9 +89,9 @@ alias f='open .'
 
 # cd
 if [[ $(command -v rg) ]]; then
-	alias agcd='alias | rg cd'
+  alias agcd='alias | rg cd'
 else
-	alias aggit='alias | grep cd'
+  alias aggit='alias | grep cd'
 fi
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -99,33 +99,33 @@ alias ....='cd ../../..'
 
 # ls - exa
 if [[ $(command -v rg) ]]; then
-	alias aglist='alias | rg ls'
+  alias aglist='alias | rg ls'
 else
-	alias aglist='alias | grep ls'
+  alias aglist='alias | grep ls'
 fi
 
 if [[ $(command -v exa) ]]; then
-	alias e='exa --icons --git'
-	alias l=e
-	alias ls=e
-	alias ea='exa -a --icons --git'
-	alias la=ea
-	alias ee='exa -aahl --icons --git'
-	alias ll=ee
-	alias et='exa -T -L 3 -a -I "node_modules|.git|.cache" --icons'
-	alias lt=et
-	alias eta='exa -T -a -I "node_modules|.git|.cache" --color=always --icons | less -r'
-	alias lta=eta
-	alias l='clear && ls'
+  alias e='exa --icons --git'
+  alias l=e
+  alias ls=e
+  alias ea='exa -a --icons --git'
+  alias la=ea
+  alias ee='exa -aahl --icons --git'
+  alias ll=ee
+  alias et='exa -T -L 3 -a -I "node_modules|.git|.cache" --icons'
+  alias lt=et
+  alias eta='exa -T -a -I "node_modules|.git|.cache" --color=always --icons | less -r'
+  alias lta=eta
+  alias l='clear && ls'
 else
-	alias l='clear && ls'
+  alias l='clear && ls'
 fi
 
 # Git
 if [[ $(command -v rg) ]]; then
-	alias aggit='alias | rg git'
+  alias aggit='alias | rg git'
 else
-	alias aggit='alias | grep git'
+  alias aggit='alias | grep git'
 fi
 alias g='git'
 
@@ -135,18 +135,18 @@ alias delds='find . -name ".DS_Store" -type f -ls -delete'
 
 # .zshrc
 if [[ $(command -v rg) ]]; then
-	alias agzsh='alias | rg zsh'
+  alias agzsh='alias | rg zsh'
 else
-	alias aggit='alias | grep zsh'
+  alias aggit='alias | grep zsh'
 fi
 alias zsh='code ~/.zshrc'
 alias szsh='source ~/.zshrc'
 
 # ZennCLI
 if [[ $(command -v rg) ]]; then
-	alias agzenn='alias | rg zenn'
+  alias agzenn='alias | rg zenn'
 else
-	alias agzenn='alias | grep zenn'
+  alias agzenn='alias | grep zenn'
 fi
 alias zenna='cd ~/Documents/zenn-articles'
 alias zennb='cd ~/Documents/zenn-books'
@@ -166,9 +166,9 @@ alias aeu='anyenv update'
 
 # Yarn
 if [[ $(command -v rg) ]]; then
-	alias agyarn='alias | rg yarn'
+  alias agyarn='alias | rg yarn'
 else
-	alias agyarn='alias | rg yarn'
+  alias agyarn='alias | rg yarn'
 fi
 alias y='yarn'
 alias ygl='yarn global list --depth=0'
@@ -188,9 +188,9 @@ alias mp='multipass'
 
 # Docker
 if [[ $(command -v rg) ]]; then
-	alias agdocker='alias | rg docker'
+  alias agdocker='alias | rg docker'
 else
-	alias agdocker='alias | grep docker'
+  alias agdocker='alias | grep docker'
 fi
 alias d='docker'
 alias dp='docker ps'
@@ -211,17 +211,17 @@ alias drm='docker system prune'
 
 # Starship
 if [[ $(command -v rg) ]]; then
-	alias agship='alias | rg ship'
+  alias agship='alias | rg ship'
 else
-	alias agship='alias | grep ship'
+  alias agship='alias | grep ship'
 fi
 alias eship='code ~/.config/starship.toml'
 
 # Homebrew
 if [[ $(command -v rg) ]]; then
-	alias agbrew='alias | rg brew'
+  alias agbrew='alias | rg brew'
 else
-	alias agbrew='alias | grep brew'
+  alias agbrew='alias | grep brew'
 fi
 alias brewa='_brewautoupgrade'
 alias brewL='brew leaves'
@@ -236,9 +236,9 @@ alias brewx='brew uninstall'
 
 # mas
 if [[ $(command -v rg) ]]; then
-	alias agmas='alias | rg mas'
+  alias agmas='alias | rg mas'
 else
-	alias agmas='alias | grep mas'
+  alias agmas='alias | grep mas'
 fi
 alias masa='_masautoupgrade'
 alias masi='mas install'
@@ -257,42 +257,42 @@ alias delstores=_delstores
 
 # brew upgrade
 _brewautoupgrade() {
-	echo "Upgrading formula..."
-	echo -e "\e[1;3;33mbrew upgrade\e[m"
-	brew upgrade
-	echo -e "\e[1;3;33mbrew cleanup\e[m"
-	brew cleanup
-	echo -e "\e[1;3;33mbrew doctor\e[m"
-	brew doctor
-	echo "done. "
+  echo "Upgrading formula..."
+  echo -e "\e[1;3;33mbrew upgrade\e[m"
+  brew upgrade
+  echo -e "\e[1;3;33mbrew cleanup\e[m"
+  brew cleanup
+  echo -e "\e[1;3;33mbrew doctor\e[m"
+  brew doctor
+  echo "done. "
 }
 
 # apt upgrade
 _aptautoupgrade() {
-	echo "upgrading packages..."
-	echo -e "\e[1;3;32mapt update & apt upgrade\e[m"
-	aptu -y
-	echo -e "\e[1;3;32mapt autoremove\e[m"
-	aptar
-	echo "done."
+  echo "upgrading packages..."
+  echo -e "\e[1;3;32mapt update & apt upgrade\e[m"
+  aptu -y
+  echo -e "\e[1;3;32mapt autoremove\e[m"
+  aptar
+  echo "done."
 }
 
 # mas upgrade
 _masautoupgrade() {
-	echo "Upgrading apps..."
-	echo -e "\e[1;3;32mmas outdated\e[m"
-	mas outdated
-	echo -e "\e[1;3;32mmas upgrade\e[m"
-	mas upgrade
-	echo "done."
+  echo "Upgrading apps..."
+  echo -e "\e[1;3;32mmas outdated\e[m"
+  mas outdated
+  echo -e "\e[1;3;32mmas upgrade\e[m"
+  mas upgrade
+  echo "done."
 }
 
 # Autoupgrade
 alias au='_autoupgrade'
 _autoupgrade() {
-	_brewautoupgrade
-	echo ------------------------------------------------------------------------------
-	_masautoupgrade
+  _brewautoupgrade
+  echo ------------------------------------------------------------------------------
+  _masautoupgrade
 }
 
 # Starship

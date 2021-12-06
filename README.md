@@ -38,4 +38,5 @@ bash <(curl -sL raw.githubusercontent.com/ryu-461/dotfiles/main/bootstrap.sh)
 # Run bootstrap scrpt
 bash <(curl -sL raw.githubusercontent.com/ryu-461/dotfiles/main/bootstrap.sh)
 ```
+
 Happy Hacking!!
