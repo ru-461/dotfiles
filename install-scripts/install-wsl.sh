@@ -4,7 +4,7 @@ set -ue
 
 # Install Linuxbrew
 if !(type "brew" > /dev/null 2>&1); then
-  echo "Linuxbrew is missing, install a new one."
+  echo "Installing Linuxbrew."
   sudo apt install build-essential curl file git
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   echo "done."
@@ -14,18 +14,18 @@ if !(type "brew" > /dev/null 2>&1); then
   echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
   source ~/.profile
 else
-  echo "Linuxbrew is already installed, skip to install."
+  echo "Skip the Linuxbrew as they are already installed."
 fi
 
 # Install Zsh
 if !(type "zsh" > /dev/null 2>&1); then
-  echo "Zsh is missing, install a new one."
+  echo "Installing Zsh."
   brew install zsh
-  echo "Setting default..."
+  echo "Setting default."
   sudo sh -c 'echo $(brew --prefix)/bin/zsh >> /etc/shells'
   chsh -s $(brew --prefix)/bin/zsh
-  echo "Loading .zshrc"
+  echo "Loading Settings from .zshrc"
   source ../.zshrc
 else
-  echo "Zsh is already installed, skip to install."
+  echo "Skip the Zsh as they are already installed."
 fi
