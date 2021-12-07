@@ -11,32 +11,9 @@ My settings and any more.
 
 ## How to use
 
-### macOS
-
-```shell
-# Install xcode-select
-xcode-select install
-
-# Clone this repository locally
-git clone https://github.com/ryu-461/dotfiles.git
-cd dotfiles
-
-# Run bootstrap.sh
- ./bootstrap.sh
-```
-
-### Ubuntu・WSL
-
 ```shell
 # Run bootstrap scrpt
-bash <(curl -sL raw.githubusercontent.com/ryu-461/dotfiles/main/bootstrap.sh)
-```
-
-### Linux
-
-```shell
-# Run bootstrap scrpt
-bash <(curl -sL raw.githubusercontent.com/ryu-461/dotfiles/main/bootstrap.sh)
+bash <(curl -fsSL raw.githubusercontent.com/ryu-461/dotfiles/main/bootstrap.sh)
 ```
 
 Happy Hacking!!
