@@ -12,7 +12,7 @@ My settings and any more.
 ## How to use
 
 ```shell
-# Run bootstrap scrpt
+# Run bootstrap.sh
 bash <(curl -fsSL raw.githubusercontent.com/ryu-461/dotfiles/main/bootstrap.sh)
 ```
 
