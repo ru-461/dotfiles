@@ -48,7 +48,7 @@ elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
     git pull origin main
   fi
   # Run install script
-  source $DOT_BASE/setup-scripts/install-linux.sh
+  source $DOT_BASE/install-scripts/install-linux.sh
 else
   exit 1
 fi
