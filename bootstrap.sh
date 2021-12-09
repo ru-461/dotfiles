@@ -17,11 +17,11 @@ elif [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
   echo "Your environment is a Windows Subsystem for Linux, Start deployment for WSL."
   cd $HOME
   # Update packages
-  echo "Updating the package to the latest..."
+  echo "Updating the package to the latest ..."
   sudo apt update -y && sudo apt upgrade -y
   sudo apt install git -y
   # Clone dotfile repository locally
-  echo "Cloning the dotfiles repository..."
+  echo "Cloning the dotfiles repository ..."
   git clone $DOT_REMOTE
   # Run install script
   sh $DOT_BASE/install-scripts/install-wsl.sh
@@ -29,11 +29,11 @@ elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
   cd $HOME
   echo "Your environment is a Linux, Start deployment for Linux."
   # Update packages
-  echo "Updating the package to the latest..."
+  echo "Updating the package to the latest ..."
   sudo apt update -y && sudo apt upgrade -y
   sudo apt install git -y
   # Clone dotfile repository locally
-  echo "Cloning the dotfiles repository..."
+  echo "Cloning the dotfiles repository ..."
   git clone $DOT_REMOTE
   # Run install script
   sh $DOT_BASE/setup-scripts/install-linux.sh
@@ -43,7 +43,7 @@ fi
 echo "Installation complete."
 echo "=============================================================================="
 
-echo "Expanding symbolic links..."
+echo "Expanding symbolic links ..."
 dotfiles=(.zshrc)
 for file in "${dotfiles[@]}"; do
   [[ "$file" == ".git" ]] && continue
