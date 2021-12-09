@@ -12,7 +12,7 @@ echo "Start Installation."
 if [ $(uname) == 'Darwin' ]; then
   echo "Your environment is a Mac, Start deployment for macOS."
   # Run install script
-  source $DOT_BASE/install-scripts/install-mac.sh
+  # source $DOT_BASE/install-scripts/install-mac.sh
 elif [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
   echo "Your environment is a Windows Subsystem for Linux, Start deployment for WSL."
   cd $HOME
@@ -21,8 +21,14 @@ elif [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
   sudo apt update -y && sudo apt upgrade -y
   sudo apt install git -y
   # Clone dotfile repository locally
-  echo "Cloning the dotfiles repository ..."
-  git clone $DOT_REMOTE
+  if [ ! -d $HOME/dotfiles ]; then
+    echo "Cloning the dotfiles repository ..."
+    git clone $DOT_REMOTE
+  else
+    echo "Updating the dotfiles ..."
+    cd $DOT_BASE
+    git pull origin main
+  fi
   # Run install script
   source $DOT_BASE/install-scripts/install-wsl.sh
 elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
@@ -33,8 +39,14 @@ elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
   sudo apt update -y && sudo apt upgrade -y
   sudo apt install git -y
   # Clone dotfile repository locally
-  echo "Cloning the dotfiles repository ..."
-  git clone $DOT_REMOTE
+  if [ ! -d $HOME/dotfiles ]; then
+    echo "Cloning the dotfiles repository ..."
+    git clone $DOT_REMOTE
+  else
+    echo "Updating the dotfiles ..."
+    cd $DOT_BASE
+    git pull origin main
+  fi
   # Run install script
   source $DOT_BASE/setup-scripts/install-linux.sh
 else
