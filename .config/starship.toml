@@ -1,0 +1,20 @@
+add_newline = true
+
+scan_timeout = 10
+
+[username]
+disabled = true
+
+[character]
+success_symbol = "[▶](bold green)"
+error_symbol = "[▶](bold red)"
+
+[package]
+disabled = true
+
+[cmd_duration]
+min_time = 500
+format = "🕛 [$duration](bold yellow)"
+
+[docker_context]
+format = "via [🐋 $context](blue bold)"
