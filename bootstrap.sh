@@ -12,7 +12,7 @@ echo "Start Installation."
 if [ $(uname) == 'Darwin' ]; then
   echo "Your environment is a Mac, Start deployment for macOS."
   # Run install script
-  sh $DOT_BASE/install-scripts/install-mac.sh
+  source $DOT_BASE/install-scripts/install-mac.sh
 elif [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
   echo "Your environment is a Windows Subsystem for Linux, Start deployment for WSL."
   cd $HOME
@@ -24,7 +24,7 @@ elif [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
   echo "Cloning the dotfiles repository ..."
   git clone $DOT_REMOTE
   # Run install script
-  sh $DOT_BASE/install-scripts/install-wsl.sh
+  source $DOT_BASE/install-scripts/install-wsl.sh
 elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
   cd $HOME
   echo "Your environment is a Linux, Start deployment for Linux."
@@ -36,20 +36,14 @@ elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
   echo "Cloning the dotfiles repository ..."
   git clone $DOT_REMOTE
   # Run install script
-  sh $DOT_BASE/setup-scripts/install-linux.sh
+  source $DOT_BASE/setup-scripts/install-linux.sh
 else
   exit 1
 fi
 echo "Installation complete."
 echo "=============================================================================="
+# Start deploy.
+cd $DOT_BASE
+source $DOT_BASE/deploy.sh
 
-echo "Expanding symbolic links ..."
-dotfiles=(.zshrc)
-for file in "${dotfiles[@]}"; do
-  [[ "$file" == ".git" ]] && continue
-  [[ "$file" == ".gitignore" ]] && continue
-  [[ "$file" == ".DS_Store" ]] && continue
-  ln -svf ~/dotfiles/${file} ~/${file}
-done
-echo "Symbolic link expansion is complete."
 echo "Happy Hacking!!"
