@@ -25,7 +25,7 @@ if !(type "zsh" > /dev/null 2>&1); then
   sudo sh -c 'echo $(brew --prefix)/bin/zsh >> /etc/shells'
   chsh -s $(brew --prefix)/bin/zsh
   echo "Loading Settings from .zshrc"
-  source ../.zshrc
+  source ~/.zshrc
 else
   echo "Skip the Zsh as they are already installed."
 fi
