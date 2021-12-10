@@ -79,8 +79,9 @@ fi
 # dotfiles
 alias dot='code ~/dotfiles'
 # System
-alias re='$SHELL -l'
+alias re='source ~/.zshrc'
 alias c='clear'
+alias cls='clear'
 alias q='exit'
 alias a='alias'
 alias h='history'
