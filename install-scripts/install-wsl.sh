@@ -2,6 +2,24 @@
 
 set -ue
 
+echo "Start Installation."
+
+# Update packages
+echo "Updating the package to the latest ..."
+sudo apt update -y && sudo apt upgrade -y
+sudo apt install git -y
+
+if [ ! -d $HOME/dotfiles ]; then
+  echo "Cloning the dotfiles repository ..."
+  cd $HOME
+  git clone $DOT_REMOTE
+else
+  echo "Dotfiles already exists."
+fi
+
+# Setting System
+sudo timedatectl set-timezone Asia/Tokyo
+
 # Install Linuxbrew
 if !(type "brew" > /dev/null 2>&1); then
   echo "Installing Linuxbrew ..."
@@ -29,3 +47,5 @@ if !(type "zsh" > /dev/null 2>&1); then
 else
   echo "Skip the Zsh as they are already installed."
 fi
+
+echo "Installation complete."

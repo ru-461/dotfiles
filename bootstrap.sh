@@ -12,59 +12,33 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
   exit 1
 fi
 echo ""
-echo "Start Installation."
+
 if [[ $(uname) == 'Darwin' ]]; then
   echo "Your environment is a Mac, Start deployment for macOS."
-    # Clone dotfile repository locally
-  if [[ ! -d $HOME/dotfiles ]]; then
-    echo "Cloning the dotfiles repository ..."
-    cd $HOME
-    git clone $DOT_REMOTE
-  fi
-  # Run install script
-  # source $DOT_BASE/install-scripts/install-mac.sh
+  ENV="mac"
+  installation
 elif [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
   echo "Your environment is a Windows Subsystem for Linux, Start deployment for WSL."
-  cd $HOME
-  # Update packages
-  echo "Updating the package to the latest ..."
-  sudo apt update -y && sudo apt upgrade -y
-  sudo apt install git -y
-  # Clone dotfile repository locally
-  if [ ! -d $HOME/dotfiles ]; then
-    echo "Cloning the dotfiles repository ..."
-    cd $HOME
-    git clone $DOT_REMOTE
-  fi
-  # Run install script
-  source $DOT_BASE/install-scripts/install-wsl.sh
+  ENV="wsl"
+  installation
 elif [[ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]]; then
   echo "Your environment is a Linux, Start deployment for Linux."
-  # Update packages
-  echo "Updating the package to the latest ..."
-  sudo apt update -y && sudo apt upgrade -y
-  sudo apt install git -y
-  # Clone dotfile repository locally
-  if [[ ! -d $HOME/dotfiles ]]; then
-    echo "Cloning the dotfiles repository ..."
-    cd $HOME
-    git clone $DOT_REMOTE
-  else
-    read -p "The dotfiles already exists. Do you want to update them? [y/N] ')" -n 1 -r
-    echo ""
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-      echo "Updating the dotfiles ..."
-      cd $DOT_BASE
-      git pull origin main
-    fi
-    echo 'There is nothing to do.'
-  fi
-  # Run install script
-  source $DOT_BASE/install-scripts/install-linux.sh
+  ENV="linux"
+  installation
 else
+  echo "This platform is not supported in this Dotfiles."
   exit 1
 fi
-echo "Installation complete."
+
+function installation() {
+  if [[ -f $DOT_BASE/install-scripts/install-$ENV.sh ]]; then
+    sh $DOT_BASE/install-scripts/install-$ENV.sh
+  else
+    echo "Cannot find an installation script for this platform."
+    exit 1
+  fi
+}
+
 # Start deploy.
 cd $DOT_BASE
 # source $DOT_BASE/deploy.sh
