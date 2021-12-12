@@ -15,8 +15,8 @@ echo ""
 
 
 function installation() {
-  echo $ENV
-  echo "defined!"
+  echo "Called install script"
+  echo "Your platform is ${ENV}"
   if [[ -f ${DOT_BASE}/install-scripts/install-${ENV}.sh ]]; then
     sh ${DOT_BASE}/install-scripts/install-${ENV}.sh
   else
