@@ -3,20 +3,20 @@ echo -e "\e[1;3;36mWelcom!!\e[m"
 
 #################################  ZSH INIT  #################################
 
-# zsh history
+# Zsh history
 setopt histignorealldups
 HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.zsh_history
 
-# compinit
+# Compinit
 autoload -Uz compinit
 compinit
 
 # Lang
 export LANG=ja_JP.UTF-8
 
-# beep
+# Beep
 setopt no_beep
 setopt nolistbeep
 
@@ -62,7 +62,7 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 # anyenv
 eval "$(anyenv init - no--rehash)"
 
-# pyenv
+# Pyenv
 if [[ $(command -v pyenv) ]]; then
   export PYENV_ROOT="$HOME/.anyenv/envs/pyenv"
   export PATH="$PYENV_ROOT/bin:$PATH"
@@ -296,7 +296,7 @@ _masautoupgrade() {
   echo "done."
 }
 
-# Autoupgrade
+# Auto upgrade
 alias au='_autoupgrade'
 _autoupgrade() {
   if [[ ! OS="darwin" ]]; then
