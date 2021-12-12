@@ -18,6 +18,7 @@ function installation() {
   if [[ -f ${DOT_BASE}/install-scripts/install-${ENV}.sh ]]; then
     sh $DOT_BASE/install-scripts/install-$ENV.sh
   else
+    echo $ENV
     echo "Cannot find an installation script for this platform."
     exit 1
   fi
