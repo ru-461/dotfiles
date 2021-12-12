@@ -13,6 +13,16 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
 fi
 echo ""
 
+
+function installation() {
+  if [[ -f $DOT_BASE/install-scripts/install-$ENV.sh ]]; then
+    sh $DOT_BASE/install-scripts/install-$ENV.sh
+  else
+    echo "Cannot find an installation script for this platform."
+    exit 1
+  fi
+}
+
 if [[ $(uname) == 'Darwin' ]]; then
   echo "Your environment is a Mac, Start deployment for macOS."
   ENV="mac"
@@ -29,15 +39,6 @@ else
   echo "This platform is not supported in this Dotfiles."
   exit 1
 fi
-
-function installation() {
-  if [[ -f $DOT_BASE/install-scripts/install-$ENV.sh ]]; then
-    sh $DOT_BASE/install-scripts/install-$ENV.sh
-  else
-    echo "Cannot find an installation script for this platform."
-    exit 1
-  fi
-}
 
 # Start deploy.
 cd $DOT_BASE
