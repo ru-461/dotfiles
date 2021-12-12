@@ -39,18 +39,21 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 # OS judgment
 case ${OSTYPE} in
   darwin*)
-  # brew
-  export PATH="/opt/homebrew/bin:$PATH"
-  export PATH="/opt/homebrew/sbin:$PATH"
-  alias brew="PATH=/opt/homebrew/bin:/opt/homebrew/sbin  brew "
-  # Flutter
-  export PATH="$PATH:/Users/$USER/dev/flutter/bin"
+    OS=darwin
   ;;
   linux*)
-  # brew
-  eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+    OS=linux
   ;;
 esac
+
+# brew
+if [[ $OS=="darwin" ]]; then
+  export PATH="/opt/homebrew/bin:$PATH"
+  export PATH="/opt/homebrew/sbin:$PATH"
+  alias brew="PATH=/opt/homebrew/bin:/opt/homebrew/sbin brew "
+else
+  eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+fi
 
 # Volta
 export VOLTA_HOME="$HOME/.volta"
@@ -72,6 +75,11 @@ fi
 # GitHub CLI
 if [[ $(command -v pyenv) ]]; then
   eval "$(gh completion -s zsh)"
+fi
+
+# flutter
+if [[ OS=="darwin" ]]; then
+  export PATH="$PATH:/Users/$USER/dev/flutter/bin"
 fi
 
 #################################  ALIASES  #################################
@@ -216,7 +224,7 @@ if [[ $(command -v rg) ]]; then
 else
   alias agship='alias | grep ship'
 fi
-alias eship='code ~/.config/starship.toml'
+alias ship='code ~/.config/starship.toml'
 
 # Homebrew
 if [[ $(command -v rg) ]]; then
@@ -252,13 +260,13 @@ alias masx='mas uninstall'
 #################################  FUNCTIONS  #################################
 
 function _delstores () {
-    sudo find $1 \( -name '.DS_Store' -or -name '._*' -or -name 'Thumbs.db' -or -name 'Desktop.ini' \) -delete -print;
+  sudo find $1 \( -name '.DS_Store' -or -name '._*' -or -name 'Thumbs.db' -or -name 'Desktop.ini' \) -delete -print;
 }
 alias delstores=_delstores
 
 # brew upgrade
 _brewautoupgrade() {
-  echo "Upgrading formula..."
+  echo "Upgrading brew formulas ..."
   echo -e "\e[1;3;33mbrew upgrade\e[m"
   brew upgrade
   echo -e "\e[1;3;33mbrew cleanup\e[m"
@@ -270,7 +278,7 @@ _brewautoupgrade() {
 
 # apt upgrade
 _aptautoupgrade() {
-  echo "upgrading packages..."
+  echo "Upgrading packages ..."
   echo -e "\e[1;3;32mapt update & apt upgrade\e[m"
   aptu -y
   echo -e "\e[1;3;32mapt autoremove\e[m"
@@ -291,6 +299,9 @@ _masautoupgrade() {
 # Autoupgrade
 alias au='_autoupgrade'
 _autoupgrade() {
+  if [[ ! OS="darwin" ]]; then
+    _aptautoupgrade
+  fi
   _brewautoupgrade
   echo ------------------------------------------------------------------------------
   _masautoupgrade
