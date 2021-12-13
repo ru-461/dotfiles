@@ -47,7 +47,7 @@ case ${OSTYPE} in
 esac
 
 # brew
-if [[ $OS=="darwin" ]]; then
+if [[ $OS = "Darwin" ]]; then
   export PATH="/opt/homebrew/bin:$PATH"
   export PATH="/opt/homebrew/sbin:$PATH"
   alias brew="PATH=/opt/homebrew/bin:/opt/homebrew/sbin brew "
@@ -78,7 +78,7 @@ if [[ $(command -v pyenv) ]]; then
 fi
 
 # flutter
-if [[ OS=="darwin" ]]; then
+if [[ $OS = "darwin" ]]; then
   export PATH="$PATH:/Users/$USER/dev/flutter/bin"
 fi
 
@@ -118,7 +118,7 @@ if [[ $(command -v exa) ]]; then
   alias l=e
   alias ls=e
   alias ea='exa -a --icons --git'
-  alias la=ea
+  alias la=eacd
   alias ee='exa -aahl --icons --git'
   alias ll=ee
   alias et='exa -T -L 3 -a -I "node_modules|.git|.cache" --icons'
@@ -244,18 +244,20 @@ alias brewu='brew upgrade'
 alias brewx='brew uninstall'
 
 # mas
-if [[ $(command -v rg) ]]; then
-  alias agmas='alias | rg mas'
-else
-  alias agmas='alias | grep mas'
+if [[ $OS = "darwin" ]]; then
+  if [[ $(command -v rg) ]]; then
+    alias agmas='alias | rg mas'
+  else
+    alias agmas='alias | grep mas'
+  fi
+  alias masa='_masautoupgrade'
+  alias masi='mas install'
+  alias masl='mas list'
+  alias maso='mas outdated'
+  alias mass='mas search'
+  alias masu='mas upgrade'
+  alias masx='mas uninstall'
 fi
-alias masa='_masautoupgrade'
-alias masi='mas install'
-alias masl='mas list'
-alias maso='mas outdated'
-alias mass='mas search'
-alias masu='mas upgrade'
-alias masx='mas uninstall'
 
 #################################  FUNCTIONS  #################################
 
@@ -297,15 +299,15 @@ _masautoupgrade() {
 }
 
 # Auto upgrade
-alias au='_autoupgrade'
 _autoupgrade() {
-  if [[ ! OS="darwin" ]]; then
+  if [[ ! $OS = "darwin" ]]; then
     _aptautoupgrade
   fi
   _brewautoupgrade
   echo ------------------------------------------------------------------------------
   _masautoupgrade
 }
+alias au='_autoupgrade'
 
 # Starship
 eval "$(starship init zsh)"
