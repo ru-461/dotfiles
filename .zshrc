@@ -282,9 +282,9 @@ _brewautoupgrade() {
 _aptautoupgrade() {
   echo "Upgrading packages ..."
   echo -e "\e[1;3;32mapt update & apt upgrade\e[m"
-  aptu -y
+  sudo apt update -y
   echo -e "\e[1;3;32mapt autoremove\e[m"
-  aptar
+
   echo "done."
 }
 
@@ -304,8 +304,10 @@ _autoupgrade() {
     _aptautoupgrade
   fi
   _brewautoupgrade
-  echo ------------------------------------------------------------------------------
+    if [[ $OS = "darwin" ]]; then
+      echo ------------------------------------------------------------------------------
   _masautoupgrade
+  fi
 }
 alias au='_autoupgrade'
 
