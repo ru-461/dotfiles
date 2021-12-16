@@ -284,6 +284,7 @@ _aptautoupgrade() {
   echo -e "\e[1;3;32mapt update & apt upgrade\e[m"
   sudo apt update -y
   echo -e "\e[1;3;32mapt autoremove\e[m"
+  sudo apt upgrade -y
   echo "done."
 }
 
