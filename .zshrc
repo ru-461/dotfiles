@@ -4,7 +4,7 @@ echo -e "\e[1;3;36mWelcom!!\e[m"
 #################################  ZSH INIT  #################################
 
 # Zsh history
-setopt histignorealldups
+# retopt histignorealldups
 HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.zsh_history
@@ -47,7 +47,7 @@ case ${OSTYPE} in
 esac
 
 # brew
-if [[ $OS = "Darwin" ]]; then
+if [[ $OS = "darwin" ]]; then
   export PATH="/opt/homebrew/bin:$PATH"
   export PATH="/opt/homebrew/sbin:$PATH"
   alias brew="PATH=/opt/homebrew/bin:/opt/homebrew/sbin brew "
@@ -284,7 +284,6 @@ _aptautoupgrade() {
   echo -e "\e[1;3;32mapt update & apt upgrade\e[m"
   sudo apt update -y
   echo -e "\e[1;3;32mapt autoremove\e[m"
-
   echo "done."
 }
 
@@ -304,9 +303,9 @@ _autoupgrade() {
     _aptautoupgrade
   fi
   _brewautoupgrade
-    if [[ $OS = "darwin" ]]; then
-      echo ------------------------------------------------------------------------------
-  _masautoupgrade
+  if [[ $OS = "darwin" ]]; then
+    echo ------------------------------------------------------------------------------
+    _masautoupgrade
   fi
 }
 alias au='_autoupgrade'
