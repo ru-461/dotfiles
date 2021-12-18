@@ -194,6 +194,8 @@ alias ydev='yarn dev'
 
 # Multipass
 alias mp='multipass'
+alias mpl='multipass list'
+alias mpre='multipass restart'
 
 # Docker
 if [[ $(command -v rg) ]]; then
