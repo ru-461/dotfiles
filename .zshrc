@@ -277,7 +277,7 @@ _brewautoupgrade() {
   brew cleanup
   echo -e "\e[1;3;33mbrew doctor\e[m"
   brew doctor
-  echo "done. "
+  echo "done."
 }
 
 # apt upgrade
