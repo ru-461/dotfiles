@@ -245,7 +245,7 @@ alias brews='brew search'
 alias brewu='brew upgrade'
 alias brewx='brew uninstall'
 
-# mas
+# mas-cli
 if [[ $OS = "darwin" ]]; then
   if [[ $(command -v rg) ]]; then
     alias agmas='alias | rg mas'
