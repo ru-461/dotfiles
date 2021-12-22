@@ -1,8 +1,3 @@
-# Welcome message
-echo -e "${COLOR_BLUE}Welcom!!${COLOR_BLUE}"
-
-#################################  ZSH INIT  #################################
-
 # Colors
 COLOR_GRAY="\033[1;38;5;243m"
 COLOR_BLUE="\033[1;34m"
@@ -11,6 +6,11 @@ COLOR_RED="\033[1;31m"
 COLOR_PURPLE="\033[1;35m"
 COLOR_YELLOW="\033[1;33m"
 COLOR_NONE="\033[0m"
+
+# Welcome message
+echo -e "${COLOR_BLUE}Welcom!!${COLOR_NONE}"
+
+#################################  ZSH INIT  #################################
 
 # Zsh history
 HISTSIZE=1000
@@ -271,6 +271,13 @@ fi
 
 #################################  FUNCTIONS  #################################
 
+_headline() {
+    echo -e "\n${COLOR_GRAY}==============================${COLOR_NONE}"
+    echo -e "${COLOR_PURPLE}$1${COLOR_NONE}"
+    echo -e "${COLOR_GRAY}==============================${COLOR_NONE}\n"
+}
+
+
 function _delstores () {
   sudo find $1 \( -name '.DS_Store' -or -name '._*' -or -name 'Thumbs.db' -or -name 'Desktop.ini' \) -delete -print;
 }
@@ -278,38 +285,41 @@ alias delstores=_delstores
 
 # brew upgrade
 _brewautoupgrade() {
+  _headline "Upgrading brew"
   echo "Upgrading brew formulas ..."
-  echo -e "${COLOR_YELLOW}brew update${COLOR_YELLOW}"
+  echo -e "${COLOR_YELLOW}brew update${COLOR_NONE}"
   brew update
-  echo -e "${COLOR_YELLOW}brew upgrade${COLOR_YELLOW}"
+  echo -e "${COLOR_YELLOW}brew upgrade${COLOR_NONE}"
   brew upgrade
-  echo -e "${COLOR_YELLOW}brew cleanup${COLOR_YELLOW}"
+  echo -e "${COLOR_YELLOW}brew cleanup${COLOR_NONE}"
   brew cleanup
-  echo -e "${COLOR_YELLOW}brew doctor${COLOR_YELLOW}"
+  echo -e "${COLOR_YELLOW}brew doctor${COLOR_NONE}"
   brew doctor
   echo "done."
 }
 
 # apt upgrade
 _aptautoupgrade() {
+  _headline "Upgrading apt"
   echo "Upgrading packages ..."
-  echo -e "${COLOR_YELLOW}apt update${COLOR_YELLOW}"
+  echo -e "${COLOR_YELLOW}apt update${COLOR_NONE}"
   sudo apt update
-  echo -e "${COLOR_YELLOW}apt upgrade${COLOR_YELLOW}"
+  echo -e "${COLOR_YELLOW}apt upgrade${COLOR_NONE}"
   sudo apt upgrade -y
-  echo -e "${COLOR_YELLOW}apt autoremove${COLOR_YELLOW}"
+  echo -e "${COLOR_YELLOW}apt autoremove${COLOR_NONE}"
   sudo apt autoremove -y
-  echo -e "${COLOR_YELLOW}apt crean${COLOR_YELLOW}"
+  echo -e "${COLOR_YELLOW}apt crean${COLOR_NONE}"
   sudo apt crean -y
   echo "done."
 }
 
 # mas upgrade
 _masautoupgrade() {
+  _headline "Upgrading mas"
   echo "Upgrading apps ..."
-  echo -e "${COLOR_BLUE}mas outdated${COLOR_BLUE}"
+  echo -e "${COLOR_BLUE}mas outdated${COLOR_NONE}"
   mas outdated
-  echo -e "${COLOR_BLUE}mas upgrade${COLOR_BLUE}"
+  echo -e "${COLOR_BLUE}mas upgrade${COLOR_NONE}"
   mas upgrade
   echo "done."
 }
@@ -321,7 +331,6 @@ _autoupgrade() {
   fi
   _brewautoupgrade
   if [[ $OS = "darwin" ]]; then
-    echo ------------------------------------------------------------------------------
     _masautoupgrade
   fi
 }
