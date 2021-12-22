@@ -271,6 +271,8 @@ alias delstores=_delstores
 # brew upgrade
 _brewautoupgrade() {
   echo "Upgrading brew formulas ..."
+  echo -e "\e[1;3;33mbrew update\e[m"
+  brew update
   echo -e "\e[1;3;33mbrew upgrade\e[m"
   brew upgrade
   echo -e "\e[1;3;33mbrew cleanup\e[m"
@@ -283,16 +285,20 @@ _brewautoupgrade() {
 # apt upgrade
 _aptautoupgrade() {
   echo "Upgrading packages ..."
-  echo -e "\e[1;3;32mapt update & apt upgrade\e[m"
-  sudo apt update -y
-  echo -e "\e[1;3;32mapt autoremove\e[m"
+  echo -e "\e[1;3;32mapt update\e[m"
+  sudo apt update
+  echo -e "\e[1;3;32mapt upgrade\e[m"
   sudo apt upgrade -y
+  echo -e "\e[1;3;32mapt autoremove\e[m"
+  sudo apt autoremove -y
+  echo -e "\e[1;3;32mapt crean\e[m"
+  sudo apt crean -y
   echo "done."
 }
 
 # mas upgrade
 _masautoupgrade() {
-  echo "Upgrading apps..."
+  echo "Upgrading apps ..."
   echo -e "\e[1;3;32mmas outdated\e[m"
   mas outdated
   echo -e "\e[1;3;32mmas upgrade\e[m"
