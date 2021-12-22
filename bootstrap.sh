@@ -12,26 +12,26 @@ COLOR_YELLOW="\033[1;33m"
 COLOR_NONE="\033[0m"
 
 success() {
-    echo -e "${COLOR_GREEN}$1${COLOR_NONE}"
+  echo -e "${COLOR_GREEN}$1${COLOR_NONE}"
 }
 
 info() {
-    echo -e "${COLOR_BLUE}Info: ${COLOR_NONE}$1"
+  echo -e "${COLOR_BLUE}Info: ${COLOR_NONE}$1"
 }
 
 headline() {
-    echo -e "\n${COLOR_GRAY}==============================${COLOR_NONE}"
-    echo -e "${COLOR_PURPLE}$1${COLOR_NONE}"
-    echo -e "${COLOR_GRAY}==============================${COLOR_NONE}\n"
+  echo -e "\n${COLOR_GRAY}==============================${COLOR_NONE}"
+  echo -e "${COLOR_PURPLE}$1${COLOR_NONE}"
+  echo -e "${COLOR_GRAY}==============================${COLOR_NONE}\n"
 }
 
 warning() {
-    echo -e "${COLOR_YELLOW}Warning: ${COLOR_NONE}$1"
+  echo -e "${COLOR_YELLOW}Warning: ${COLOR_NONE}$1"
 }
 
 error() {
-    echo -e "${COLOR_RED}Error: ${COLOR_NONE}$1"
-    exit 1
+  echo -e "${COLOR_RED}Error: ${COLOR_NONE}$1"
+  exit 1
 }
 
 DOT_BASE=$HOME/dotfiles
@@ -39,8 +39,7 @@ DOT_REMOTE=https://github.com/ryu-461/dotfiles.git
 
 read -p "Welcome dotfiles installation!! This script will install and deploy the various packages. Are you ready? [y/N] ')" -n 1 -r
 if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-  echo ""
-  info 'The installation has been canceled. There is nothing to do.'
+  info "The installation has been canceled. There is nothing to do."
   exit 1
 fi
 echo ""
@@ -53,7 +52,6 @@ function installation() {
     sh ${DOT_BASE}/install-scripts/install-${ENV}.sh
   else
     error "Cannot find an installation script for this platform."
-    exit 1
   fi
 }
 
@@ -70,12 +68,11 @@ elif [[ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]]; then
   ENV="linux"
   installation
 else
-  echo "This platform is not supported in this Dotfiles."
-  exit 1
+  error "This platform is not supported in this Dotfiles."
 fi
 
 # Start deploy.
 cd $DOT_BASE
 
 # source $DOT_BASE/deploy.sh
-echo "Happy Hacking!!"
+success "done. Happy Hacking!!"
