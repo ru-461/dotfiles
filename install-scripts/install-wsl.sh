@@ -39,9 +39,11 @@ fi
 if !(type "zsh" > /dev/null 2>&1); then
   echo "Installing Zsh ..."
   brew install zsh
-  echo "Setting default ..."
-  sudo sh -c 'echo $(brew --prefix)/bin/zsh >> /etc/shells'
-  chsh -s $(brew --prefix)/bin/zsh
+  echo "Setting default..."
+  # sudo sh -c 'echo $(brew --prefix)/bin/zsh >> /etc/shells'
+  # chsh -s $(brew --prefix)/bin/zsh
+  echo `which zsh` | sudo tee -a /etc/shells
+  chsh -s `which zsh`
   echo "Loading Settings from .zshrc"
   source ~/.zshrc
 else
