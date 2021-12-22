@@ -6,7 +6,7 @@ echo "Start Installation."
 
 # Update packages
 echo "Updating the package to the latest ..."
-sudo apt update -y && sudo apt upgrade -y
+sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean -y
 sudo apt install git -y
 
 if [ ! -d $HOME/dotfiles ]; then
