@@ -1,10 +1,18 @@
 # Welcome message
-echo -e "\e[1;3;36mWelcom!!\e[m"
+echo -e "${COLOR_BLUE}Welcom!!${COLOR_BLUE}"
 
 #################################  ZSH INIT  #################################
 
+# Colors
+COLOR_GRAY="\033[1;38;5;243m"
+COLOR_BLUE="\033[1;34m"
+COLOR_GREEN="\033[1;32m"
+COLOR_RED="\033[1;31m"
+COLOR_PURPLE="\033[1;35m"
+COLOR_YELLOW="\033[1;33m"
+COLOR_NONE="\033[0m"
+
 # Zsh history
-# retopt histignorealldups
 HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.zsh_history
@@ -271,13 +279,13 @@ alias delstores=_delstores
 # brew upgrade
 _brewautoupgrade() {
   echo "Upgrading brew formulas ..."
-  echo -e "\e[1;3;33mbrew update\e[m"
+  echo -e "${COLOR_YELLOW}brew update${COLOR_YELLOW}"
   brew update
-  echo -e "\e[1;3;33mbrew upgrade\e[m"
+  echo -e "${COLOR_YELLOW}brew upgrade${COLOR_YELLOW}"
   brew upgrade
-  echo -e "\e[1;3;33mbrew cleanup\e[m"
+  echo -e "${COLOR_YELLOW}brew cleanup${COLOR_YELLOW}"
   brew cleanup
-  echo -e "\e[1;3;33mbrew doctor\e[m"
+  echo -e "${COLOR_YELLOW}brew doctor${COLOR_YELLOW}"
   brew doctor
   echo "done."
 }
@@ -285,13 +293,13 @@ _brewautoupgrade() {
 # apt upgrade
 _aptautoupgrade() {
   echo "Upgrading packages ..."
-  echo -e "\e[1;3;32mapt update\e[m"
+  echo -e "${COLOR_YELLOW}apt update${COLOR_YELLOW}"
   sudo apt update
-  echo -e "\e[1;3;32mapt upgrade\e[m"
+  echo -e "${COLOR_YELLOW}apt upgrade${COLOR_YELLOW}"
   sudo apt upgrade -y
-  echo -e "\e[1;3;32mapt autoremove\e[m"
+  echo -e "${COLOR_YELLOW}apt autoremove${COLOR_YELLOW}"
   sudo apt autoremove -y
-  echo -e "\e[1;3;32mapt crean\e[m"
+  echo -e "${COLOR_YELLOW}apt crean${COLOR_YELLOW}"
   sudo apt crean -y
   echo "done."
 }
@@ -299,9 +307,9 @@ _aptautoupgrade() {
 # mas upgrade
 _masautoupgrade() {
   echo "Upgrading apps ..."
-  echo -e "\e[1;3;32mmas outdated\e[m"
+  echo -e "${COLOR_BLUE}mas outdated${COLOR_BLUE}"
   mas outdated
-  echo -e "\e[1;3;32mmas upgrade\e[m"
+  echo -e "${COLOR_BLUE}mas upgrade${COLOR_BLUE}"
   mas upgrade
   echo "done."
 }
