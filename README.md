@@ -1,6 +1,6 @@
 # dotfiles
 
-My settings and any more.
+My settings and any more dotfiles.
 
 ## Support OS
 
