@@ -16,4 +16,4 @@ My settings and any more dotfiles.
 bash <(curl -fsSL raw.githubusercontent.com/ryu-461/dotfiles/main/bootstrap.sh)
 ```
 
-Happy Hacking!!
+Happy Hacking!
