@@ -15,7 +15,7 @@ echo -e "${COLOR_BLUE}Welcom!!${COLOR_NONE}"
 # Zsh history
 HISTSIZE=1000
 SAVEHIST=1000
-HISTFILE=~/.zsh_history
+HISTFILE=${HOME}/.zsh_history
 
 # Compinit
 autoload -Uz compinit
