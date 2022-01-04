@@ -272,9 +272,9 @@ fi
 #################################  FUNCTIONS  #################################
 
 _headline() {
-    echo -e "\n${COLOR_GRAY}==============================${COLOR_NONE}"
-    echo -e "${COLOR_PURPLE}$1${COLOR_NONE}"
-    echo -e "${COLOR_GRAY}==============================${COLOR_NONE}\n"
+  echo -e "\n${COLOR_GRAY}==============================${COLOR_NONE}"
+  echo -e "${COLOR_PURPLE}$1${COLOR_NONE}"
+  echo -e "${COLOR_GRAY}==============================${COLOR_NONE}\n"
 }
 
 
