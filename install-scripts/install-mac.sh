@@ -10,7 +10,7 @@ if [[ $UNAME == arm64 ]]; then
   if !(type "git" > /dev/null 2>&1); then
     echo "Installing Command line tools ..."
     xcode-select --install
-    # Install Rosetta2
+    # Install Rosetta2 for M1 Mac
     echo "Installing Rosetta2."
     /usr/sbin/softwareupdate --install-rosetta --agree-to-license
   else
