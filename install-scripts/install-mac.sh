@@ -4,7 +4,7 @@ set -ue
 
 UNAME=`uname -m`
 
-echo "Start Installation for WSL."
+echo "Start Installation for Mac."
 
 # Architecture determination
 if [[ $UNAME == arm64 ]]; then
