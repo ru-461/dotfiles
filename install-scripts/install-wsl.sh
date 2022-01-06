@@ -2,7 +2,7 @@
 
 set -ue
 
-echo "Start Installation."
+echo "Start Installation for WSL."
 
 # Update packages
 echo "Updating the package to the latest ..."

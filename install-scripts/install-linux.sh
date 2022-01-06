@@ -2,7 +2,7 @@
 
 set -ue
 
-echo "Start Installation."
+echo "Start Installation for Linux."
 
 # Update packages
 echo "Updating the package to the latest ..."

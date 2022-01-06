@@ -4,6 +4,8 @@ set -ue
 
 UNAME=`uname -m`
 
+echo "Start Installation for WSL."
+
 # Architecture determination
 if [[ $UNAME == arm64 ]]; then
   # Install command line tools
