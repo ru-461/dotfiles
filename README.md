@@ -5,7 +5,7 @@ My settings and any more dotfiles.
 ## Support OS
 
 - macOS（only arm64）
-- WSL2 （Ubuntu x64）
+- WSL2 （only Ubuntu x64）
 - Ubuntu（x64）
 - Linux（x64）
 
@@ -16,4 +16,4 @@ My settings and any more dotfiles.
 bash <(curl -fsSL raw.githubusercontent.com/ryu-461/dotfiles/main/bootstrap.sh)
 ```
 
-Happy Hacking!
+Happy Hacking!!
