@@ -1,6 +1,7 @@
 # dotfiles
 
 My settings and any more dotfiles.
+Configuration scripts that can be used anywhere.
 
 ## Support OS
 
