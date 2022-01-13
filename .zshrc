@@ -331,7 +331,7 @@ _autoupgrade() {
   fi
   _brewautoupgrade
   if [[ $OS = "darwin" ]]; then
-    # _masautoupgrade
+    _masautoupgrade
   fi
 }
 alias au='_autoupgrade'
