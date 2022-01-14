@@ -277,7 +277,6 @@ _headline() {
   echo -e "${COLOR_GRAY}==============================${COLOR_NONE}\n"
 }
 
-
 function _delstores () {
   sudo find $1 \( -name '.DS_Store' -or -name '._*' -or -name 'Thumbs.db' -or -name 'Desktop.ini' \) -delete -print;
 }
