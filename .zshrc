@@ -335,5 +335,5 @@ _autoupgrade() {
 }
 alias au='_autoupgrade'
 
-# Starship
+# Starship init
 eval "$(starship init zsh)"
