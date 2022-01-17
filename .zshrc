@@ -64,11 +64,15 @@ else
 fi
 
 # Volta
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
+if [[ $(command -v volta) ]]; then
+  export VOLTA_HOME="$HOME/.volta"
+  export PATH="$VOLTA_HOME/bin:$PATH"
+fi
 
 # anyenv
-eval "$(anyenv init - no--rehash)"
+if [[ $(command -v anyenv) ]]; then
+  eval "$(anyenv init - no--rehash)"
+fi
 
 # Pyenv
 if [[ $(command -v pyenv) ]]; then
