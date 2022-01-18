@@ -50,4 +50,11 @@ else
   echo "Skip the Zsh as they are already installed."
 fi
 
+# Install Volta
+if !(type "brew" > /dev/null 2>&1); then
+  curl https://get.volta.sh | bash -s -- --skip-setup
+else
+  echo "Skip the Volta as they are already installed."
+fi
+
 echo "Installation complete."
