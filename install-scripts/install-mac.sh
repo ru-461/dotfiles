@@ -36,7 +36,7 @@ if !(type "brew" > /dev/null 2>&1); then
   brew doctor
   echo "done."
   echo "Installing a package from Brewfile ..."
-  brew bundle --file '../Brewfile'
+  brew bundle --file '~/dotfiles/Brewfile'
 else
   echo "Skip the Homebrew as they are already installed."
 fi
