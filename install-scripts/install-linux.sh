@@ -42,7 +42,7 @@ if !(type "zsh" > /dev/null 2>&1); then
   echo "Setting default..."
   # sudo sh -c 'echo $(brew --prefix)/bin/zsh >> /etc/shells'
   # chsh -s $(brew --prefix)/bin/zsh
-  echo `which zsh` | sudo tee -a /etc/shells
+  echo "which zsh" | sudo tee -a /etc/shells
   sudo chsh -s `which zsh`
   echo "Loading Settings from .zshrc"
   source ~/.zshrc
