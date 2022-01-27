@@ -32,7 +32,7 @@ if !(type "brew" > /dev/null 2>&1); then
   echo "eval \$($(brew --prefix)/bin/brew shellenv)" >> ~/g.profile
   source ~/.profile
 else
-  echo "Skip the Linuxbrew as they are already installed."
+  echo "Brew is already installed."
 fi
 
 # Install Zsh
@@ -47,14 +47,14 @@ if !(type "zsh" > /dev/null 2>&1); then
   echo "Loading Settings from .zshrc"
   source ~/.zshrc
 else
-  echo "Skip the Zsh as they are already installed."
+  echo "Zsh is already installed."
 fi
 
 # Install Volta
 if !(type "brew" > /dev/null 2>&1); then
   curl https://get.volta.sh | bash -s -- --skip-setup
 else
-  echo "Skip the Volta as they are already installed."
+  echo "Volta is already installed."
 fi
 
 echo "Installation complete."
