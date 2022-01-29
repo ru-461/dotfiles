@@ -58,7 +58,7 @@ esac
 if [[ $OS = "darwin" ]]; then
   export PATH="/opt/homebrew/bin:$PATH"
   export PATH="/opt/homebrew/sbin:$PATH"
-  alias brew="PATH=/opt/homebrew/bin:/opt/homebrew/sbin brew "
+  alias brew="PATH=/opt/homebrew/bin:/opt/homebrew/sbin brew"
 else
   eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 fi
