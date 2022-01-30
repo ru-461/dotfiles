@@ -256,7 +256,10 @@ alias brewo='brew outdated'
 alias brews='brew search'
 alias brewu='brew upgrade'
 alias brewx='brew uninstall'
-alias dotbrew='brew bundle dump --file '~/dotfiles/Brewfile' --force'
+# Brew Bundle
+if [[ $(command -v brew bundle) ]]; then
+  alias brewbnd='brew bundle --file '~/dotfiles/Brewfile''
+fi
 
 # mas-cli
 if [[ $OS = "darwin" ]]; then
