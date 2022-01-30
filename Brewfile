@@ -1,10 +1,7 @@
-# Common tap
-tap "homebrew/bundle"
 tap "homebrew/core"
+tap "homebrew/bundle"
 
-# OS Dependence
 if OS.mac?
-  cask_args appdir: '/Applications'
   tap "buo/cask-upgrade"
   tap "homebrew/cask"
   tap "homebrew/cask-fonts"
@@ -12,7 +9,7 @@ if OS.mac?
   tap "sanemat/font"
 end
 
-# brew
+tap "teamookla/speedtest"
 brew "anyenv"
 brew "awscli"
 brew "bat"
@@ -29,6 +26,7 @@ brew "hub"
 brew "iproute2mac"
 brew "jq"
 brew "libiconv"
+brew "mas"
 brew "procs"
 brew "ripgrep"
 brew "screenfetch"
@@ -43,6 +41,7 @@ brew "wget"
 brew "youtube-dl"
 brew "z"
 brew "zplug"
+brew "teamookla/speedtest/speedtest"
 cask "adobe-acrobat-reader"
 cask "aerial"
 cask "alfred"
@@ -85,32 +84,28 @@ cask "visual-studio-code-insiders"
 cask "vivaldi"
 cask "vlc"
 cask "zoom"
-
-# mas
-if OS.mac?
-  mas "Bitwarden", id: 1352778147
-  mas "DaisyDisk", id: 411643860
-  mas "Developer", id: 640199958
-  mas "G App Launcher", id: 1543803459
-  mas "GarageBand", id: 682658836
-  mas "Hidden Bar", id: 1452453066
-  mas "iMovie", id: 408981434
-  mas "Keynote", id: 409183694
-  mas "Lightshot Screenshot", id: 526298438
-  mas "LINE", id: 539883307
-  mas "Microsoft Remote Desktop", id: 1295203466
-  mas "Notion Web Clipper", id: 1559269364
-  mas "Numbers", id: 409203825
-  mas "Pages", id: 409201541
-  mas "PopClip", id: 445189367
-  mas "Prime Video", id: 545519333
-  mas "Reeder", id: 1529448980
-  mas "RunCat", id: 1429033973
-  mas "Skitch", id: 425955336
-  mas "Spark", id: 1176895641
-  mas "TweetDeck", id: 485812721
-  mas "Twitter", id: 1482454543
-  mas "Xcode", id: 497799835
-  mas "xSearch", id: 1579902068
-  mas "Yoink", id: 457622435
-end
+mas "Bitwarden", id: 1352778147
+mas "DaisyDisk", id: 411643860
+mas "Developer", id: 640199958
+mas "G App Launcher", id: 1543803459
+mas "GarageBand", id: 682658836
+mas "Hidden Bar", id: 1452453066
+mas "iMovie", id: 408981434
+mas "Keynote", id: 409183694
+mas "Lightshot Screenshot", id: 526298438
+mas "LINE", id: 539883307
+mas "Microsoft Remote Desktop", id: 1295203466
+mas "Notion Web Clipper", id: 1559269364
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
+mas "PopClip", id: 445189367
+mas "Prime Video", id: 545519333
+mas "Reeder", id: 1529448980
+mas "RunCat", id: 1429033973
+mas "Skitch", id: 425955336
+mas "Spark", id: 1176895641
+mas "TweetDeck", id: 485812721
+mas "Twitter", id: 1482454543
+mas "Xcode", id: 497799835
+mas "xSearch", id: 1579902068
+mas "Yoink", id: 457622435
