@@ -1,6 +1,7 @@
 tap "homebrew/core"
 tap "homebrew/bundle"
 
+# mac only
 if OS.mac?
   tap "buo/cask-upgrade"
   tap "homebrew/cask"
