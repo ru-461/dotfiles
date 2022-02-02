@@ -31,6 +31,7 @@ if !(type "brew" > /dev/null 2>&1); then
   test -r $~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >> ~/.bash_profile
   echo "eval \$($(brew --prefix)/bin/brew shellenv)" >> ~/g.profile
   source ~/.profile
+  echo "done."
 else
   echo "Brew is already installed."
 fi
@@ -48,6 +49,14 @@ if !(type "zsh" > /dev/null 2>&1); then
   source ~/.zshrc
 else
   echo "Zsh is already installed."
+fi
+
+# Brewfile
+if [ ! -f $HOME/dotfiles/Brewfile ]; then
+  echo "Installing the formulas from Brewfile ..."
+  brew tap "homebrew/bundle"
+  brew bundle --file '~/dotfiles/Brewfile'
+  echo "done."
 fi
 
 # Install Volta

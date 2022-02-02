@@ -25,12 +25,12 @@ if !(type "brew" > /dev/null 2>&1); then
   echo "Installing Linuxbrew ..."
   sudo apt install build-essential curl file git -y
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  echo "done."
   test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
   test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
   test -r ~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
   echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
   source ~/.profile
+  echo "done."
 else
   echo "Skip the Linuxbrew as they are already installed."
 fi
@@ -48,6 +48,14 @@ if !(type "zsh" > /dev/null 2>&1); then
   source ~/.zshrc
 else
   echo "Skip the Zsh as they are already installed."
+fi
+
+# Brewfile
+if [ ! -f $HOME/dotfiles/Brewfile ]; then
+  echo "Installing the formulas from Brewfile ..."
+  brew tap "homebrew/bundle"
+  brew bundle --file '~/dotfiles/Brewfile'
+  echo "done."
 fi
 
 # Install Volta（skip volta setup）
