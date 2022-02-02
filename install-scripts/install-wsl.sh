@@ -44,14 +44,14 @@ if !(type "zsh" > /dev/null 2>&1); then
   # chsh -s $(brew --prefix)/bin/zsh
   echo `which zsh` | sudo tee -a /etc/shells
   sudo chsh -s `which zsh`
-  echo "Loading Settings from .zshrc"
+  echo "Loading Settings from .zshrc."
   source ~/.zshrc
 else
   echo "Skip the Zsh as they are already installed."
 fi
 
 # Install Volta（skip volta setup）
-if !(type "brew" > /dev/null 2>&1); then
+if !(type "volta" > /dev/null 2>&1); then
   curl https://get.volta.sh | bash -s -- --skip-setup
 else
   echo "Skip the Volta as they are already installed."
