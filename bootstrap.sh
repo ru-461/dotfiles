@@ -44,32 +44,59 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
 fi
 echo ""
 
-function installation() {
-  echo "Called install script"
-  info "Your platform is ${ENV}"
-  echo "Start ${DOT_BASE}/install-scripts/install-${ENV}.sh"
-  if [[ -f ${DOT_BASE}/install-scripts/install-${ENV}.sh ]]; then
-    sh ${DOT_BASE}/install-scripts/install-${ENV}.sh
-  else
-    error "Cannot find an installation script for this platform."
-  fi
-}
-
+echo "Start Installation."
 if [[ $(uname) == 'Darwin' ]]; then
-  info "Your environment is a Mac, Start deployment for macOS."
-  ENV="mac"
-  installation
+  echo "Your environment is a Mac, Start deployment for macOS."
+    # Clone dotfile repository locally
+  if [[ ! -d $HOME/dotfiles ]]; then
+    echo "Cloning the dotfiles repository ..."
+    cd $HOME
+    git clone $DOT_REMOTE
+  fi
+  # Run install script
+  # source $DOT_BASE/install-scripts/install-mac.sh
 elif [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
-  info "Your environment is a Windows Subsystem for Linux, Start deployment for WSL."
-  ENV="wsl"
-  installation
+  echo "Your environment is a Windows Subsystem for Linux, Start deployment for WSL."
+  cd $HOME
+  # Update packages
+  echo "Updating the package to the latest ..."
+  sudo apt update -y && sudo apt upgrade -y
+  sudo apt install git -y
+  # Clone dotfile repository locally
+  if [ ! -d $HOME/dotfiles ]; then
+    echo "Cloning the dotfiles repository ..."
+    cd $HOME
+    git clone $DOT_REMOTE
+  fi
+  # Run install script
+  source $DOT_BASE/install-scripts/install-wsl.sh
 elif [[ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]]; then
-  info "Your environment is a Linux, Start deployment for Linux."
-  ENV="linux"
-  installation
+  echo "Your environment is a Linux, Start deployment for Linux."
+  # Update packages
+  echo "Updating the package to the latest ..."
+  sudo apt update -y && sudo apt upgrade -y
+  sudo apt install git -y
+  # Clone dotfile repository locally
+  if [[ ! -d $HOME/dotfiles ]]; then
+    echo "Cloning the dotfiles repository ..."
+    cd $HOME
+    git clone $DOT_REMOTE
+  else
+    read -p "The dotfiles already exists. Do you want to update them? [y/N] ')" -n 1 -r
+    echo ""
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+      echo "Updating the dotfiles ..."
+      cd $DOT_BASE
+      git pull origin main
+    fi
+    echo 'There is nothing to do.'
+  fi
+  # Run install script
+  source $DOT_BASE/install-scripts/install-linux.sh
 else
-  error "This platform is not supported in this Dotfiles."
+  exit 1
 fi
+echo "Installation complete."
 
 # Start deploy.
 cd $DOT_BASE
