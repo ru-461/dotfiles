@@ -45,7 +45,6 @@ fi
 echo ""
 
 echo "Start Installation."
-cd $DOT_BASE
 
 if [[ $(uname) == 'Darwin' ]]; then
   echo "Your environment is a Mac, Start deployment for macOS."

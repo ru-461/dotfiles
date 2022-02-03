@@ -2,6 +2,8 @@
 
 set -ue
 
+cd $DOT_BASE
+
 echo "Start Installation for Linux."
 
 # Update packages
