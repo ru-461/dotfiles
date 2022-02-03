@@ -14,8 +14,13 @@ if [ ! -d $HOME/dotfiles ]; then
   cd $HOME
   git clone $DOT_REMOTE
 else
-  echo "Dotfiles already exists."
+  echo "dotfiles already exists."
 fi
+
+# Create symlinks
+echo "Linking files ..."
+source deploy.sh
+echo "done."
 
 # Setting System
 sudo timedatectl set-timezone Asia/Tokyo
