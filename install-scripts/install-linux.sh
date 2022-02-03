@@ -19,7 +19,7 @@ fi
 
 # Create symlinks
 echo "Linking files ..."
-source deploy.sh
+source $HOME/dotfiles/deploy.sh
 echo "done."
 
 # Setting System
