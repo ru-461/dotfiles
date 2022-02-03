@@ -2,6 +2,8 @@
 
 set -ue
 
+cd $DOT_BASE
+
 echo "Expanding symbolic links ..."
 
 # to home
