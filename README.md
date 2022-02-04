@@ -12,8 +12,10 @@ Configuration scripts that can be used anywhere.
 
 # How to use
 
+Run bootstrap.sh
+Just run this one-liner！
+
 ```shell
-# Run bootstrap.sh
 bash <(curl -fsSL raw.githubusercontent.com/ryu-461/dotfiles/main/bootstrap.sh)
 ```
 
