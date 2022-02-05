@@ -315,7 +315,7 @@ _aptautoupgrade() {
   sudo apt upgrade -y
   echo -e "${COLOR_YELLOW}apt autoremove${COLOR_NONE}"
   sudo apt autoremove -y
-  echo -e "${COLOR_YELLOW}apt crean${COLOR_NONE}"
+  echo -e "${COLOR_YELLOW}apt clean${COLOR_NONE}"
   sudo apt crean -y
   echo "done."
 }
