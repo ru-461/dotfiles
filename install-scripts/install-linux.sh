@@ -33,8 +33,8 @@ if !(type "brew" > /dev/null 2>&1); then
   echo "done."
   test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
   test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-  test -r $~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >> ~/.bash_profile
-  echo "eval \$($(brew --prefix)/bin/brew shellenv)" >> ~/g.profile
+  test -r ~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
+  echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
   source ~/.profile
   echo "done."
 else
@@ -46,10 +46,8 @@ if !(type "zsh" > /dev/null 2>&1); then
   echo "Installing Zsh ..."
   brew install zsh
   echo "Setting default..."
-  # sudo sh -c 'echo $(brew --prefix)/bin/zsh >> /etc/shells'
-  # chsh -s $(brew --prefix)/bin/zsh
-  echo "which zsh" | sudo tee -a /etc/shells
-  sudo chsh -s `which zsh`
+  echo `which zsh` | sudo tee -a /etc/shells
+  chsh -s `which zsh`
   echo "Loading Settings from .zshrc"
   source ~/.zshrc
 else
