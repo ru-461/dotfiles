@@ -51,6 +51,7 @@ if !(type "zsh" > /dev/null 2>&1); then
   echo "Loading Settings from .zshrc"
   source ~/.zshrc
 else
+  source ~/.zshrc
   echo "Zsh is already installed."
 fi
 
