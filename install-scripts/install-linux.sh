@@ -6,9 +6,18 @@ echo "Start Installation for Linux."
 
 # Update packages
 echo "Updating the package to the latest ..."
-sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean -y
-sudo apt install git -y
+# Use apt
+if !(type "apt" > /dev/null 2>&1); then
+  sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean -y
+  sudo apt install git zsh -y
+fi
+# Use yum
+if !(type "yum" > /dev/null 2>&1); then
+  sudo yum update && sudo yum upgrade -y
+  sudo yum install git zsh -y
+fi
 
+# Clone dotfiles
 if [ ! -d $HOME/dotfiles ]; then
   echo "Cloning the dotfiles repository ..."
   cd $HOME
@@ -51,7 +60,6 @@ if !(type "zsh" > /dev/null 2>&1); then
   echo "Loading Settings from .zshrc"
   source ~/.zshrc
 else
-  source ~/.zshrc
   echo "Zsh is already installed."
 fi
 
