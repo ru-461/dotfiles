@@ -160,7 +160,7 @@ if [[ $(command -v rg) ]]; then
 else
   alias aggit='alias | grep zsh'
 fi
-alias zsh='code ~/.zshrc'
+alias czsh='code ~/.zshrc'
 alias szsh='source ~/.zshrc'
 
 # ZennCLI
