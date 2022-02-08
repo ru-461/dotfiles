@@ -52,6 +52,19 @@ echo ""
 echo "Start Installation."
 cd $HOME
 
+if [[ ! -d $HOME/dotfiles ]]; then
+  read -p "The dotfiles already exists. Do you want to update them? [y/N] ')" -n 1 -r
+  echo ""
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo "Updating the dotfiles ..."
+    cd $DOT_BASE
+    git pull origin main
+  fi
+  echo "There is nothing to do."
+  exit 1
+fi
+echo ""
+
 if [[ $(uname) == 'Darwin' ]]; then
   echo "Your environment is a Mac, Start deployment for macOS."
     # Clone dotfile repository locally
@@ -73,19 +86,8 @@ elif [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
       tar -zxf $HOME/dotfiles.tar.gz --strip-components 1 -C $HOME/dotfiles
       rm -f $HOME/dotfiles.tar.gz
     fi
-    cd $DOT_BASE
-  else
-    read -p "The dotfiles already exists. Do you want to update them? [y/N] ')" -n 1 -r
-    echo ""
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-      echo "Updating the dotfiles ..."
-      cd $DOT_BASE
-      git pull origin main
-    fi
-    echo 'There is nothing to do.'
-    exit 1
   fi
-  echo ""
+  cd $DOT_BASE
   # Run install script
   source $DOT_BASE/install-scripts/install-wsl.sh
 elif [[ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]]; then
@@ -100,19 +102,8 @@ elif [[ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]]; then
       tar -zxf $HOME/dotfiles.tar.gz --strip-components 1 -C $HOME/dotfiles
       rm -f $HOME/dotfiles.tar.gz
     fi
-    cd $DOT_BASE
-  else
-    read -p "The dotfiles already exists. Do you want to update them? [y/N] ')" -n 1 -r
-    echo ""
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-      echo "Updating the dotfiles ..."
-      cd $DOT_BASE
-      git pull origin main
-    fi
-    echo "There is nothing to do."
-    exit 1
   fi
-  echo ""
+  cd $DOT_BASE
   # Run install script
   if [[ $(uname -o) == 'Android' ]]; then
     source $DOT_BASE/install-scripts/install-termux.sh
@@ -124,9 +115,10 @@ else
 fi
 echo "Installation complete."
 
+zsh
 echo "Loading Settings from .zshrc"
-source ~/.zshrc
-
+source ~/.zshrc\
 echo ""
+
 # source $DOT_BASE/deploy.sh
 success "done. Happy Hacking!!"
