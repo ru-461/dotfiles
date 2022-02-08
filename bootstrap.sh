@@ -83,6 +83,7 @@ elif [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
       git pull origin main
     fi
     echo 'There is nothing to do.'
+    exit 1
   fi
   echo ""
   # Run install script
@@ -109,6 +110,7 @@ elif [[ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]]; then
       git pull origin main
     fi
     echo 'There is nothing to do.'
+    exit 1
   fi
   echo ""
   # Run install script
