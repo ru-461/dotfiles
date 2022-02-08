@@ -63,9 +63,6 @@ if [[ $(uname) == 'Darwin' ]]; then
   # source $DOT_BASE/install-scripts/install-mac.sh
 elif [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
   echo "Your environment is a Windows Subsystem for Linux, Start deployment for WSL."
-  # Update packages
-  echo "Updating the package to the latest ..."
-  sudo apt update -y && sudo apt upgrade -y
   # Clone dotfile repository locally
   if [ ! -d $HOME/dotfiles ]; then
     if has "git"; then
@@ -91,9 +88,6 @@ elif [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
   source $DOT_BASE/install-scripts/install-wsl.sh
 elif [[ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]]; then
   echo "Your environment is a Linux, Start deployment for Linux."
-  # Update packages
-  echo "Updating the package to the latest ..."
-  sudo apt update -y && sudo apt upgrade -y
   # Clone dotfile repository locally
   if [ ! -d $HOME/dotfiles ]; then
     if has "git"; then
