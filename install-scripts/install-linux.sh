@@ -40,9 +40,8 @@ if ! has "brew"; then
   test -r ~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
   echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
   source ~/.profile
-  echo "done."
 else
-  echo "Brew is already installed."
+  echo "brew is already installed."
 fi
 
 echo ""
@@ -60,7 +59,7 @@ fi
 
 echo ""
 # Brewfile
-if [ ! -f $HOME/dotfiles/Brewfile ]; then
+if [ -f $HOME/dotfiles/Brewfile ]; then
   echo "Installing the formulas from Brewfile ..."
   brew tap "homebrew/bundle"
   brew bundle --file '~/dotfiles/Brewfile'
@@ -74,5 +73,3 @@ if ! has "volta"; then
 else
   echo "Volta is already installed."
 fi
-
-echo "Installation complete."
