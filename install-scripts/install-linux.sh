@@ -6,11 +6,13 @@ echo "Start Installation for Linux."
 
 # Update packages
 echo "Updating the package to the latest ..."
+
 # Use apt
 if has "apt"; then
   sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean -y
   sudo apt install git zsh -y
 fi
+
 # Use yum
 if has "yum"; then
   sudo yum update && sudo yum upgrade -y
@@ -26,7 +28,7 @@ echo "done."
 sudo timedatectl set-timezone Asia/Tokyo
 
 # Install Linuxbrew
-if !(type "brew" > /dev/null 2>&1); then
+if has "brew"; then
   echo "Installing Linuxbrew ..."
   sudo apt install build-essential curl file git -y
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -42,7 +44,7 @@ else
 fi
 
 # Install Zsh
-if !(type "zsh" > /dev/null 2>&1); then
+if has "zsh"; then
   echo "Installing Zsh ..."
   brew install zsh
   echo "Setting default..."
@@ -62,7 +64,7 @@ if [ ! -f $HOME/dotfiles/Brewfile ]; then
 fi
 
 # Install Volta
-if !(type "volta" > /dev/null 2>&1); then
+if has "volta"; then
   curl https://get.volta.sh | bash -s -- --skip-setup
 else
   echo "Volta is already installed."
