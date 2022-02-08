@@ -91,7 +91,7 @@ elif [[ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]]; then
   # Clone dotfile repository locally
   if [ ! -d $HOME/dotfiles ]; then
     if has "git"; then
-      echo "Cloning the dotfi\les repository ..."
+      echo "Cloning the dotfiles repository ..."
       git clone $DOT_REMOTE
     else
       curl -fsSLo $HOME/dotfiles.tar.gz $DOT_TARBALL
