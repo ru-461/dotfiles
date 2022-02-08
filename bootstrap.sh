@@ -109,12 +109,16 @@ elif [[ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]]; then
       cd $DOT_BASE
       git pull origin main
     fi
-    echo 'There is nothing to do.'
+    echo "There is nothing to do."
     exit 1
   fi
   echo ""
   # Run install script
-  source $DOT_BASE/install-scripts/install-linux.sh
+  if [[ $(uname -o) == 'Android' ]]; then
+    source $DOT_BASE/install-scripts/install-termux.sh
+  else
+    source $DOT_BASE/install-scripts/install-linux.sh
+  fi
 else
   exit 1
 fi
