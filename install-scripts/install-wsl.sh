@@ -5,30 +5,32 @@ set -ue
 echo "Start Installation for Linux."
 
 # Update packages
-echo "Updating the package to the latest ..."
-
+echo "Updating the packages to the latest ..."
 # Use apt
 if has "apt"; then
+  echo "Use apt."
   sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean -y
   sudo apt install git zsh -y
 fi
 
 # Use yum
 if has "yum"; then
+  echo "Use yum."
   sudo yum update && sudo yum upgrade -y
   sudo yum install git zsh -y
 fi
-
-# Create symlinks
-echo "Linking files ..."
-source $HOME/dotfiles/deploy.sh
 echo "done."
+
+echo ""
+# Create symlinks
+source $HOME/dotfiles/deploy.sh
 
 # Setting System
 sudo timedatectl set-timezone Asia/Tokyo
 
+echo ""
 # Install Linuxbrew
-if has "brew"; then
+if ! has "brew"; then
   echo "Installing Linuxbrew ..."
   sudo apt install build-essential curl file git -y
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -43,8 +45,9 @@ else
   echo "Brew is already installed."
 fi
 
+echo ""
 # Install Zsh
-if has "zsh"; then
+if ! has "zsh"; then
   echo "Installing Zsh ..."
   brew install zsh
   echo "Setting default..."
@@ -55,6 +58,7 @@ else
   echo "Zsh is already installed."
 fi
 
+echo ""
 # Brewfile
 if [ ! -f $HOME/dotfiles/Brewfile ]; then
   echo "Installing the formulas from Brewfile ..."
@@ -63,8 +67,9 @@ if [ ! -f $HOME/dotfiles/Brewfile ]; then
   echo "done."
 fi
 
+echo ""
 # Install Volta
-if has "volta"; then
+if ! has "volta"; then
   curl https://get.volta.sh | bash -s -- --skip-setup
 else
   echo "Volta is already installed."
