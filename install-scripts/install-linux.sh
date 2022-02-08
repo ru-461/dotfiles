@@ -17,15 +17,6 @@ if has "yum"; then
   sudo yum install git zsh -y
 fi
 
-# Clone dotfiles
-if [ ! -d $HOME/dotfiles ]; then
-  echo "Cloning the dotfiles repository ..."
-  cd $HOME
-  git clone $DOT_REMOTE
-else
-  echo "dotfiles already exists."
-fi
-
 # Create symlinks
 echo "Linking files ..."
 source $HOME/dotfiles/deploy.sh
