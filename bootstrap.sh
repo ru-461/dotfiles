@@ -34,7 +34,12 @@ error() {
   exit 1
 }
 
+has() {
+  type "$1" > /dev/null 2>&1
+}
+
 DOT_BASE=$HOME/dotfiles
+DOT_TARBALL=https://github.com/ryu-461/dotfiles/tarball/main
 DOT_REMOTE=https://github.com/ryu-461/dotfiles.git
 
 read -p "Welcome dotfiles installation!! This script will install and deploy the various packages. Are you ready? [y/N] ')" -n 1 -r
@@ -45,29 +50,42 @@ fi
 echo ""
 
 echo "Start Installation."
+cd $HOME
 
 if [[ $(uname) == 'Darwin' ]]; then
   echo "Your environment is a Mac, Start deployment for macOS."
     # Clone dotfile repository locally
   if [[ ! -d $HOME/dotfiles ]]; then
     echo "Cloning the dotfiles repository ..."
-    cd $HOME
     git clone $DOT_REMOTE
   fi
   # Run install script
   # source $DOT_BASE/install-scripts/install-mac.sh
 elif [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
   echo "Your environment is a Windows Subsystem for Linux, Start deployment for WSL."
-  cd $HOME
   # Update packages
   echo "Updating the package to the latest ..."
   sudo apt update -y && sudo apt upgrade -y
-  sudo apt install git -y
   # Clone dotfile repository locally
   if [ ! -d $HOME/dotfiles ]; then
-    echo "Cloning the dotfiles repository ..."
-    cd $HOME
-    git clone $DOT_REMOTE
+    if has "git"; then
+      echo "Cloning the dotfiles repository ..."
+      git clone $DOT_REMOTE
+    else
+      curl -fsSLo $HOME/dotfiles.tar.gz $DOT_TARBALL
+      tar -zxf $HOME/dotfiles.tar.gz --strip-components 1 -C $HOME/dotfiles
+      rm -f $HOME/dotfiles.tar.gz
+    fi
+    cd $DOT_BASE
+  else
+    read -p "The dotfiles already exists. Do you want to update them? [y/N] ')" -n 1 -r
+    echo ""
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+      echo "Updating the dotfiles ..."
+      cd $DOT_BASE
+      git pull origin main
+    fi
+    echo 'There is nothing to do.'
   fi
   # Run install script
   source $DOT_BASE/install-scripts/install-wsl.sh
@@ -76,12 +94,18 @@ elif [[ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]]; then
   # Update packages
   echo "Updating the package to the latest ..."
   sudo apt update -y && sudo apt upgrade -y
-  sudo apt install git -y
   # Clone dotfile repository locally
-  if [[ ! -d $HOME/dotfiles ]]; then
-    echo "Cloning the dotfiles repository ..."
-    cd $HOME
-    git clone $DOT_REMOTE
+  # Clone dotfile repository locally
+  if [ ! -d $HOME/dotfiles ]; then
+    if has "git"; then
+      echo "Cloning the dotfi\les repository ..."
+      git clone $DOT_REMOTE
+    else
+      curl -fsSLo $HOME/dotfiles.tar.gz $DOT_TARBALL
+      tar -zxf $HOME/dotfiles.tar.gz --strip-components 1 -C $HOME/dotfiles
+      rm -f $HOME/dotfiles.tar.gz
+    fi
+    cd $DOT_BASE
   else
     read -p "The dotfiles already exists. Do you want to update them? [y/N] ')" -n 1 -r
     echo ""
@@ -99,8 +123,8 @@ else
 fi
 echo "Installation complete."
 
-# Start deploy.
-cd $DOT_BASE
+echo "Loading Settings from .zshrc"
+source ~/.zshrc
 
 # source $DOT_BASE/deploy.sh
 success "done. Happy Hacking!!"
