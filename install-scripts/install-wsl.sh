@@ -2,31 +2,33 @@
 
 set -ue
 
-echo "Start Installation for WSL."
+echo "Start Installation for Linux."
 
 # Update packages
 echo "Updating the package to the latest ..."
-sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean -y
-sudo apt install git -y
 
-if [ ! -d $HOME/dotfiles ]; then
-  echo "Cloning the dotfiles repository ..."
-  cd $HOME
-  git clone $DOT_REMOTE
-else
-  echo "dotfiles already exists."
+# Use apt
+if has "apt"; then
+  sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean -y
+  sudo apt install git zsh -y
+fi
+
+# Use yum
+if has "yum"; then
+  sudo yum update && sudo yum upgrade -y
+  sudo yum install git zsh -y
 fi
 
 # Create symlinks
 echo "Linking files ..."
-source deploy.sh
+source $HOME/dotfiles/deploy.sh
 echo "done."
 
 # Setting System
 sudo timedatectl set-timezone Asia/Tokyo
 
 # Install Linuxbrew
-if !(type "brew" > /dev/null 2>&1); then
+if has "brew"; then
   echo "Installing Linuxbrew ..."
   sudo apt install build-essential curl file git -y
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -42,14 +44,13 @@ else
 fi
 
 # Install Zsh
-if !(type "zsh" > /dev/null 2>&1); then
+if has "zsh"; then
   echo "Installing Zsh ..."
   brew install zsh
   echo "Setting default..."
   echo `which zsh` | sudo tee -a /etc/shells
   chsh -s `which zsh`
-  echo "Loading Settings from .zshrc"
-  source ~/.zshrc
+  echo "done."
 else
   echo "Zsh is already installed."
 fi
@@ -62,11 +63,11 @@ if [ ! -f $HOME/dotfiles/Brewfile ]; then
   echo "done."
 fi
 
-# Install Volta（skip volta setup）
-if !(type "volta" > /dev/null 2>&1); then
+# Install Volta
+if has "volta"; then
   curl https://get.volta.sh | bash -s -- --skip-setup
 else
-  echo "Skip the Volta as they are already installed."
+  echo "Volta is already installed."
 fi
 
 echo "Installation complete."
