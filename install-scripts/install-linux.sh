@@ -7,12 +7,12 @@ echo "Start Installation for Linux."
 # Update packages
 echo "Updating the package to the latest ..."
 # Use apt
-if !(type "apt" > /dev/null 2>&1); then
+if has "apt"; then
   sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean -y
   sudo apt install git zsh -y
 fi
 # Use yum
-if !(type "yum" > /dev/null 2>&1); then
+if has "yum"; then
   sudo yum update && sudo yum upgrade -y
   sudo yum install git zsh -y
 fi
@@ -57,8 +57,7 @@ if !(type "zsh" > /dev/null 2>&1); then
   echo "Setting default..."
   echo `which zsh` | sudo tee -a /etc/shells
   chsh -s `which zsh`
-  echo "Loading Settings from .zshrc"
-  source ~/.zshrc
+  echo "done."
 else
   echo "Zsh is already installed."
 fi
