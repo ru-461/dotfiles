@@ -10,7 +10,7 @@ termux-setup-storage
 echo "Updating the packages to the latest ..."
 echo "Use Pkg."
   pkg update && pkg upgrade -y
-  pkg apt install wget git curl proot vim -y
+  pkg install wget git curl proot vim -y
 echo "done."
 
 echo "Installation complete."
