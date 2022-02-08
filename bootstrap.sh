@@ -95,7 +95,6 @@ elif [[ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]]; then
   echo "Updating the package to the latest ..."
   sudo apt update -y && sudo apt upgrade -y
   # Clone dotfile repository locally
-  # Clone dotfile repository locally
   if [ ! -d $HOME/dotfiles ]; then
     if has "git"; then
       echo "Cloning the dotfi\les repository ..."
