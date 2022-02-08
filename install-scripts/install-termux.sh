@@ -5,7 +5,12 @@ set -ue
 echo "Start Installation for Termux."
 
 # In order to have access to shared storage
-termux-setup-storage
+if [[ ! -d $HOME/dotfiles ]]; then
+  echo "Access to shared storage."
+  termux-setup-storage
+  echo "done."
+fi
+echo ""
 
 echo "Updating the packages to the latest ..."
 echo "Use Pkg."
