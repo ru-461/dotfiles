@@ -52,7 +52,7 @@ echo ""
 echo "Start Installation."
 cd $HOME
 
-if [[ ! -d $HOME/dotfiles ]]; then
+if [[ -d $HOME/dotfiles ]]; then
   read -p "The dotfiles already exists. Do you want to update them? [y/N] ')" -n 1 -r
   echo ""
   if [[ $REPLY =~ ^[Yy]$ ]]; then
