@@ -30,7 +30,7 @@ sudo timedatectl set-timezone Asia/Tokyo
 
 echo ""
 # Install Linuxbrew
-if !has "brew"; then
+if ! has "brew"; then
   echo "Installing Linuxbrew ..."
   sudo apt install build-essential curl file git -y
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -47,7 +47,7 @@ fi
 
 echo ""
 # Install Zsh
-if !has "zsh"; then
+if ! has "zsh"; then
   echo "Installing Zsh ..."
   brew install zsh
   echo "Setting default..."
@@ -69,7 +69,7 @@ fi
 
 echo ""
 # Install Volta
-if has "volta"; then
+if ! has "volta"; then
   curl https://get.volta.sh | bash -s -- --skip-setup
 else
   echo "Volta is already installed."
