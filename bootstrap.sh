@@ -121,5 +121,6 @@ echo "Installation complete."
 echo "Loading Settings from .zshrc"
 source ~/.zshrc
 
+echo ""
 # source $DOT_BASE/deploy.sh
 success "done. Happy Hacking!!"
