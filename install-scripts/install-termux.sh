@@ -17,5 +17,3 @@ echo "Use Pkg."
   pkg update && pkg upgrade -y
   pkg install wget git curl proot vim -y
 echo "done."
-
-echo "Installation complete."
