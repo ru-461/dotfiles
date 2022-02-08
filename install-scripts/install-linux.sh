@@ -5,8 +5,7 @@ set -ue
 echo "Start Installation for Linux."
 
 # Update packages
-echo "Updating the package to the latest ..."
-
+echo "Updating the packages to the latest ..."
 # Use apt
 if has "apt"; then
   sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean -y
@@ -18,6 +17,7 @@ if has "yum"; then
   sudo yum update && sudo yum upgrade -y
   sudo yum install git zsh -y
 fi
+echo "done."
 
 # Create symlinks
 echo "Linking files ..."
