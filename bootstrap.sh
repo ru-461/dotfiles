@@ -84,6 +84,7 @@ elif [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
     fi
     echo 'There is nothing to do.'
   fi
+  echo ""
   # Run install script
   source $DOT_BASE/install-scripts/install-wsl.sh
 elif [[ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]]; then
@@ -109,6 +110,7 @@ elif [[ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]]; then
     fi
     echo 'There is nothing to do.'
   fi
+  echo ""
   # Run install script
   source $DOT_BASE/install-scripts/install-linux.sh
 else
