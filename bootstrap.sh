@@ -115,10 +115,11 @@ else
 fi
 echo "Installation complete."
 
-zsh
-echo "Loading Settings from .zshrc"
-source ~/.zshrc\
-echo ""
+echo "Setting default shell ..."
+if [[ "$SHELL" != $(which zsh) ]]; then
+    chsh -s $(which zsh)
+    echo"Default shell changed to Zsh."
+fi
 
 # source $DOT_BASE/deploy.sh
-success "done. Happy Hacking!!"
+success "Done. Happy Hacking!!"
