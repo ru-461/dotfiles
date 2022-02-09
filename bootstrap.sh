@@ -115,11 +115,5 @@ else
 fi
 echo "Installation complete."
 
-echo "Setting default shell ..."
-if [[ "$SHELL" != $(which zsh) ]]; then
-    chsh -s $(which zsh)
-    echo"Default shell changed to Zsh."
-fi
-
 # source $DOT_BASE/deploy.sh
 success "Done. Happy Hacking!!"

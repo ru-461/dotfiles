@@ -10,16 +10,36 @@ echo "Updating the packages to the latest ..."
 if has "apt"; then
   echo "Use apt."
   sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean -y
-  sudo apt install git zsh -y
 fi
 
 # Use yum
 if has "yum"; then
   echo "Use yum."
   sudo yum update && sudo yum upgrade -y
-  sudo yum install git zsh -y
 fi
 echo "done."
+
+echo ""
+# Install Zsh
+if ! has "zsh"; then
+  echo "Installing Zsh ..."
+  if has "apt"; then
+    sudo apt install zsh
+  fi
+
+  if has "yum"; then
+    sudo yum install zsh
+  fi
+  echo "Setting default..."
+  if [[ "$SHELL" != $(which zsh) ]]; then
+      chsh -s $(which zsh)
+      echo"Default shell changed to Zsh."
+  fi
+  echo "Zsh will be enabled after the re-login."
+  echo "Done."
+else
+  echo "Zsh is already installed."
+fi
 
 echo ""
 # Create symlinks
@@ -42,19 +62,6 @@ if ! has "brew"; then
   source ~/.profile
 else
   echo "brew is already installed."
-fi
-
-echo ""
-# Install Zsh
-if ! has "zsh"; then
-  echo "Installing Zsh ..."
-  brew install zsh
-  echo "Setting default..."
-  echo `which zsh` | sudo tee -a /etc/shells
-  chsh -s `which zsh`
-  echo "done."
-else
-  echo "Zsh is already installed."
 fi
 
 echo ""
