@@ -88,7 +88,6 @@ echo ""
 if ! has "volta"; then
   echo "Setting Volta ..."
   curl https://get.volta.sh | bash -s -- --skip-setup
-  yarn install node yarn npm npx
 else
   echo "Volta is already installed."
 fi
