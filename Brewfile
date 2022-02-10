@@ -8,6 +8,7 @@ if OS.mac?
   tap "homebrew/cask-fonts"
   tap "homebrew/cask-versions"
   tap "sanemat/font"
+  brew "awscli"
   brew "blueutil"
   brew "ffmpeg"
   brew "mas"
@@ -15,7 +16,6 @@ end
 
 tap "teamookla/speedtest"
 brew "anyenv"
-brew "awscli"
 brew "bat"
 brew "bzip2"
 brew "cmatrix"
