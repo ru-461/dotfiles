@@ -54,7 +54,6 @@ if ! has "brew"; then
   echo "Installing Linuxbrew ..."
   sudo apt install build-essential curl file git -y
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  echo "Done."
   echo "Setting Linuxbrew ..."
   test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
   test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
@@ -63,6 +62,7 @@ if ! has "brew"; then
   source ~/.profile
   echo "Installing additional packages ..."
   # brew install git wget vim
+  echo "Done."
 else
   echo "brew is already installed."
 fi
@@ -73,13 +73,14 @@ if [ -f $HOME/dotfiles/Brewfile ]; then
   echo "Installing the formulas from Brewfile ..."
   brew tap "homebrew/bundle"
   brew bundle --file '~/dotfiles/Brewfile'
-  echo "done."
+  echo "Done."
 fi
 
 echo ""
 # Install Volta
 if ! has "volta"; then
   curl https://get.volta.sh | bash -s -- --skip-setup
+  yarn install node yarn npm npx
 else
   echo "Volta is already installed."
 fi

@@ -33,7 +33,7 @@ if ! has "zsh"; then
   echo "Setting default..."
   if [[ "$SHELL" != $(which zsh) ]]; then
       chsh -s $(which zsh)
-      echo"Default shell changed to Zsh."
+      echo "Default shell changed to Zsh."
   fi
   echo "Zsh will be enabled after the re-login."
   echo "Done."
@@ -54,12 +54,15 @@ if ! has "brew"; then
   echo "Installing Linuxbrew ..."
   sudo apt install build-essential curl file git -y
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  echo "done."
+  echo "Setting Linuxbrew ..."
   test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
   test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
   test -r ~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
   echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
   source ~/.profile
+  echo "Installing additional packages ..."
+  # brew install git wget vim
+  echo "Done."
 else
   echo "brew is already installed."
 fi
@@ -70,14 +73,14 @@ if [ -f $HOME/dotfiles/Brewfile ]; then
   echo "Installing the formulas from Brewfile ..."
   brew tap "homebrew/bundle"
   brew bundle --file '~/dotfiles/Brewfile'
-  echo "done."
+  echo "Done."
 fi
 
 echo ""
 # Install Volta
 if ! has "volta"; then
   curl https://get.volta.sh | bash -s -- --skip-setup
-  volta install node npm npx yarn
+  yarn install node yarn npm npx
 else
   echo "Volta is already installed."
 fi
