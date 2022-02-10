@@ -75,12 +75,21 @@ if [ -f $HOME/dotfiles/Brewfile ]; then
   brew bundle --file '~/dotfiles/Brewfile'
   echo "Done."
 fi
-
 echo ""
+
+# Install anyenv
+if has "anyenv"; then
+  echo "Setting anyenv ..."
+  anyenv install --init
+fi
+echo ""
+
 # Install Volta
 if ! has "volta"; then
+  echo "Setting Volta ..."
   curl https://get.volta.sh | bash -s -- --skip-setup
   yarn install node yarn npm npx
 else
   echo "Volta is already installed."
 fi
+echo ""
