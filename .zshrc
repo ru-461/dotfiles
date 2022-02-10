@@ -64,10 +64,8 @@ else
 fi
 
 # Volta
-if [[ $(command -v volta) ]]; then
-  export VOLTA_HOME="$HOME/.volta"
-  export PATH="$VOLTA_HOME/bin:$PATH"
-fi
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
 
 # anyenv
 if [[ $(command -v anyenv) ]]; then
