@@ -33,7 +33,7 @@ if ! has "zsh"; then
   echo "Setting default..."
   if [[ "$SHELL" != $(which zsh) ]]; then
       chsh -s $(which zsh)
-      echo"Default shell changed to Zsh."
+      echo "Default shell changed to Zsh."
   fi
   echo "Zsh will be enabled after the re-login."
   echo "Done."
