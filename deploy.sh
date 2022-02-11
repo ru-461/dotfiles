@@ -2,22 +2,19 @@
 
 set -ue
 
-cd $DOT_BASE
-
 echo "Expanding symbolic links ..."
+echo "-------------------------------"
 
-# to home
-for file in .??*; do
-  [[ "$file" == ".DS_Store" ]] && continue
-  [[ "$file" == ".git" ]] && continue
-  [[ "$file" == ".gitignore" ]] && continue
-  ln -svfv "$(pwd)/$file" "$HOME/$file"
+for file in $(find . -not -path '*.git/*' -not -path '*.DS_Store' -path '*/.*' -type f -print | cut -b3-)
+do
+  mkdir -p "$HOME/$(dirname "$file")"
+  if [ -L "$HOME/$file" ]; then
+    ln -sfv "$DOT_BASE/$file" "$HOME/$file"
+  else
+    ln -sniv "$DOT_BASE/$file" "$HOME/$file"
+  fi
 done
 
-# to .Config
-mkdir -p $HOME/.config
-for file in "$(ls .config)"; do
-  ln -snfv "$(pwd)/.config/$file" "$HOME/.config/$file"
-done
-
+echo "-------------------------------"
 echo "Symbolic link expansion is complete."
+echo ""
