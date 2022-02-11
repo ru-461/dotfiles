@@ -80,13 +80,11 @@ fi
 echo ""
 
 # Install anyenv
-if has "anyenv"; then
-  echo "Setting anyenv ..."
-  anyenv install --init
-  if [ ! -d $HOME/.config/anyenv/anyenv-install ]; then
+if ! has "anyenv"; then
+    echo "Setting anyenv ..."
+    anyenv install --init
     mkdir -p $(anyenv root)/plugins
     git clone https://github.com/znz/anyenv-update.git $(anyenv root)/plugins/anyenv-update
-  fi
 fi
 echo ""
 
