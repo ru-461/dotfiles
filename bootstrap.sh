@@ -115,5 +115,4 @@ else
 fi
 echo "Installation complete."
 
-# source $DOT_BASE/deploy.sh
 success "Done. Happy Hacking!!"
