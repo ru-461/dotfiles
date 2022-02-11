@@ -2,7 +2,7 @@
 
 set -ue
 
-echo "Start Installation for Linux."
+echo "Start Installation for Windows Subsystem for Linux."
 
 # Update packages
 echo "Updating the packages to the latest ..."
@@ -17,9 +17,9 @@ if has "yum"; then
   echo "Use yum."
   sudo yum update && sudo yum upgrade -y
 fi
-echo "done."
-
+echo "Done."
 echo ""
+
 # Install Zsh
 if ! has "zsh"; then
   echo "Installing Zsh ..."
@@ -30,7 +30,7 @@ if ! has "zsh"; then
   if has "yum"; then
     sudo yum install zsh
   fi
-  echo "Setting default..."
+  echo "Setting default ..."
   if [[ "$SHELL" != $(which zsh) ]]; then
       chsh -s $(which zsh)
       echo "Default shell changed to Zsh."
@@ -40,15 +40,22 @@ if ! has "zsh"; then
 else
   echo "Zsh is already installed."
 fi
-
 echo ""
+
 # Create symlinks
 source $HOME/dotfiles/deploy.sh
+echo ""
 
 # Setting System
-sudo timedatectl set-timezone Asia/Tokyo
-
+echo "Start configuration for Japanese."
+echo "Setting time zone and locale ..."
+sudo apt install language-pack-ja manpages-ja manpages-ja-dev -y
+sudo update-locale LANG=ja_JP.UTF8
+sudo dpkg-reconfigure tzdata
+echo "The settings will take effect after you log in again."
+echo "Done."
 echo ""
+
 # Install Linuxbrew
 if ! has "brew"; then
   echo "Installing Linuxbrew ..."
@@ -66,8 +73,8 @@ if ! has "brew"; then
 else
   echo "brew is already installed."
 fi
-
 echo ""
+
 # Brewfile
 if [ -f $HOME/dotfiles/Brewfile ]; then
   echo "Installing the formulas from Brewfile ..."
@@ -75,12 +82,20 @@ if [ -f $HOME/dotfiles/Brewfile ]; then
   brew bundle --file '~/dotfiles/Brewfile'
   echo "Done."
 fi
-
 echo ""
+
+# Install anyenv
+if has "anyenv"; then
+  echo "Setting anyenv ..."
+  anyenv install --init
+fi
+echo ""
+
 # Install Volta
 if ! has "volta"; then
+  echo "Setting Volta ..."
   curl https://get.volta.sh | bash -s -- --skip-setup
-  yarn install node yarn npm npx
 else
   echo "Volta is already installed."
 fi
+echo ""
