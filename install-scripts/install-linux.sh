@@ -30,7 +30,7 @@ if ! has "zsh"; then
   if has "yum"; then
     sudo yum install zsh
   fi
-  echo "Setting default..."
+  echo "Setting default ..."
   if [[ "$SHELL" != $(which zsh) ]]; then
       chsh -s $(which zsh)
       echo "Default shell changed to Zsh."
@@ -40,15 +40,17 @@ if ! has "zsh"; then
 else
   echo "Zsh is already installed."
 fi
-
 echo ""
+
 # Create symlinks
 source $HOME/dotfiles/deploy.sh
+echo ""
 
 # Setting System
+echo "Set the time zone ..."
 sudo timedatectl set-timezone Asia/Tokyo
-
 echo ""
+
 # Install Linuxbrew
 if ! has "brew"; then
   echo "Installing Linuxbrew ..."
@@ -66,8 +68,8 @@ if ! has "brew"; then
 else
   echo "brew is already installed."
 fi
-
 echo ""
+
 # Brewfile
 if [ -f $HOME/dotfiles/Brewfile ]; then
   echo "Installing the formulas from Brewfile ..."
