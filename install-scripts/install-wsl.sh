@@ -24,11 +24,11 @@ echo ""
 if ! has "zsh"; then
   echo "Installing Zsh ..."
   if has "apt"; then
-    sudo apt install zsh
+    sudo apt install zsh -y
   fi
 
   if has "yum"; then
-    sudo yum install zsh
+    sudo yum install zsh -y
   fi
   echo "Setting default ..."
   if [[ "$SHELL" != $(which zsh) ]]; then
