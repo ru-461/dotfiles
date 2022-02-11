@@ -17,9 +17,9 @@ if has "yum"; then
   echo "Use yum."
   sudo yum update && sudo yum upgrade -y
 fi
-echo "done."
-
+echo "Done."
 echo ""
+
 # Install Zsh
 if ! has "zsh"; then
   echo "Installing Zsh ..."
@@ -47,9 +47,9 @@ source $HOME/dotfiles/deploy.sh
 echo ""
 
 # Setting System
-echo "Set the time zone ..."
+echo "Setting the time zone ..."
 sudo timedatectl set-timezone Asia/Tokyo
-echo ""
+echo "Done."
 
 # Install Linuxbrew
 if ! has "brew"; then
