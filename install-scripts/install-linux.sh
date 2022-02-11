@@ -85,6 +85,8 @@ if ! has "anyenv"; then
     anyenv install --init
     mkdir -p $(anyenv root)/plugins
     git clone https://github.com/znz/anyenv-update.git $(anyenv root)/plugins/anyenv-update
+else
+  echo "anyenv is already installed."
 fi
 echo ""
 
