@@ -88,6 +88,7 @@ echo ""
 if has "anyenv"; then
   echo "Setting anyenv ..."
   anyenv install --init
+  git clone https://github.com/znz/anyenv-update.git $(anyenv root)/plugins/anyenv-update
 fi
 echo ""
 
