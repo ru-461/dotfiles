@@ -10,7 +10,7 @@ echo "Start Installation for Mac."
 if [[ $UNAME == arm64 ]]; then
   # Install command line tools
   if !(type "git" > /dev/null 2>&1); then
-    echo "Installing Command line tools ..."
+    echo "Installing Command line tools..."
     xcode-select --install
     # Install Rosetta2 for M1 Mac
     echo "Installing Rosetta2."
@@ -25,9 +25,9 @@ fi
 
 # Install Homebrew
 if !(type "brew" > /dev/null 2>&1); then
-  echo "Installing Homebrew ..."
+  echo "Installing Homebrew..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  echo "Upgrading formula ..."
+  echo "Upgrading formula..."
   echo "brew upgrade."
   brew upgrade
   echo "brew cleanup."
@@ -35,7 +35,7 @@ if !(type "brew" > /dev/null 2>&1); then
   echo "brew doctor."
   brew doctor
   echo "done."
-  echo "Installing a package from Brewfile ..."
+  echo "Installing a package from Brewfile..."
   brew bundle --file '~/dotfiles/Brewfile'
 else
   echo "Skip the Homebrew as they are already installed."

@@ -8,12 +8,12 @@ echo "Start Installation for Termux."
 if [[ ! -d $HOME/dotfiles ]]; then
   echo "Access to shared storage."
   termux-setup-storage
-  echo "done."
+  echo "Done."
 fi
 echo ""
 
-echo "Updating the packages to the latest ..."
+echo "Updating the packages to the latest..."
 echo "Use Pkg."
   pkg update && pkg upgrade -y
   pkg install wget git curl proot vim -y
-echo "done."
+echo "Done."
