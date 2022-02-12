@@ -54,6 +54,9 @@ case ${OSTYPE} in
   ;;
 esac
 
+# Avoid duplicate paths
+typeset -U path PATH
+
 # brew
 if [[ $OS = "darwin" ]]; then
   export PATH="/opt/homebrew/bin:$PATH"
