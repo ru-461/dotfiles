@@ -41,6 +41,26 @@ else
   echo "Homebrew is already installed."
 fi
 
+# Brewfile
+if [ -f $HOME/dotfiles/Brewfile ]; then
+  echo "Installing the formulas from Brewfile..."
+  brew tap "homebrew/bundle"
+  brew bundle --file '~/dotfiles/Brewfile'
+  echo "Done."
+fi
+echo ""
+
+# Install anyenv
+if ! has "anyenv"; then
+    echo "Setting anyenv..."
+    anyenv install --init
+    mkdir -p $(anyenv root)/plugins
+    git clone https://github.com/znz/anyenv-update.git $(anyenv root)/plugins/anyenv-update
+else
+  echo "anyenv is already installed."
+fi
+echo ""
+
 # Install Volta
 if ! has "volta"; then
   curl https://get.volta.sh | bash -s -- --skip-setup
