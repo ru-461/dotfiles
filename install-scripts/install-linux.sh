@@ -66,7 +66,7 @@ if ! has "brew"; then
   # brew install git wget vim
   echo "Done."
 else
-  echo "brew is already installed."
+  echo "Linuxbrew is already installed."
 fi
 echo ""
 
