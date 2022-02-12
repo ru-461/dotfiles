@@ -9,7 +9,7 @@ echo "Start Installation for Mac."
 # Architecture determination
 if [[ $UNAME == arm64 ]]; then
   # Install command line tools
-  if !(type "git" > /dev/null 2>&1); then
+  if ! has "git"; then
     echo "Installing Command line tools..."
     xcode-select --install
     # Install Rosetta2 for M1 Mac
@@ -24,7 +24,7 @@ else
 fi
 
 # Install Homebrew
-if !(type "brew" > /dev/null 2>&1); then
+if ! has "brew"; then
   echo "Installing Homebrew..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   echo "Upgrading formula..."
@@ -38,12 +38,12 @@ if !(type "brew" > /dev/null 2>&1); then
   echo "Installing a package from Brewfile..."
   brew bundle --file '~/dotfiles/Brewfile'
 else
-  echo "Skip the Homebrew as they are already installed."
+  echo "Homebrew is already installed."
 fi
 
 # Install Volta
-if !(type "volta" > /dev/null 2>&1); then
+if ! has "volta"; then
   curl https://get.volta.sh | bash -s -- --skip-setup
 else
-  echo "Skip the Volta as they are already installed."
+  echo "Volta is already installed."
 fi
