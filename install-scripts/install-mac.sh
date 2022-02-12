@@ -47,5 +47,3 @@ if !(type "volta" > /dev/null 2>&1); then
 else
   echo "Skip the Volta as they are already installed."
 fi
-
-echo "Installation complete."
