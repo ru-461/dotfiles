@@ -21,6 +21,9 @@ HISTFILE=${HOME}/.zsh_history
 autoload -Uz compinit
 compinit
 
+# init
+zstyle ":completion:*:commands" rehash 1
+
 # Lang
 export LANG=ja_JP.UTF-8
 
