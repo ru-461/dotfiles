@@ -34,9 +34,7 @@ if ! has "brew"; then
   brew cleanup
   echo "brew doctor."
   brew doctor
-  echo "done."
-  echo "Installing a package from Brewfile..."
-  brew bundle --file '~/dotfiles/Brewfile'
+  echo "Done."
 else
   echo "Homebrew is already installed."
 fi
