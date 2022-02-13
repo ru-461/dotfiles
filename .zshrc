@@ -21,9 +21,6 @@ HISTFILE=${HOME}/.zsh_history
 autoload -Uz compinit
 compinit
 
-# init
-zstyle ":completion:*:commands" rehash 1
-
 # Lang
 export LANG=ja_JP.UTF-8
 
@@ -31,7 +28,9 @@ export LANG=ja_JP.UTF-8
 setopt no_beep
 setopt nolistbeep
 
+# Zsyle
 zstyle ':completion:*' auto-description 'specify: %d'
+zstyle ":completion:*:commands" rehash 1
 zstyle ':completion:*' completer _expand _complete _correct _approximate
 zstyle ':completion:*' format 'Completing %d'
 zstyle ':completion:*' group-name ''
