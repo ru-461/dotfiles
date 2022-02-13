@@ -28,7 +28,7 @@ export LANG=ja_JP.UTF-8
 setopt no_beep
 setopt nolistbeep
 
-# Zsyle
+# Zstyle
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ":completion:*:commands" rehash 1
 zstyle ':completion:*' completer _expand _complete _correct _approximate
