@@ -192,7 +192,7 @@ alias aeu='anyenv update'
 if [[ $(command -v rg) ]]; then
   alias agyarn='alias | rg yarn'
 else
-  alias agyarn='alias | rg yarn'
+  alias agyarn='alias | grep yarn'
 fi
 alias y='yarn'
 alias ygl='yarn global list --depth=0'
