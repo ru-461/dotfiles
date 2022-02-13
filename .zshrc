@@ -208,6 +208,11 @@ alias ysrun='yarn -s run'
 alias ydev='yarn dev'
 
 # Multipass
+if [[ $(command -v rg) ]]; then
+  alias agmultipass='alias | rg multipass'
+else
+  alias agmultipass='alias | grep multipass'
+fi
 alias mp='multipass'
 alias mpl='multipass list'
 alias mpre='multipass restart'
