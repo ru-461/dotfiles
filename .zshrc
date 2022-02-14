@@ -45,10 +45,10 @@ path=(
   $HOME/.anyenv/envs/pyenv/bin(N-/)
   $HOME/.volta/bin(N-/)
   /Users/$USER/dev/flutter/bin(N-/)
-  /usr/bin
-  /usr/sbin
-  /bin
-  /sbin
+  /usr/bin(N-/)
+  /usr/sbin(N-/)
+  /bin(N-/)
+  /sbin(N-/)
   /Library/Apple/usr/bin(N-/)
 )
 
