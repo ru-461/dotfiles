@@ -2,6 +2,8 @@
 
 set -ue
 
+DOT_BASE=$HOME/dotfiles
+
 echo "Expanding symbolic links ..."
 echo "-------------------------------"
 
