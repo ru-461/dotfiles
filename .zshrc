@@ -10,9 +10,6 @@ COLOR_NONE="\033[0m"
 # Welcome message
 echo -e "${COLOR_BLUE}Welcom!!${COLOR_NONE}"
 
-# Lang
-export LANG=ja_JP.UTF-8
-
 # OS judgment
 case ${OSTYPE} in
   darwin*)
@@ -24,6 +21,11 @@ case ${OSTYPE} in
 esac
 
 #################################  ZSH INIT  #################################
+
+# Lang
+export LANG=ja_JP.UTF-8
+setopt print_eight_bit
+
 zstyle ":completion:*:commands" rehash 1
 
 # Zsh history
