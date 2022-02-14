@@ -26,6 +26,7 @@ esac
 export LANG=ja_JP.UTF-8
 setopt print_eight_bit
 
+# Completion
 zstyle ":completion:*:commands" rehash 1
 
 # Zsh history
@@ -52,6 +53,7 @@ path=(
   /Library/Apple/usr/bin(N-/)
 )
 
+# Enable completion & autosuggestions
 if [[ $(command -v brew) ]]; then
   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
   source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
