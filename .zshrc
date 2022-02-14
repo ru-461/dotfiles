@@ -21,13 +21,12 @@ case ${OSTYPE} in
 esac
 
 #################################  ZSH INIT  #################################
+# Completion
+zstyle ":completion:*:commands" rehash 1
 
 # Lang
 export LANG=ja_JP.UTF-8
 setopt print_eight_bit
-
-# Completion
-zstyle ":completion:*:commands" rehash 1
 
 # Zsh history
 HISTSIZE=1000
@@ -131,10 +130,6 @@ else
 fi
 alias g='git'
 
-# for macOS
-alias dsstore='find . -name '.DS_Store' -type f -ls -delete'
-alias delds='find . -name ".DS_Store" -type f -ls -delete'
-
 # .zshrc
 if [[ $(command -v rg) ]]; then
   alias agzsh='alias | rg zsh'
@@ -162,6 +157,11 @@ alias zennv='zenna && yarn zenn --version'
 alias zennup='zenna && yarn upgrade zenn-cli'
 
 # anyenv
+if [[ $(command -v rg) ]]; then
+  alias agyarn='alias | rg anyenv'
+else
+  alias agyarn='alias | grep anyenv'
+fi
 alias aganyenv='alias | rg anyenv'
 alias ae='anyenv'
 alias aeu='anyenv update'
@@ -270,6 +270,10 @@ _headline() {
   echo -e "${COLOR_PURPLE}$1${COLOR_NONE}"
   echo -e "${COLOR_GRAY}==============================${COLOR_NONE}\n"
 }
+
+# Delete mac stores
+alias dsstore='find . -name '.DS_Store' -type f -ls -delete'
+alias delds='find . -name ".DS_Store" -type f -ls -delete'
 
 function _delstores () {
   sudo find $1 \( -name '.DS_Store' -or -name '._*' -or -name 'Thumbs.db' -or -name 'Desktop.ini' \) -delete -print;
