@@ -54,6 +54,7 @@ path=(
 
 if [[ $(command -v brew) ]]; then
   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
   autoload -Uz compinit && compinit
 fi
 
