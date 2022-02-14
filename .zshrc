@@ -10,6 +10,15 @@ COLOR_NONE="\033[0m"
 # Welcome message
 echo -e "${COLOR_BLUE}Welcom!!${COLOR_NONE}"
 
+# OS judgment
+case ${OSTYPE} in
+  darwin*)
+    OS=darwin
+  ;;
+  linux*)
+    OS=linux
+  ;;
+esac
 #################################  ZSH INIT  #################################
 
 # Zsh history
@@ -46,31 +55,20 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
-# OS judgment
-case ${OSTYPE} in
-  darwin*)
-    OS=darwin
-  ;;
-  linux*)
-    OS=linux
-  ;;
-esac
-
-# Avoid duplicate paths
+# Configure path
 typeset -U path PATH
-
-# brew
-if [[ $OS = "darwin" ]]; then
-  export PATH="/opt/homebrew/bin:$PATH"
-  export PATH="/opt/homebrew/sbin:$PATH"
-  alias brew="PATH=/opt/homebrew/bin:/opt/homebrew/sbin brew"
-else
-  eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-fi
-
-# Volta
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
+path=(
+  /opt/homebrew/bin(N-/)
+  /opt/homebrew/sbin(N-/)
+  $HOME/.anyenv/envs/pyenv/bin(N-/)
+  $HOME/.volta/bin(N-/)
+  /Users/$USER/dev/flutter/bin(N-/)
+  /usr/bin
+  /usr/sbin
+  /bin
+  /sbin
+  /Library/Apple/usr/bin(N-/)
+)
 
 # anyenv
 if [[ $(command -v anyenv) ]]; then
@@ -79,22 +77,12 @@ fi
 
 # Pyenv
 if [[ $(command -v pyenv) ]]; then
-  export PYENV_ROOT="$HOME/.anyenv/envs/pyenv"
-  export PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init --path)"
-  if command -v pyenv 1>/dev/null 2>&1; then
-    eval "$(pyenv init -)"
-  fi
 fi
 
 # GitHub CLI
 if [[ $(command -v pyenv) ]]; then
   eval "$(gh completion -s zsh)"
-fi
-
-# flutter
-if [[ $OS = "darwin" ]]; then
-  export PATH="$PATH:/Users/$USER/dev/flutter/bin"
 fi
 
 #################################  ALIASES  #################################
