@@ -52,10 +52,19 @@ path=(
   /Library/Apple/usr/bin(N-/)
 )
 
+
+if [[ $OS = "linux" ]]; then
+  eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+fi
+
 # Enable completion & autosuggestions
 if [[ $(command -v brew) ]]; then
-  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+  if [[ $OS = "darwin" ]]; then
+    source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  else
+    source /home/linuxbrew/.linuxbrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  fi
   autoload -Uz compinit && compinit
 fi
 
