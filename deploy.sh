@@ -9,7 +9,7 @@ else
   exit 1
 fi
 
-echo "Expanding symbolic links ..."
+echo "Expanding symbolic links..."
 echo "-------------------------------"
 
 for file in $(find . -not -path '*.git/*' -not -path '*.DS_Store' -path '*/.*' -type f -print | cut -b3-)
