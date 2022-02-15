@@ -18,3 +18,26 @@ echo "Use Pkg."
   pkg install wget git curl proot vim -y
 echo "Done."
 echo ""
+
+# Install anyenv
+if ! has "anyenv"; then
+    echo "Installing anyenv..."
+    git clone https://github.com/anyenv/anyenv ~/.anyenv
+    ~/.anyenv/bin/anyenv init
+    anyenv install --init
+    echo "Setting anyenv plugin..."
+    mkdir -p $(anyenv root)/plugins
+    git clone https://github.com/znz/anyenv-update.git $(anyenv root)/plugins/anyenv-update
+else
+  echo "anyenv is already installed."
+fi
+echo ""
+
+# Install Volta
+if ! has "volta"; then
+  echo "Installing Volta..."
+  curl https://get.volta.sh | bash -s -- --skip-setup
+else
+  echo "Volta is already installed."
+fi
+echo ""

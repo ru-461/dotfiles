@@ -86,8 +86,11 @@ echo ""
 
 # Install anyenv
 if ! has "anyenv"; then
-    echo "Setting anyenv..."
+    echo "Installing anyenv..."
+    git clone https://github.com/anyenv/anyenv ~/.anyenv
+    ~/.anyenv/bin/anyenv init
     anyenv install --init
+    echo "Setting anyenv plugin..."
     mkdir -p $(anyenv root)/plugins
     git clone https://github.com/znz/anyenv-update.git $(anyenv root)/plugins/anyenv-update
 else
@@ -97,7 +100,7 @@ echo ""
 
 # Install Volta
 if ! has "volta"; then
-  echo "Setting Volta..."
+  echo "Installing Volta..."
   curl https://get.volta.sh | bash -s -- --skip-setup
 else
   echo "Volta is already installed."
