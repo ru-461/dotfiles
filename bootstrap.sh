@@ -77,7 +77,7 @@ if [[ $(uname) == 'Darwin' ]]; then
 elif [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
   echo "Your environment is a Windows Subsystem for Linux, Start deployment for WSL."
   # Clone dotfile repository locally
-  if [ ! -d $HOME/dotfiles ]; then
+  if [[ ! -d $HOME/dotfiles ]]; then
     if has "git"; then
       echo "Cloning the dotfiles repository ..."
       git clone $DOT_REMOTE
@@ -93,7 +93,7 @@ elif [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
 elif [[ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]]; then
   echo "Your environment is a Linux, Start deployment for Linux."
   # Clone dotfile repository locally
-  if [ ! -d $HOME/dotfiles ]; then
+  if [[ ! -d $HOME/dotfiles ]]; then
     if has "git"; then
       echo "Cloning the dotfiles repository ..."
       git clone $DOT_REMOTE
