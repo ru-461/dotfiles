@@ -22,22 +22,17 @@ else
   echo "This script is not compatible with this architecture."
   exit 1
 fi
+echo ""
 
 # Install Homebrew
 if ! has "brew"; then
   echo "Installing Homebrew..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  echo "Upgrading formula..."
-  echo "brew upgrade."
-  brew upgrade
-  echo "brew cleanup."
-  brew cleanup
-  echo "brew doctor."
-  brew doctor
   echo "Done."
 else
   echo "Homebrew is already installed."
 fi
+echo ""
 
 # Brewfile
 if [ -f $HOME/dotfiles/Brewfile ]; then
@@ -50,8 +45,11 @@ echo ""
 
 # Install anyenv
 if ! has "anyenv"; then
-    echo "Setting anyenv..."
+    echo "Installing anyenv..."
+    git clone https://github.com/anyenv/anyenv ~/.anyenv
+    ~/.anyenv/bin/anyenv init
     anyenv install --init
+    echo "Setting anyenv plugin..."
     mkdir -p $(anyenv root)/plugins
     git clone https://github.com/znz/anyenv-update.git $(anyenv root)/plugins/anyenv-update
 else
@@ -61,7 +59,9 @@ echo ""
 
 # Install Volta
 if ! has "volta"; then
+  echo "Installing Volta..."
   curl https://get.volta.sh | bash -s -- --skip-setup
 else
   echo "Volta is already installed."
 fi
+echo ""
