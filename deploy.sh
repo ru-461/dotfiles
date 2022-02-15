@@ -2,7 +2,12 @@
 
 set -ue
 
-DOT_BASE=$HOME/dotfiles
+if [[ -d $HOME/dotfiles ]]; then
+  DOT_BASE=$HOME/dotfiles
+else
+  echo "Dotfiles is missing."
+  exit 1
+fi
 
 echo "Expanding symbolic links ..."
 echo "-------------------------------"
