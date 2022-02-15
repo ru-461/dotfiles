@@ -31,7 +31,7 @@ setopt print_eight_bit
 # Zsh history
 HISTSIZE=1000
 SAVEHIST=1000
-HISTFILE=$HOME/.zsh_history
+HISTFILE=~/.zsh_history
 
 # Beep
 setopt no_beep
@@ -42,8 +42,9 @@ typeset -U path PATH
 path=(
   /opt/homebrew/bin(N-/)
   /opt/homebrew/sbin(N-/)
-  $HOME/.anyenv/envs/pyenv/bin(N-/)
-  $HOME/.volta/bin(N-/)
+  ~/.anyenv/bin(N-/)
+  ~/.anyenv/envs/pyenv/bin(N-/)
+  ~/.volta/bin(N-/)
   /Users/$USER/dev/flutter/bin(N-/)
   /usr/bin(N-/)
   /usr/sbin(N-/)
@@ -51,7 +52,6 @@ path=(
   /sbin(N-/)
   /Library/Apple/usr/bin(N-/)
 )
-
 
 if [[ $OS = "linux" ]]; then
   eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
