@@ -15,7 +15,6 @@ if OS.mac?
 end
 
 tap "teamookla/speedtest"
-brew "anyenv"
 brew "bat"
 brew "bzip2"
 brew "cmatrix"
