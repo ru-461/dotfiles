@@ -14,7 +14,7 @@ echo ""
 
 echo "Updating the packages to the latest..."
 echo "Use Pkg."
-  pkg update && pkg upgrade -y
+  pkg update
   pkg install wget git curl proot vim -y
 echo "Done."
 echo ""

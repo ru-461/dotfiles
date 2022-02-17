@@ -9,13 +9,13 @@ echo "Updating the packages to the latest..."
 # Use apt
 if has "apt"; then
   echo "Use apt."
-  sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean -y
+  sudo apt update
 fi
 
 # Use yum
 if has "yum"; then
   echo "Use yum."
-  sudo yum update && sudo yum upgrade -y
+  sudo yum update
 fi
 echo "Done."
 echo ""
