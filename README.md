@@ -5,8 +5,8 @@ Configuration scripts that can be used anywhere.
 
 # Support OS
 
-- macOS（only arm64）
-- WSL2 （only Ubuntu x64）
+- macOS（Only arm64）
+- WSL2 （Only Ubuntu x64）
 - Ubuntu（x64）
 - Linux（x64）
 
