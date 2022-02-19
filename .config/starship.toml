@@ -17,4 +17,4 @@ min_time = 500
 format = "🕛 [$duration](bold yellow)"
 
 [docker_context]
-format = "via [🐋 $context](blue bold)"
+format = "via [🐋 $context](blue bold) "
