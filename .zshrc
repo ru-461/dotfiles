@@ -50,6 +50,8 @@ path=(
   /usr/sbin(N-/)
   /bin(N-/)
   /sbin(N-/)
+  /usr/local/bin(N-/)
+  /usr/local/sbin(N-/)
   /Library/Apple/usr/bin(N-/)
 )
 
@@ -79,7 +81,7 @@ if [[ $(command -v pyenv) ]]; then
 fi
 
 # GitHub CLI
-if [[ $(command -v pyenv) ]]; then
+if [[ $(command -v gh) ]]; then
   eval "$(gh completion -s zsh)"
 fi
 
