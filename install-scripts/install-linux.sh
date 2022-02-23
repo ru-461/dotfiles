@@ -48,7 +48,7 @@ echo ""
 
 # Setting System
 echo "Setting the time zone..."
-sudo timedatectl set-timezone Asia/Tokyo
+# sudo timedatectl set-timezone Asia/Tokyo
 echo "Done."
 
 # Install Linuxbrew
