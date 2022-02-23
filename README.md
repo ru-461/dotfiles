@@ -19,4 +19,24 @@ Just run this one-liner！
 bash <(curl -fsSL raw.githubusercontent.com/ryu-461/dotfiles/main/bootstrap.sh)
 ```
 
+# Try using Docker
+
+Try dotfile easily using Docker.
+
+```shell
+docker build -t dotfiles --force-rm .
+```
+
+Deploy dotfiles in Ubuntu container.
+
+```shell
+docker run -it dotfiles
+```
+
+Run bootstrap.sh in container.
+
+```shell
+. bootstrap.sh
+```
+
 Happy Hacking!!
