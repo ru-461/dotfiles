@@ -9,12 +9,12 @@ RUN apt-get update &&  \
     ca-certificates
 
 RUN adduser --disabled-password \
---gecos '' docker
+    --gecos '' docker
 
 RUN adduser docker sudo
 
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> \
-/etc/sudoers
+    /etc/sudoers
 
 USER docker
 
