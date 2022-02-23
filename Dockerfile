@@ -8,7 +8,19 @@ RUN apt-get update &&  \
     sudo \
     ca-certificates
 
-# Copy bootstrap script
-COPY bootstrap.sh /
+RUN adduser --disabled-password \
+--gecos '' docker
 
-CMD [ "bin/bash" ]
+RUN adduser docker sudo
+
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> \
+/etc/sudoers
+
+USER docker
+
+WORKDIR /home/docker
+
+# Copy bootstrap script
+COPY bootstrap.sh .
+
+CMD [ "/usr/bin/bash" ]
