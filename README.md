@@ -24,7 +24,7 @@ bash <(curl -fsSL raw.githubusercontent.com/ryu-461/dotfiles/main/bootstrap.sh)
 Try dotfile easily using Docker.
 
 ```shell
-docker build -t --force-rm dotfiles .
+docker build -t dotfiles --force-rm .
 ```
 
 Deploy dotfiles in Ubuntu container.
