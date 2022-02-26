@@ -55,8 +55,11 @@ path=(
   /Library/Apple/usr/bin(N-/)
 )
 
+# Brew setup
 if [[ $OS = "linux" ]]; then
   eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+else
+  alias brew="PATH=/opt/homebrew/bin:/opt/homebrew/sbin brew"
 fi
 
 # Enable completion & autosuggestions
