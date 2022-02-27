@@ -25,7 +25,8 @@ esac
 # Completion
 zstyle ":completion:*:commands" rehash 1
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-colors ''
 
 # Lang
 export LANG=ja_JP.UTF-8
