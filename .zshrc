@@ -21,8 +21,11 @@ case ${OSTYPE} in
 esac
 
 #################################  ZSH INIT  #################################
+
 # Completion
 zstyle ":completion:*:commands" rehash 1
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
 # Lang
 export LANG=ja_JP.UTF-8
@@ -45,7 +48,7 @@ path=(
   ~/.anyenv/bin(N-/)
   ~/.anyenv/envs/pyenv/bin(N-/)
   ~/.volta/bin(N-/)
-  /Users/$USER/dev/flutter/bin(N-/)
+  /Users/$USER/dev/flutter  /bin(N-/)
   /usr/bin(N-/)
   /usr/sbin(N-/)
   /bin(N-/)
@@ -55,7 +58,7 @@ path=(
   /Library/Apple/usr/bin(N-/)
 )
 
-# Brew setup
+# Brew
 if [[ $OS = "linux" ]]; then
   eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 else
