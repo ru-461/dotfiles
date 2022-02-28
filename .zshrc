@@ -28,6 +28,9 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' list-colors ''
 
+# Cd
+setopt auto_cd
+
 # Lang
 export LANG=ja_JP.UTF-8
 setopt print_eight_bit
