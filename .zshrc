@@ -1,3 +1,5 @@
+#################################  COMMON  #################################
+
 # Colors
 COLOR_GRAY="\033[1;38;5;243m"
 COLOR_BLUE="\033[1;34m"
@@ -67,6 +69,8 @@ path=(
   /Library/Apple/usr/bin(N-/)
 )
 
+#################################  TOOL INIT  #################################
+
 # Brew
 if [[ $OS = "linux" ]]; then
   eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
@@ -100,6 +104,13 @@ if has "gh"; then
   eval "$(gh completion -s zsh)"
 fi
 
+# Replace grep with rg
+if has "rg"; then
+  alias ag"$1"='alias | rg $1'
+else
+  alias ag"$1"='alias | grep $1'
+fi
+
 #################################  ALIASES  #################################
 
 # dotfiles
@@ -115,22 +126,11 @@ alias ps='procs'
 alias f='open .'
 
 # cd
-if has "rg"; then
-  alias agcd='alias | rg cd'
-else
-  alias aggit='alias | grep cd'
-fi
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 
 # ls - exa
-if has "rg"; then
-  alias aglist='alias | rg ls'
-else
-  alias aglist='alias | grep ls'
-fi
-
 if has "exa"; then
   alias e='exa --icons --git'
   alias l=e
@@ -149,28 +149,13 @@ else
 fi
 
 # Git
-if has "rg"; then
-  alias aggit='alias | rg git'
-else
-  alias aggit='alias | grep git'
-fi
 alias g='git'
 
 # .zshrc
-if has "rg"; then
-  alias agzsh='alias | rg zsh'
-else
-  alias aggit='alias | grep zsh'
-fi
 alias czsh='code ~/.zshrc'
 alias szsh='source ~/.zshrc'
 
 # ZennCLI
-if has "rg"; then
-  alias agzenn='alias | rg zenn'
-else
-  alias agzenn='alias | grep zenn'
-fi
 alias zenna='cd ~/Documents/zenn-articles'
 alias zennb='cd ~/Documents/zenn-books'
 alias zennop='zenna && code ~/Documents/my-zenn-contents && yarn zenn preview --open'
@@ -183,21 +168,11 @@ alias zennv='zenna && yarn zenn --version'
 alias zennup='zenna && yarn upgrade zenn-cli'
 
 # anyenv
-if has "rg"; then
-  alias agyarn='alias | rg anyenv'
-else
-  alias agyarn='alias | grep anyenv'
-fi
 alias aganyenv='alias | rg anyenv'
 alias ae='anyenv'
 alias aeu='anyenv update'
 
 # Yarn
-if has "rg"; then
-  alias agyarn='alias | rg yarn'
-else
-  alias agyarn='alias | grep yarn'
-fi
 alias y='yarn'
 alias ygl='yarn global list --depth=0'
 alias yal='yarn list --depth=0'
@@ -212,21 +187,11 @@ alias ysrun='yarn -s run'
 alias ydev='yarn dev'
 
 # Multipass
-if has "rg"; then
-  alias agmultipass='alias | rg multipass'
-else
-  alias agmultipass='alias | grep multipass'
-fi
 alias mp='multipass'
 alias mpl='multipass list'
 alias mpre='multipass restart'
 
 # Docker
-if has "rg"; then
-  alias agdocker='alias | rg docker'
-else
-  alias agdocker='alias | grep docker'
-fi
 alias d='docker'
 alias dp='docker ps'
 alias dpls='docker ps --latest'
@@ -247,19 +212,9 @@ alias dnls='docker network ls --all --latest'
 alias drm='docker system prune'
 
 # Starship
-if has "rg"; then
-  alias agship='alias | rg ship'
-else
-  alias agship='alias | grep ship'
-fi
 alias ship='code ~/.config/starship.toml'
 
 # Homebrew
-if has "rg"; then
-  alias agbrew='alias | rg brew'
-else
-  alias agbrew='alias | grep brew'
-fi
 alias brewa='_brewautoupgrade'
 alias brewL='brew leaves'
 alias brewc='brew cleanup'
@@ -277,11 +232,6 @@ fi
 
 # mas-cli
 if [[ $OS = "darwin" ]]; then
-  if has "rg"; then
-    alias agmas='alias | rg mas'
-  else
-    alias agmas='alias | grep mas'
-  fi
   alias masa='_masautoupgrade'
   alias masi='mas install'
   alias masl='mas list'
