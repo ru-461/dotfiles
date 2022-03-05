@@ -2,13 +2,11 @@
 
 set -ue
 
-UNAME=`uname -m`
-
 echo "Start Installation for Mac."
 echo ""
 
 # Architecture determination
-if [[ $UNAME == arm64 ]]; then
+if [[ $(uname -m) == 'arm64' ]]; then
   # Install command line tools
   if ! has "git"; then
     echo "Installing Command line tools..."
@@ -34,6 +32,16 @@ else
   echo "Homebrew is already installed."
 fi
 echo ""
+
+# Brewfile
+if [ -f $HOME/dotfiles/Brewfile ]; then
+  echo "Installing the formulas from Brewfile..."
+  brew tap "homebrew/bundle"
+  brew bundle --file '~/dotfiles/Brewfile'
+  echo "Done."
+fi
+echo ""
+
 
 # Brewfile
 if [ -f $HOME/dotfiles/Brewfile ]; then
