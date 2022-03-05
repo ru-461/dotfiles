@@ -3,6 +3,7 @@
 set -ue
 
 echo "Start Installation for Windows Subsystem for Linux."
+echo ""
 
 # Update packages
 echo "Updating the packages to the latest..."

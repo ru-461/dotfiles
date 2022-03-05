@@ -5,6 +5,7 @@ set -ue
 UNAME=`uname -m`
 
 echo "Start Installation for Mac."
+echo ""
 
 # Architecture determination
 if [[ $UNAME == arm64 ]]; then

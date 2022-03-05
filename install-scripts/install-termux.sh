@@ -3,6 +3,7 @@
 set -ue
 
 echo "Start Installation for Termux."
+echo ""
 
 # In order to have access to shared storage
 if [[ ! -d $HOME/dotfiles ]]; then

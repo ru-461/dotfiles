@@ -3,6 +3,7 @@
 set -ue
 
 echo "Start Installation for Linux."
+echo ""
 
 # Update packages
 echo "Updating the packages to the latest..."
@@ -54,6 +55,7 @@ if has "timedatectl"; then
 else
   echo "timedatectl is required to set the time zone."
 fi
+echo ""
 
 # Install Linuxbrew
 if ! has "brew"; then
