@@ -20,6 +20,11 @@ case ${OSTYPE} in
   ;;
 esac
 
+# Command check
+has() {
+  type "$1" > /dev/null 2>&1
+}
+
 #################################  ZSH INIT  #################################
 
 # Completion
@@ -70,7 +75,7 @@ else
 fi
 
 # Enable completion & autosuggestions
-if [[ $(command -v brew) ]]; then
+if has "brew"; then
     FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
   if [[ $OS = "darwin" ]]; then
     source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -81,17 +86,17 @@ if [[ $(command -v brew) ]]; then
 fi
 
 # anyenv
-if [[ $(command -v anyenv) ]]; then
+if has "anyenv"; then
   eval "$(anyenv init - no--rehash)"
 fi
 
 # Pyenv
-if [[ $(command -v pyenv) ]]; then
+if has "pyenv"; then
   eval "$(pyenv init --path)"
 fi
 
 # GitHub CLI
-if [[ $(command -v gh) ]]; then
+if has "gh"; then
   eval "$(gh completion -s zsh)"
 fi
 
@@ -110,7 +115,7 @@ alias ps='procs'
 alias f='open .'
 
 # cd
-if [[ $(command -v rg) ]]; then
+if has "rg"; then
   alias agcd='alias | rg cd'
 else
   alias aggit='alias | grep cd'
@@ -120,13 +125,13 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 
 # ls - exa
-if [[ $(command -v rg) ]]; then
+if has "rg"; then
   alias aglist='alias | rg ls'
 else
   alias aglist='alias | grep ls'
 fi
 
-if [[ $(command -v exa) ]]; then
+if has "exa"; then
   alias e='exa --icons --git'
   alias l=e
   alias ls=e
@@ -144,7 +149,7 @@ else
 fi
 
 # Git
-if [[ $(command -v rg) ]]; then
+if has "rg"; then
   alias aggit='alias | rg git'
 else
   alias aggit='alias | grep git'
@@ -152,7 +157,7 @@ fi
 alias g='git'
 
 # .zshrc
-if [[ $(command -v rg) ]]; then
+if has "rg"; then
   alias agzsh='alias | rg zsh'
 else
   alias aggit='alias | grep zsh'
@@ -161,7 +166,7 @@ alias czsh='code ~/.zshrc'
 alias szsh='source ~/.zshrc'
 
 # ZennCLI
-if [[ $(command -v rg) ]]; then
+if has "rg"; then
   alias agzenn='alias | rg zenn'
 else
   alias agzenn='alias | grep zenn'
@@ -178,7 +183,7 @@ alias zennv='zenna && yarn zenn --version'
 alias zennup='zenna && yarn upgrade zenn-cli'
 
 # anyenv
-if [[ $(command -v rg) ]]; then
+if has "rg"; then
   alias agyarn='alias | rg anyenv'
 else
   alias agyarn='alias | grep anyenv'
@@ -188,7 +193,7 @@ alias ae='anyenv'
 alias aeu='anyenv update'
 
 # Yarn
-if [[ $(command -v rg) ]]; then
+if has "rg"; then
   alias agyarn='alias | rg yarn'
 else
   alias agyarn='alias | grep yarn'
@@ -207,7 +212,7 @@ alias ysrun='yarn -s run'
 alias ydev='yarn dev'
 
 # Multipass
-if [[ $(command -v rg) ]]; then
+if has "rg"; then
   alias agmultipass='alias | rg multipass'
 else
   alias agmultipass='alias | grep multipass'
@@ -217,7 +222,7 @@ alias mpl='multipass list'
 alias mpre='multipass restart'
 
 # Docker
-if [[ $(command -v rg) ]]; then
+if has "rg"; then
   alias agdocker='alias | rg docker'
 else
   alias agdocker='alias | grep docker'
@@ -242,7 +247,7 @@ alias dnls='docker network ls --all --latest'
 alias drm='docker system prune'
 
 # Starship
-if [[ $(command -v rg) ]]; then
+if has "rg"; then
   alias agship='alias | rg ship'
 else
   alias agship='alias | grep ship'
@@ -250,7 +255,7 @@ fi
 alias ship='code ~/.config/starship.toml'
 
 # Homebrew
-if [[ $(command -v rg) ]]; then
+if has "rg"; then
   alias agbrew='alias | rg brew'
 else
   alias agbrew='alias | grep brew'
@@ -266,13 +271,13 @@ alias brews='brew search'
 alias brewu='brew upgrade'
 alias brewx='brew uninstall'
 # Brew Bundle
-if [[ $(command -v brew bundle) ]]; then
+if has "brew bundle"; then
   alias brewbnd='brew bundle --file '~/dotfiles/Brewfile''
 fi
 
 # mas-cli
 if [[ $OS = "darwin" ]]; then
-  if [[ $(command -v rg) ]]; then
+  if has "rg"; then
     alias agmas='alias | rg mas'
   else
     alias agmas='alias | grep mas'
