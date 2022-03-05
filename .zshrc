@@ -57,7 +57,7 @@ path=(
   ~/.anyenv/bin(N-/)
   ~/.anyenv/envs/pyenv/bin(N-/)
   ~/.volta/bin(N-/)
-  /Users/$USER/dev/flutter  /bin(N-/)
+  /Users/$USER/dev/flutter/bin(N-/)
   /usr/bin(N-/)
   /usr/sbin(N-/)
   /bin(N-/)
