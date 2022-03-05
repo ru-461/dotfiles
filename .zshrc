@@ -131,7 +131,7 @@ if [[ $(command -v exa) ]]; then
   alias l=e
   alias ls=e
   alias ea='exa -a --icons --git'
-  alias la=eacd
+  alias la=ea
   alias ee='exa -aahl --icons --git'
   alias ll=ee
   alias et='exa -T -L 3 -a -I "node_modules|.git|.cache" --icons'
