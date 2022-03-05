@@ -47,7 +47,7 @@ source $HOME/dotfiles/deploy.sh
 echo ""
 
 # Setting System
-if ! has "brew"; then
+if ! has "timedatectl"; then
   echo "Setting the time zone..."
   sudo timedatectl set-timezone Asia/Tokyo
   echo "Done."
