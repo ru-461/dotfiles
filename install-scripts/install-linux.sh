@@ -47,9 +47,13 @@ source $HOME/dotfiles/deploy.sh
 echo ""
 
 # Setting System
-echo "Setting the time zone..."
-# sudo timedatectl set-timezone Asia/Tokyo
-echo "Done."
+if ! has "brew"; then
+  echo "Setting the time zone..."
+  sudo timedatectl set-timezone Asia/Tokyo
+  echo "Done."
+else
+  echo "timedatectl is required to set the time zone."
+fi
 
 # Install Linuxbrew
 if ! has "brew"; then
