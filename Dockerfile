@@ -9,17 +9,21 @@ RUN apt-get update &&  \
     sudo \
     ca-certificates
 
-RUN adduser --disabled-password \
-    --gecos '' docker
+# Add user for testing Brew installation.
+ARG USERNAME=docker
+ARG GROUPNAME=docker
+ARG UID=1000
+ARG GID=1000
+ARG PASSWORD=docker
 
-RUN adduser docker sudo
+RUN groupadd -g $GID $GROUPNAME && \
+    useradd -m -s /bin/bash -u $UID -g $GID -G sudo $USERNAME && \
+    echo $USERNAME:$PASSWORD | chpasswd && \
+    echo "$USERNAME   ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> \
-    /etc/sudoers
+USER $USERNAME
 
-USER docker
-
-WORKDIR /home/docker
+WORKDIR /home/$USERNAME/
 
 # Copy bootstrap script
 COPY bootstrap.sh .
