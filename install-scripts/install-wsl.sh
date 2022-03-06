@@ -68,8 +68,6 @@ if ! has "brew"; then
   test -r ~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
   echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
   source ~/.profile
-  echo "Installing additional packages..."
-  # brew install git wget vim
   echo "Done."
 else
   echo "Linuxbrew is already installed."
