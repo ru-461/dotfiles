@@ -23,6 +23,8 @@ RUN groupadd -g $GID $GROUPNAME && \
     echo $USERNAME:$PASSWORD | chpasswd && \
     echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
+RUN chmod +x bootstrap.sh
+
 USER $USERNAME
 
 WORKDIR /home/$USERNAME/
