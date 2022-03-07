@@ -87,11 +87,10 @@ echo ""
 if ! has "anyenv"; then
     echo "Installing anyenv..."
     git clone https://github.com/anyenv/anyenv ~/.anyenv
-    ~/.anyenv/bin/anyenv init
-    anyenv install --init
+    ~/.anyenv/bin/anyenv install --init
     echo "Setting anyenv plugin..."
-    mkdir -p $(anyenv root)/plugins
-    git clone https://github.com/znz/anyenv-update.git $(anyenv root)/plugins/anyenv-update
+    mkdir -p ~/.anyenv/plugins
+    git clone https://github.com/znz/anyenv-update.git ~/.anyenv/plugins/anyenv-update
 else
   echo "anyenv is already installed."
 fi
