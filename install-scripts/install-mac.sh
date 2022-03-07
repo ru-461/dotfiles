@@ -64,3 +64,38 @@ else
   echo "Volta is already installed."
 fi
 echo ""
+
+#################################  DEFAULTS  #################################
+
+#  Apprerance
+echo "Setting Apprerance..."
+defaults delete .GlobalPreferences AppleInterfaceStyleSwitchesAutomatically > /dev/null 2>&1
+# Theme
+defaults write .GlobalPreferences AppleInterfaceStyle -string "Dark"
+# Dock
+defaults delete com.apple.dock orientation
+echo ""
+
+echo "Setting File System..."
+# DS_Store
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+# Show Hidden Files
+defaults write com.apple.finder AppleShowAllFiles true
+echo ""
+
+echo "Setting AppStore..."
+# Enable Auto Update Check
+defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
+# Enable Auto Update
+defaults write com.apple.commerce AutoUpdate -bool false
+echo ""
+
+echo "Setting Screenshot..."
+# Location
+defaults write com.apple.screencapture location -string "$HOME/Downloads"
+# Format - png
+defaults write com.apple.screencapture type -string "png"
+# Disable Shadow
+defaults write com.apple.screencapture disable-shadow -bool true
+echo ""
