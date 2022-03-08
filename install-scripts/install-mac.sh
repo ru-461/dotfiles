@@ -67,6 +67,9 @@ echo ""
 
 #################################  DEFAULTS  #################################
 
+echo "Start Setting defaults..."
+echo ""
+
 #  Apprerance
 echo "Setting Apprerance..."
 defaults delete .GlobalPreferences AppleInterfaceStyleSwitchesAutomatically > /dev/null 2>&1
@@ -85,7 +88,7 @@ defaults write com.apple.finder AppleShowAllFiles true
 echo ""
 
 echo "Setting AppStore..."
-# Enable Auto Update Check
+# Enable Auto Update Checkc
 defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
 # Enable Auto Update
 defaults write com.apple.commerce AutoUpdate -bool false
