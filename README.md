@@ -33,10 +33,4 @@ Deploy dotfiles in Ubuntu container.
 docker run -it --rm dotfiles
 ```
 
-Run bootstrap.sh in container.
-
-```shell
-. bootstrap.sh
-```
-
 Happy Hacking!!
