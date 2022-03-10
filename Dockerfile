@@ -30,4 +30,4 @@ WORKDIR /home/$USERNAME/
 # Copy bootstrap script
 COPY --chown=$USERNAME:$USERNAME bootstrap.sh .
 
-CMD [ "/usr/bin/bash", "bootstrap.sh" ]
+CMD [ "/usr/bin/bash" ]
