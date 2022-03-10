@@ -78,7 +78,7 @@ else
   alias brew="PATH=/opt/homebrew/bin:/opt/homebrew/sbin brew"
 fi
 
-# Enable completion & autosuggestions
+# Enable completion & Autosuggestions
 if has "brew"; then
     FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
   if [[ $OS = "darwin" ]]; then
@@ -94,7 +94,7 @@ if has "anyenv"; then
   eval "$(anyenv init - no--rehash)"
 fi
 
-# Pyenv
+# pyenv
 if has "pyenv"; then
   eval "$(pyenv init --path)"
 fi
