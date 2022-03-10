@@ -47,7 +47,7 @@ if ! has "anyenv"; then
     echo "Installing anyenv..."
     git clone https://github.com/anyenv/anyenv ~/.anyenv
     ~/.anyenv/bin/anyenv install --init
-    echo "Setting anyenv plugin..."
+    echo "Setting anyenv plugins..."
     mkdir -p ~/.anyenv/plugins
     git clone https://github.com/znz/anyenv-update.git ~/.anyenv/plugins/anyenv-update
 else
