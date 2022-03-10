@@ -6,7 +6,7 @@ on:
     branches:
       - main
     paths:
-      - 'install-scripts-install-mac.sh'
+      - 'install-scripts/install-mac.sh'
 
 jobs:
   macos-test:
