@@ -1,0 +1,17 @@
+# .github/workflows/macos.yml
+name: macOS
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'install-scripts-install-mac.sh'
+
+jobs:
+  macos-test:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: bash bootstrap.sh
