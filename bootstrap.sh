@@ -73,7 +73,7 @@ if [[ $(uname) == 'Darwin' ]]; then
     git clone $DOT_REMOTE
   fi
   # Run install script
-  # source $DOT_BASE/install-scripts/install-mac.sh
+  source $DOT_BASE/install-scripts/install-mac.sh
 elif [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
   echo "Your environment is a Windows Subsystem for Linux, Start deployment for WSL."
   # Clone dotfile repository locally
