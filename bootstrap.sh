@@ -12,7 +12,7 @@ COLOR_YELLOW="\033[1;33m"
 COLOR_NONE="\033[0m"
 
 success() {
-  echo -e "\n${COLOR_GREEN}$1${COLOR_NONE}"
+  echo -e "${COLOR_GREEN}$1${COLOR_NONE}"
 }
 
 info() {
@@ -20,9 +20,9 @@ info() {
 }
 
 headline() {
-  echo -e "\n${COLOR_GRAY}==============================${COLOR_NONE}"
+  echo -e "${COLOR_GRAY}==============================${COLOR_NONE}"
   echo -e "${COLOR_PURPLE}$1${COLOR_NONE}"
-  echo -e "${COLOR_GRAY}==============================${COLOR_NONE}\n"
+  echo -e "${COLOR_GRAY}==============================${COLOR_NONE}"
 }
 
 warning() {
