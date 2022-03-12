@@ -2,6 +2,9 @@
 
 set -ue
 
+# Create symlinks
+source $HOME/dotfiles/deploy.sh
+
 # Architecture determination
 if [[ $(uname -m) == 'arm64' ]]; then
   # Install command line tools
