@@ -4,7 +4,7 @@ set -ue
 
 if [[ -d $HOME/dotfiles ]]; then
   DOT_BASE=$HOME/dotfiles
-  echo -e "\033[1;34mStart to deploy symlink.\033[1;34m"
+  echo -e "\033[1;34minfo: \033[0mStart to deploy symlink."
 else
   echo -e "\033[1;31mDotfiles is missing.\033[1;31m"
   exit 1
