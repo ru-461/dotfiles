@@ -53,7 +53,7 @@ cd $HOME
 if [[ -d $HOME/dotfiles ]]; then
   read -p "The dotfiles already exists. Do you want to update them? [y/N] " -n 1 -r
   if [[ $REPLY =~ ^[Yy]$ ]]; then
-    info "Updating the dotfiles ..."
+    info "Updating the dotfiles..."
     cd $DOT_BASE
     git pull origin main
   else
@@ -66,7 +66,7 @@ if [[ $(uname) == 'Darwin' ]]; then
   echo "Your environment is a Mac, Start deployment for macOS."
     # Clone dotfile repository locally
   if [[ ! -d $HOME/dotfiles ]]; then
-    echo "Cloning the dotfiles repository ..."
+    echo "Cloning the dotfiles repository..."
     git clone $DOT_REMOTE
   fi
   # Run install script
@@ -92,7 +92,7 @@ elif [[ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]]; then
   # Clone dotfile repository locally
   if [[ ! -d $HOME/dotfiles ]]; then
     if has "git"; then
-      info "Cloning the dotfiles repository ..."
+      info "Cloning the dotfiles repository..."
       git clone $DOT_REMOTE
     else
       curl -fsSLo $HOME/dotfiles.tar.gz $DOT_TARBALL
