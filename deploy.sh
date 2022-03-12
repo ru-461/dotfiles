@@ -4,6 +4,7 @@ set -ue
 
 if [[ -d $HOME/dotfiles ]]; then
   DOT_BASE=$HOME/dotfiles
+  echo -e "\033[1;34mStart to deploy symlink.\033[1;34m"
 else
   echo -e "\033[1;31mDotfiles is missing.\033[1;31m"
   exit 1
@@ -22,4 +23,4 @@ do
 done
 echo ""
 echo "----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-echo -e "\033[1;32mSymbolic link expansion is complete.\033[1;32m\n"
+echo -e "\033[1;32mEnd of symlink expansion.\033[1;32m\n"

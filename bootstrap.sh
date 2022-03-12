@@ -41,7 +41,7 @@ DOT_BASE=$HOME/dotfiles
 DOT_TARBALL=https://github.com/ryu-461/dotfiles/tarball/main
 DOT_REMOTE=https://github.com/ryu-461/dotfiles.git
 
-headline "Welcome dotfiles installation!!"
+headline "Welcome dotfiles installation!"
 read -p "This script will install and deploy the various packages. Are you sure you want to continue? [y/N] " -n 1 -r
 echo ""
 if [[ ! $REPLY =~ ^[Yy]$ ]]; then
@@ -77,25 +77,20 @@ if [[ ! -d $HOME/dotfiles ]]; then
 fi
 
 if [[ $(uname) == 'Darwin' ]]; then
-  headline "Start Installation for macOS"
-    # Clone dotfile repository locally
-  if [[ ! -d $HOME/dotfiles ]]; then
-    info "Cloning the dotfiles repository..."
-    git clone $DOT_REMOTE
-  fi
+  headline "Installation for macOS"
   # Run install script
   source $DOT_BASE/install-scripts/install-mac.sh
 elif [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
-  headline "Start Installation for Windows Subsystem for Linux."
+  headline "Installation for Windows Subsystem for Linux."
   # Run install script
   source $DOT_BASE/install-scripts/install-wsl.sh
 elif [[ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]]; then
   if [[ $(uname -o) == 'Android' ]]; then
-    headline "Start Installation for Termux."
+    headline "Installation for Termux."
     # Run install script
     source $DOT_BASE/install-scripts/install-termux.sh
   else
-    headline "Start Installation for Linux."
+    headline "Installation for Linux."
     # Run install script
     source $DOT_BASE/install-scripts/install-linux.sh
   fi
