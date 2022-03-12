@@ -16,7 +16,7 @@ success() {
 }
 
 info() {
-  echo -e "\n${COLOR_BLUE}Info: ${COLOR_NONE}$1"
+  echo -e "${COLOR_BLUE}Info: ${COLOR_NONE}$1"
 }
 
 headline() {
@@ -26,11 +26,11 @@ headline() {
 }
 
 warning() {
-  echo -e "\n${COLOR_YELLOW}Warning: ${COLOR_NONE}$1"
+  echo -e "${COLOR_YELLOW}Warning: ${COLOR_NONE}$1"
 }
 
 error() {
-  echo -e "\n${COLOR_RED}Error: ${COLOR_NONE}$1"
+  echo -e "${COLOR_RED}Error: ${COLOR_NONE}$1"
   exit 1
 }
 
@@ -44,6 +44,7 @@ DOT_REMOTE=https://github.com/ryu-461/dotfiles.git
 
 headline "Welcome dotfiles installation!!"
 read -p "This script will install and deploy the various packages. Are you sure you want to continue? [y/N] " -n 1 -r
+echo ""
 if [[ ! $REPLY =~ ^[Yy]$ ]]; then
   info "The installation has been canceled. There is nothing to do. "
   exit 1
@@ -52,6 +53,7 @@ info "Start Installation."
 cd $HOME
 if [[ -d $HOME/dotfiles ]]; then
   read -p "The dotfiles already exists. Do you want to update them? [y/N] " -n 1 -r
+  echo ""
   if [[ $REPLY =~ ^[Yy]$ ]]; then
     info "Updating the dotfiles..."
     cd $DOT_BASE
