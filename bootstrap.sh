@@ -62,7 +62,19 @@ if [[ -d $HOME/dotfiles ]]; then
   fi
   exit 1
 fi
-echo ""
+
+# Clone dotfile repository locally
+if [[ ! -d $HOME/dotfiles ]]; then
+  headline "Clone dotfiles"
+  if has "git"; then
+    info "Cloning the dotfiles repository..."
+    git clone $DOT_REMOTE
+  else
+    curl -fsSLo $HOME/dotfiles.tar.gz $DOT_TARBALL
+    tar -zxf $HOME/dotfiles.tar.gz --strip-components 1 -C $HOME/dotfiles
+    rm -f $HOME/dotfiles.tar.gz
+  fi
+fi
 
 if [[ $(uname) == 'Darwin' ]]; then
   headline "Start Installation for macOS"
@@ -75,39 +87,16 @@ if [[ $(uname) == 'Darwin' ]]; then
   source $DOT_BASE/install-scripts/install-mac.sh
 elif [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
   headline "Start Installation for Windows Subsystem for Linux."
-  # Clone dotfile repository locally
-  if [[ ! -d $HOME/dotfiles ]]; then
-    if has "git"; then
-      info "Cloning the dotfiles repository..."
-      git clone $DOT_REMOTE
-    else
-      curl -fsSLo $HOME/dotfiles.tar.gz $DOT_TARBALL
-      tar -zxf $HOME/dotfiles.tar.gz --strip-components 1 -C $HOME/dotfiles
-      rm -f $HOME/dotfiles.tar.gz
-    fi
-  fi
-  cd $DOT_BASE
   # Run install script
   source $DOT_BASE/install-scripts/install-wsl.sh
 elif [[ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]]; then
-  headline "Start Installation for Linux."
-  # Clone dotfile repository locally
-  if [[ ! -d $HOME/dotfiles ]]; then
-    if has "git"; then
-      info "Cloning the dotfiles repository..."
-      git clone $DOT_REMOTE
-    else
-      curl -fsSLo $HOME/dotfiles.tar.gz $DOT_TARBALL
-      tar -zxf $HOME/dotfiles.tar.gz --strip-components 1 -C $HOME/dotfiles
-      rm -f $HOME/dotfiles.tar.gz
-    fi
-  fi
-  cd $DOT_BASE
-  # Run install script
   if [[ $(uname -o) == 'Android' ]]; then
     headline "Start Installation for Termux."
+    # Run install script
     source $DOT_BASE/install-scripts/install-termux.sh
   else
+    headline "Start Installation for Linux."
+    # Run install script
     source $DOT_BASE/install-scripts/install-linux.sh
   fi
 else
