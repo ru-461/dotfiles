@@ -3,6 +3,7 @@
 set -ue
 
 # Create symlinks
+headline "Symlinks"
 source $HOME/dotfiles/deploy.sh
 
 # Update packages
@@ -37,7 +38,6 @@ if ! has "zsh"; then
 else
   success "Zsh is already installed."
 fi
-echo ""
 
 # Setting System
 headline "Config"
@@ -48,7 +48,6 @@ if has "timedatectl"; then
 else
   warning "timedatectl is required to set the time zone."
 fi
-echo ""
 
 # Install Homebrew
 headline "Homebrew"
