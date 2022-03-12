@@ -64,7 +64,7 @@ fi
 echo ""
 
 if [[ $(uname) == 'Darwin' ]]; then
-  headline "Your environment is a Mac, Start deployment for macOS."
+  headline "Start Installation for macOS"
     # Clone dotfile repository locally
   if [[ ! -d $HOME/dotfiles ]]; then
     info "Cloning the dotfiles repository..."
@@ -73,7 +73,7 @@ if [[ $(uname) == 'Darwin' ]]; then
   # Run install script
   source $DOT_BASE/install-scripts/install-mac.sh
 elif [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
-  headline "Your environment is a Windows Subsystem for Linux, Start deployment for WSL."
+  headline "Start Installation for Windows Subsystem for Linux."
   # Clone dotfile repository locally
   if [[ ! -d $HOME/dotfiles ]]; then
     if has "git"; then
@@ -89,7 +89,7 @@ elif [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
   # Run install script
   source $DOT_BASE/install-scripts/install-wsl.sh
 elif [[ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]]; then
-  headline "Your environment is a Linux, Start deployment for Linux."
+  headline "Start Installation for Linux."
   # Clone dotfile repository locally
   if [[ ! -d $HOME/dotfiles ]]; then
     if has "git"; then
@@ -104,6 +104,7 @@ elif [[ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]]; then
   cd $DOT_BASE
   # Run install script
   if [[ $(uname -o) == 'Android' ]]; then
+    headline "Start Installation for Termux."
     source $DOT_BASE/install-scripts/install-termux.sh
   else
     source $DOT_BASE/install-scripts/install-linux.sh

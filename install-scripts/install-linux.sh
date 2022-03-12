@@ -2,9 +2,6 @@
 
 set -ue
 
-echo "Start Installation for Linux."
-echo ""
-
 # Update packages
 echo "Updating the packages to the latest..."
 # Use apt

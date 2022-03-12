@@ -2,9 +2,6 @@
 
 set -ue
 
-echo "Start Installation for macOS."
-echo ""
-
 # Architecture determination
 if [[ $(uname -m) == 'arm64' ]]; then
   # Install command line tools
