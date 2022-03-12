@@ -3,7 +3,7 @@
 set -ue
 
 # Update packages
-echo "Updating the packages to the latest..."
+info "Updating the packages to the latest..."
 # Use apt
 if has "apt"; then
   echo "Use apt."
