@@ -40,10 +40,6 @@ else
 fi
 echo ""
 
-# Create symlinks
-source $HOME/dotfiles/deploy.sh
-echo ""
-
 # Setting System
 echo "Start configuration for Japanese."
 echo "Setting time zone and locale..."

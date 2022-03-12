@@ -63,6 +63,9 @@ if [[ -d $HOME/dotfiles ]]; then
 fi
 echo ""
 
+# Create symlinks
+source $HOME/dotfiles/deploy.sh
+
 if [[ $(uname) == 'Darwin' ]]; then
   headline "Start Installation for macOS"
     # Clone dotfile repository locally

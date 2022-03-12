@@ -40,10 +40,6 @@ else
 fi
 echo ""
 
-# Create symlinks
-source $HOME/dotfiles/deploy.sh
-echo ""
-
 # Setting System
 if has "timedatectl"; then
   echo "Setting the time zone..."
