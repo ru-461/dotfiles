@@ -61,18 +61,19 @@ if [[ -d $HOME/dotfiles ]]; then
   fi
   exit 1
 fi
+echo ""
 
 if [[ $(uname) == 'Darwin' ]]; then
-  echo "Your environment is a Mac, Start deployment for macOS."
+  headline "Your environment is a Mac, Start deployment for macOS."
     # Clone dotfile repository locally
   if [[ ! -d $HOME/dotfiles ]]; then
-    echo "Cloning the dotfiles repository..."
+    info "Cloning the dotfiles repository..."
     git clone $DOT_REMOTE
   fi
   # Run install script
   source $DOT_BASE/install-scripts/install-mac.sh
 elif [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
-  echo "Your environment is a Windows Subsystem for Linux, Start deployment for WSL."
+  headline "Your environment is a Windows Subsystem for Linux, Start deployment for WSL."
   # Clone dotfile repository locally
   if [[ ! -d $HOME/dotfiles ]]; then
     if has "git"; then
@@ -88,7 +89,7 @@ elif [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
   # Run install script
   source $DOT_BASE/install-scripts/install-wsl.sh
 elif [[ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]]; then
-  echo "Your environment is a Linux, Start deployment for Linux."
+  headline "Your environment is a Linux, Start deployment for Linux."
   # Clone dotfile repository locally
   if [[ ! -d $HOME/dotfiles ]]; then
     if has "git"; then
