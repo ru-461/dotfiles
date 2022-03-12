@@ -6,24 +6,21 @@ set -ue
 source $HOME/dotfiles/deploy.sh
 
 # Update packages
+headline "Packages"
 info "Updating the packages to the latest..."
 # Use apt
 if has "apt"; then
-  echo "Use apt."
   sudo apt update
 fi
-
 # Use yum
 if has "yum"; then
-  echo "Use yum."
   sudo yum update
 fi
-echo "Done."
-echo ""
 
 # Install Zsh
+headline "Zsh"
 if ! has "zsh"; then
-  echo "Installing Zsh..."
+  info "Installing Zsh..."
   if has "apt"; then
     sudo apt install zsh -y
   fi
@@ -31,72 +28,70 @@ if ! has "zsh"; then
   if has "yum"; then
     sudo yum install zsh -y
   fi
-  echo "Setting default..."
+  info "Setting default..."
   if [[ "$SHELL" != $(which zsh) ]]; then
       chsh -s $(which zsh)
-      echo "Default shell changed to Zsh."
+      info "Default shell changed to Zsh."
   fi
-  echo "Zsh will be enabled after the re-login."
-  echo "Done."
+  warning "Zsh will be enabled after the re-login."
 else
-  echo "Zsh is already installed."
+  success "Zsh is already installed."
 fi
 echo ""
 
 # Setting System
+headline "Config"
 if has "timedatectl"; then
-  echo "Setting the time zone..."
+  info "Setting the time zone..."
   sudo timedatectl set-timezone Asia/Tokyo
-  echo "Done."
+  success "Success"
 else
-  echo "timedatectl is required to set the time zone."
+  warning "timedatectl is required to set the time zone."
 fi
 echo ""
 
-# Install Linuxbrew
+# Install Homebrew
+headline "Homebrew"
 if ! has "brew"; then
-  echo "Installing Linuxbrew..."
+  info "Installing Homebrew..."
   sudo apt install build-essential curl file git -y
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  echo "Setting Linuxbrew..."
+  info "Setting Homebrew..."
   test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
   test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
   test -r ~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
   echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
   source ~/.profile
-  echo "Done."
 else
-  echo "Linuxbrew is already installed."
+  success "Linuxbrew is already installed."
 fi
-echo ""
 
 # Brewfile
+headline "Brew bundle"
 if [ -f $HOME/dotfiles/Brewfile ]; then
-  echo "Installing the formulas from Brewfile..."
+  info "Installing the formulas from Brewfile..."
   brew tap "homebrew/bundle"
   brew bundle --file '~/dotfiles/Brewfile'
-  echo "Done."
 fi
-echo ""
 
 # Install anyenv
+headline "anyenv"
 if ! has "anyenv"; then
-    echo "Installing anyenv..."
-    git clone https://github.com/anyenv/anyenv ~/.anyenv
-    ~/.anyenv/bin/anyenv install --init
-    echo "Setting anyenv plugin..."
-    mkdir -p ~/.anyenv/plugins
-    git clone https://github.com/znz/anyenv-update.git ~/.anyenv/plugins/anyenv-update
+  info "Installing anyenv..."
+  git clone https://github.com/anyenv/anyenv ~/.anyenv
+  ~/.anyenv/bin/anyenv install --init
+  info "Setting anyenv plugin..."
+  mkdir -p ~/.anyenv/plugins
+  git clone https://github.com/znz/anyenv-update.git ~/.anyenv/plugins/anyenv-update
 else
-  echo "anyenv is already installed."
+  success "anyenv is already installed."
 fi
-echo ""
 
 # Install Volta
+headline "Volta"
 if ! has "volta"; then
-  echo "Installing Volta..."
+  info "Installing Volta..."
   curl https://get.volta.sh | bash -s -- --skip-setup
 else
-  echo "Volta is already installed."
+  success "Volta is already installed."
 fi
-echo ""
