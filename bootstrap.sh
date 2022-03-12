@@ -12,11 +12,11 @@ COLOR_YELLOW="\033[1;33m"
 COLOR_NONE="\033[0m"
 
 success() {
-  echo -e "${COLOR_GREEN}$1${COLOR_NONE}"
+  echo -e "\n${COLOR_GREEN}$1${COLOR_NONE}"
 }
 
 info() {
-  echo -e "${COLOR_BLUE}Info: ${COLOR_NONE}$1"
+  echo -e "\n${COLOR_BLUE}Info: ${COLOR_NONE}$1"
 }
 
 headline() {
@@ -26,11 +26,11 @@ headline() {
 }
 
 warning() {
-  echo -e "${COLOR_YELLOW}Warning: ${COLOR_NONE}$1"
+  echo -e "\n${COLOR_YELLOW}Warning: ${COLOR_NONE}$1"
 }
 
 error() {
-  echo -e "${COLOR_RED}Error: ${COLOR_NONE}$1"
+  echo -e "\n${COLOR_RED}Error: ${COLOR_NONE}$1"
   exit 1
 }
 
@@ -42,30 +42,25 @@ DOT_BASE=$HOME/dotfiles
 DOT_TARBALL=https://github.com/ryu-461/dotfiles/tarball/main
 DOT_REMOTE=https://github.com/ryu-461/dotfiles.git
 
-echo "Welcome dotfiles installation!!"
-echo ""
+headline "Welcome dotfiles installation!!"
 read -p "This script will install and deploy the various packages. Are you sure you want to continue? [y/N] " -n 1 -r
 if [[ ! $REPLY =~ ^[Yy]$ ]]; then
   info "The installation has been canceled. There is nothing to do. "
   exit 1
 fi
-echo ""
-
-echo "Start Installation."
+info "Start Installation."
 cd $HOME
-
 if [[ -d $HOME/dotfiles ]]; then
   read -p "The dotfiles already exists. Do you want to update them? [y/N] " -n 1 -r
-  echo ""
   if [[ $REPLY =~ ^[Yy]$ ]]; then
-    echo "Updating the dotfiles ..."
+    info "Updating the dotfiles ..."
     cd $DOT_BASE
     git pull origin main
+  else
+    info "There is nothing to do."
   fi
-  echo "There is nothing to do."
   exit 1
 fi
-echo ""
 
 if [[ $(uname) == 'Darwin' ]]; then
   echo "Your environment is a Mac, Start deployment for macOS."
@@ -81,7 +76,7 @@ elif [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
   # Clone dotfile repository locally
   if [[ ! -d $HOME/dotfiles ]]; then
     if has "git"; then
-      echo "Cloning the dotfiles repository ..."
+      info "Cloning the dotfiles repository..."
       git clone $DOT_REMOTE
     else
       curl -fsSLo $HOME/dotfiles.tar.gz $DOT_TARBALL
@@ -97,7 +92,7 @@ elif [[ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]]; then
   # Clone dotfile repository locally
   if [[ ! -d $HOME/dotfiles ]]; then
     if has "git"; then
-      echo "Cloning the dotfiles repository ..."
+      info "Cloning the dotfiles repository ..."
       git clone $DOT_REMOTE
     else
       curl -fsSLo $HOME/dotfiles.tar.gz $DOT_TARBALL
@@ -115,6 +110,6 @@ elif [[ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]]; then
 else
   exit 1
 fi
-echo "Installation complete."
+success "Installation complete."
 
 success "Done. Happy Hacking!!"
