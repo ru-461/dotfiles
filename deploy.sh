@@ -5,11 +5,10 @@ set -ue
 if [[ -d $HOME/dotfiles ]]; then
   DOT_BASE=$HOME/dotfiles
 else
-  warning "Dotfiles is missing."
+  echo -e "\033[1;31mDotfiles is missing.\033[1;31m"
   exit 1
 fi
 
-info "Expanding symbolic links..."
 echo "----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
 echo ""
 for file in $(find . -not -path '*.git/*' -not -path '*.DS_Store' -path '*/.*' -type f -print | cut -b3-)
@@ -23,4 +22,4 @@ do
 done
 echo ""
 echo "----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-success "Symbolic link expansion is complete."
+echo -e "\033[1;32mSymbolic link expansion is complete.\033[1;32m\n"
