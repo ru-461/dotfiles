@@ -42,9 +42,11 @@ DOT_BASE=$HOME/dotfiles
 DOT_TARBALL=https://github.com/ryu-461/dotfiles/tarball/main
 DOT_REMOTE=https://github.com/ryu-461/dotfiles.git
 
-read -p "Welcome dotfiles installation!! This script will install and deploy the various packages. Are you sure you want to continue? [y/N]" -n 1 -r
+echo "Welcome dotfiles installation!!"
+echo ""
+read -p "This script will install and deploy the various packages. Are you sure you want to continue? [y/N] " -n 1 -r
 if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-  info "The installation has been canceled. There is nothing to do."
+  info "The installation has been canceled. There is nothing to do. "
   exit 1
 fi
 echo ""
@@ -53,7 +55,7 @@ echo "Start Installation."
 cd $HOME
 
 if [[ -d $HOME/dotfiles ]]; then
-  read -p "The dotfiles already exists. Do you want to update them? [y/N]" -n 1 -r
+  read -p "The dotfiles already exists. Do you want to update them? [y/N] " -n 1 -r
   echo ""
   if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo "Updating the dotfiles ..."
