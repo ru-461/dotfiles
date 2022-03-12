@@ -76,6 +76,10 @@ if [[ ! -d $HOME/dotfiles ]]; then
   fi
 fi
 
+# Create symlinks
+headline "Symlinks"
+source $HOME/dotfiles/deploy.sh
+
 if [[ $(uname) == 'Darwin' ]]; then
   headline "Installation for macOS"
   # Run install script

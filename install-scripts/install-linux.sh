@@ -2,10 +2,6 @@
 
 set -ue
 
-# Create symlinks
-headline "Symlinks"
-source $HOME/dotfiles/deploy.sh
-
 # Update packages
 headline "Packages"
 info "Updating the packages to the latest..."

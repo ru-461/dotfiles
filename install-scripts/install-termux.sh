@@ -2,9 +2,6 @@
 
 set -ue
 
-# Create symlinks
-source $HOME/dotfiles/deploy.sh
-
 # In order to have access to shared storage
 if [[ ! -d $HOME/dotfiles ]]; then
   echo "Access to shared storage."

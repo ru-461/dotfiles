@@ -2,9 +2,6 @@
 
 set -ue
 
-# Create symlinks
-source $HOME/dotfiles/deploy.sh
-
 # Update packages
 echo "Updating the packages to the latest..."
 # Use apt
