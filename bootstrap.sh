@@ -78,6 +78,7 @@ fi
 
 # Create symlinks
 headline "Symlinks"
+cd $DOT_BASE
 source $HOME/dotfiles/deploy.sh
 
 if [[ $(uname) == 'Darwin' ]]; then
