@@ -99,6 +99,7 @@ _masautoupgrade() {
   info "Upgrading Done."
 }
 
+# pkg upgrade
 _pkgautoupgrade() {
   headline "pkg"
   info "Upgrading packages..."
@@ -106,10 +107,10 @@ _pkgautoupgrade() {
   pkg update
   run "pkg upgrade"
   pkg upgrade -y
-  run "pkg autoremove"
-  pkg autoremove -y
+  run "pkg autoclean"
+  pkg autoclean
   run "pkg clean"
-  apt clean -y
+  pkg clean
   info "Upgrading Done."
 }
 
