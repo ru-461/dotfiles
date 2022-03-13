@@ -72,7 +72,9 @@ fi
 headline "anyenv"
 if ! has "anyenv"; then
   info "Installing anyenv..."
-  git clone https://github.com/anyenv/anyenv ~/.anyenv
+    if [[ ! -d $HOME/.anyenv ]]; then
+    git clone https://github.com/anyenv/anyenv ~/.anyenv
+  fi
   ~/.anyenv/bin/anyenv install --init
   info "Setting anyenv plugin..."
   mkdir -p ~/.anyenv/plugins
