@@ -3,7 +3,7 @@
 set -ue
 
 # In order to have access to shared storage
-if [[ ! -d $HOME/dotfiles ]]; then
+if [[ ! -d $HOME/storage ]]; then
   info "Access to shared storage."
   termux-setup-storage
   success "Setup done."
@@ -22,7 +22,7 @@ if ! has "zsh"; then
   pkg install zsh -y
   info "Setting default..."
   if [[ "$SHELL" != $(which zsh) ]]; then
-      chsh -s $(which zsh)
+      chsh -s zsh
       info "Default shell changed to Zsh."
   fi
   warning "Zsh will be enabled after the re-login."
