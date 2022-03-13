@@ -55,7 +55,7 @@ has() {
 }
 
 _delstores () {
-  sudo find $1 \( -name '.DS_Store' -or -name '._*' -or -name 'Thumbs.db' -or -name 'Desktop.ini' \) -delete -print;
+  sudo find $1 \( -name ".DS_Store" -or -name "._*" -or -name "Thumbs.db" -or -name "Desktop.ini" \) -delete -print;
 }
 
 # apt upgrade
@@ -218,138 +218,138 @@ fi
 #################################  ALIASES  #################################
 
 # dotfiles
-alias dot='code ~/dotfiles'
+alias dot="code ~/dotfiles"
 # System
-alias re='source ~/.zshrc'
-alias c='clear'
-alias cls='clear'
-alias q='exit'
-alias a='alias'
-alias h='history'
-alias ps='procs'
-alias f='open .'
+alias re="source ~/.zshrc"
+alias c="clear"
+alias cls="clear"
+alias q="exit"
+alias a="alias"
+alias h="history"
+alias ps="procs"
+alias f="open ."
 
 # cd
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
 
 # ls - exa
 if has "exa"; then
-  alias e='exa --icons --git'
+  alias e="exa --icons --git"
   alias l=e
   alias ls=e
-  alias ea='exa -a --icons --git'
+  alias ea="exa -a --icons --git"
   alias la=ea
-  alias ee='exa -aahl --icons --git'
+  alias ee="exa -aahl --icons --git"
   alias ll=ee
-  alias et='exa -T -L 3 -a -I "node_modules|.git|.cache" --icons'
+  alias et="exa -T -L 3 -a -I 'node_modules|.git|.cache' --icons"
   alias lt=et
-  alias eta='exa -T -a -I "node_modules|.git|.cache" --color=always --icons | less -r'
+  alias eta="exa -T -a -I 'node_modules|.git|.cache' --color=always --icons | less -r"
   alias lta=eta
-  alias l='clear && ls'
+  alias l="clear && ls"
 else
-  alias l='clear && ls'
+  alias l="clear && ls"
 fi
 
 # Git
-alias g='git'
+alias g="git"
 
 # .zshrc
-alias czsh='code ~/.zshrc'
-alias szsh='source ~/.zshrc'
+alias czsh="code ~/.zshrc"
+alias szsh="source ~/.zshrc"
 
 # ZennCLI
-alias zenna='cd ~/Documents/zenn-articles'
-alias zennb='cd ~/Documents/zenn-books'
-alias zennop='zenna && code ~/Documents/my-zenn-contents && yarn zenn preview --open'
-alias zennna='zenna && yarn zenn new:article'
-alias zennnas='zenna && yarn zenn new:article --slug'
-alias zennnb='zenna && yarn zenn new:book'
-alias zennnbs='zenna && yarn zenn new:book --slug '
-alias zennpr='zenna && yarn zenn preview --open'
-alias zennv='zenna && yarn zenn --version'
-alias zennup='zenna && yarn upgrade zenn-cli'
+alias zenna="cd ~/Documents/zenn-articles"
+alias zennb="cd ~/Documents/zenn-books"
+alias zennop="zenna && code ~/Documents/my-zenn-contents && yarn zenn preview --open"
+alias zennna="zenna && yarn zenn new:article"
+alias zennnas="zenna && yarn zenn new:article --slug"
+alias zennnb="zenna && yarn zenn new:book"
+alias zennnbs="zenna && yarn zenn new:book --slug "
+alias zennpr="zenna && yarn zenn preview --open"
+alias zennv="zenna && yarn zenn --version"
+alias zennup="zenna && yarn upgrade zenn-cli"
 
 # anyenv
-alias aganyenv='alias | rg anyenv'
-alias ae='anyenv'
-alias aeu='anyenv update'
+alias aganyenv="alias | rg anyenv"
+alias ae="anyenv"
+alias aeu="anyenv update"
 
 # Yarn
-alias y='yarn'
-alias ygl='yarn global list --depth=0'
-alias yal='yarn list --depth=0'
-alias yga='yarn global add'
-alias ya='yarn add'
-alias yad='yarn add --dev'
-alias yrm='yarn remove'
-alias yupg='yarn upgrade'
-alias yout='yarn outdated'
-alias yrun='yarn run'
-alias ysrun='yarn -s run'
-alias ydev='yarn dev'
+alias y="yarn"
+alias ygl="yarn global list --depth=0"
+alias yal="yarn list --depth=0"
+alias yga="yarn global add"
+alias ya="yarn add"
+alias yad="yarn add --dev"
+alias yrm="yarn remove"
+alias yupg="yarn upgrade"
+alias yout="yarn outdated"
+alias yrun="yarn run"
+alias ysrun="yarn -s run"
+alias ydev="yarn dev"
 
 # Multipass
-alias mp='multipass'
-alias mpl='multipass list'
-alias mpre='multipass restart'
+alias mp="multipass"
+alias mpl="multipass list"
+alias mpre="multipass restart"
 
 # Docker
-alias d='docker'
-alias dp='docker ps'
-alias dpls='docker ps --latest'
-alias dx='docker exec -it'
-alias dcn='docker container'
-alias dcls='docker container ls --all --latest'
-alias dcrm='docker rm --force $(docker ps -a -q)'
-alias di='docker image'
-alias dils='docker image ls --all'
-alias dirm='docker rmi -f $(docker images -q)'
-alias dn='docker network'
-alias dnls='docker network ls --all --latest'
-alias dc='docker-compose'
-alias dcup='docker-compose up -d'
-alias dcd='docker-compose down'
-alias dcr='docker-compose restart'
-alias dnls='docker network ls --all --latest'
-alias drm='docker system prune'
+alias d="docker"
+alias dp="docker ps"
+alias dpls="docker ps --latest"
+alias dx="docker exec -it"
+alias dcn="docker container"
+alias dcls="docker container ls --all --latest"
+alias dcrm="docker rm --force $(docker ps -a -q)"
+alias di="docker image"
+alias dils="docker image ls --all"
+alias dirm="docker rmi -f $(docker images -q)"
+alias dn="docker network"
+alias dnls="docker network ls --all --latest"
+alias dc="docker-compose"
+alias dcup="docker-compose up -d"
+alias dcd="docker-compose down"
+alias dcr="docker-compose restart"
+alias dnls="docker network ls --all --latest"
+alias drm="docker system prune"
 
 # Starship
-alias ship='code ~/.config/starship.toml'
+alias ship="code ~/.config/starship.toml"
 
 # Homebrew
-alias brewa='_brewautoupgrade'
-alias brewL='brew leaves'
-alias brewc='brew cleanup'
-alias brewd='brew doctor'
-alias brewi='brew install'
-alias brewl='brew list'
-alias brewo='brew outdated'
-alias brews='brew search'
-alias brewu='brew upgrade'
-alias brewx='brew uninstall'
+alias brewa="_brewautoupgrade"
+alias brewL="brew leaves"
+alias brewc="brew cleanup"
+alias brewd="brew doctor"
+alias brewi="brew install"
+alias brewl="brew list"
+alias brewo="brew outdated"
+alias brews="brew search"
+alias brewu="brew upgrade"
+alias brewx="brew uninstall"
 # Brew Bundle
 if has "brew bundle"; then
-  alias brewbnd='brew bundle --file '~/dotfiles/Brewfile''
+  alias brewbnd="brew bundle --file '~/dotfiles/Brewfile'"
 fi
 
 # mas-cli
 if [[ $OS = "darwin" ]]; then
-  alias masa='_masautoupgrade'
-  alias masi='mas install'
-  alias masl='mas list'
-  alias maso='mas outdated'
-  alias mass='mas search'
-  alias masu='mas upgrade'
-  alias masx='mas uninstall'
+  alias masa="_masautoupgrade"
+  alias masi="mas install"
+  alias masl="mas list"
+  alias maso="mas outdated"
+  alias mass="mas search"
+  alias masu="mas upgrade"
+  alias masx="mas uninstall"
 fi
 
 # function
-alias dsstore='find . -name '.DS_Store' -type f -ls -delete'
-alias delds='find . -name ".DS_Store" -type f -ls -delete'
+alias dsstore="find . -name '.DS_Store' -type f -ls -delete"
+alias delds="find . -name '.DS_Store' -type f -ls -delete"
 alias delstores=_delstores
-alias au='_autoupgrade'
+alias au="_autoupgrade"
 
 # Starship init
 eval "$(starship init zsh)"
