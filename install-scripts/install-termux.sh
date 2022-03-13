@@ -15,6 +15,20 @@ info "Updating the packages to the latest..."
 pkg update
 pkg install wget git curl proot vim -y
 
+# Install Zsh
+headline "Zsh"
+if ! has "zsh"; then
+  info "Installing Zsh..."
+  pkg install zsh -y
+  info "Setting default..."
+  if [[ "$SHELL" != $(which zsh) ]]; then
+      chsh -s $(which zsh)
+      info "Default shell changed to Zsh."
+  fi
+  warning "Zsh will be enabled after the re-login."
+else
+  success "Zsh is already installed."
+fi
 
 # Install anyenv
 headline "anyenv"
