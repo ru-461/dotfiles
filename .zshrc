@@ -134,9 +134,9 @@ _autoupgrade() {
 
 # Completion
 zstyle ":completion:*:commands" rehash 1
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*' list-colors ''
+zstyle ":completion:*" matcher-list "m:{a-z}={A-Z}"
+zstyle ":completion:*:default" list-colors ${(s.:.)LS_COLORS}
+zstyle ":completion:*" list-colors ''
 
 # Cd
 setopt auto_cd
@@ -210,9 +210,9 @@ fi
 
 # Replace grep with rg
 if has "rg"; then
-  alias ag"$1"='alias | rg $1'
+  alias ag"$1"="alias | rg $1"
 else
-  alias ag"$1"='alias | grep $1'
+  alias ag"$1"="alias | grep $1"
 fi
 
 #################################  ALIASES  #################################
