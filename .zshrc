@@ -16,6 +16,9 @@ case ${OSTYPE} in
   linux*)
     OS=linux
   ;;
+  linux-android*)
+  OS=linux-android
+;;
 esac
 
 #################################  FUNCTIONS  #################################
@@ -96,15 +99,32 @@ _masautoupgrade() {
   info "Upgrading Done."
 }
 
+_pkgautoupgrade() {
+  headline "pkg"
+  info "Upgrading packages..."
+  run "pkg update"
+  pkg update
+  run "pkg upgrade"
+  pkg upgrade -y
+  run "pkg autoremove"
+  pkg autoremove -y
+  run "pkg clean"
+  apt clean -y
+  info "Upgrading Done."
+}
 # Auto upgrade
 _autoupgrade() {
   info "Auto package upgrading..."
-  if [[ ! $OS = "darwin" ]]; then
-    _aptautoupgrade
-  fi
-  _brewautoupgrade
-  if [[ $OS = "darwin" ]]; then
-    _masautoupgrade
+  if [[ ! $OS = "linux-android" ]]; then
+    if [[ ! $OS = "darwin" ]]; then
+      _aptautoupgrade
+    fi
+    _brewautoupgrade
+    if [[ $OS = "darwin" ]]; then
+      _masautoupgrade
+    fi
+  else
+    _pkgautoupgrade
   fi
 }
 
