@@ -10,14 +10,15 @@ COLOR_NONE="\033[0m"
 
 # OS judgment
 case ${OSTYPE} in
+  linux-android*)
+    OS=linux-android
+  ;;
   darwin*)
     OS=darwin
   ;;
   linux*)
     OS=linux
   ;;
-  linux-android*)
-  OS=linux-android
 ;;
 esac
 
