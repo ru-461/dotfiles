@@ -112,6 +112,7 @@ _pkgautoupgrade() {
   apt clean -y
   info "Upgrading Done."
 }
+
 # Auto upgrade
 _autoupgrade() {
   info "Auto package upgrading..."
@@ -161,6 +162,7 @@ path=(
   ~/.anyenv/envs/pyenv/bin(N-/)
   ~/.volta/bin(N-/)
   /Users/$USER/dev/flutter/bin(N-/)
+  /data/data/com.termux/files/usr/bin(N-/)
   /usr/bin(N-/)
   /usr/sbin(N-/)
   /bin(N-/)
