@@ -58,7 +58,7 @@ if ! has "brew"; then
   echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
   source ~/.profile
 else
-  success "Linuxbrew is already installed."
+  success "Homebrew is already installed."
 fi
 
 # Brewfile
