@@ -5,12 +5,8 @@ COLOR_GRAY="\033[1;38;5;243m"
 COLOR_BLUE="\033[1;34m"
 COLOR_GREEN="\033[1;32m"
 COLOR_RED="\033[1;31m"
-COLOR_PURPLE="\033[1;35m"
 COLOR_YELLOW="\033[1;33m"
 COLOR_NONE="\033[0m"
-
-# Welcome message
-echo -e "${COLOR_BLUE}Welcom!!${COLOR_NONE}"
 
 # OS judgment
 case ${OSTYPE} in
@@ -22,9 +18,89 @@ case ${OSTYPE} in
   ;;
 esac
 
-# Command check
+#################################  FUNCTIONS  #################################
+
+success() {
+  echo -e "${COLOR_GREEN}$1${COLOR_NONE}\n"
+}
+
+info() {
+  echo -e "${COLOR_BLUE}Info: ${COLOR_NONE}$1"
+}
+
+headline() {
+  echo -e "\n${COLOR_GRAY}==============================${COLOR_NONE}"
+  echo -e "${COLOR_BLUE}$1${COLOR_NONE}"
+  echo -e "${COLOR_GRAY}==============================${COLOR_NONE}"
+}
+
+warning() {
+  echo -e "${COLOR_YELLOW}Warning: ${COLOR_NONE}$1\n"
+}
+
+error() {
+  echo -e "${COLOR_RED}Error: ${COLOR_NONE}$1"
+  exit 1
+}
+
 has() {
   type "$1" > /dev/null 2>&1
+}
+
+_delstores () {
+  sudo find $1 \( -name '.DS_Store' -or -name '._*' -or -name 'Thumbs.db' -or -name 'Desktop.ini' \) -delete -print;
+}
+
+# brew upgrade
+_brewautoupgrade() {
+  _headline "Upgrading brew"
+  echo "Upgrading brew formulas..."
+  echo -e "${COLOR_YELLOW}brew update${COLOR_NONE}"
+  brew update
+  echo -e "${COLOR_YELLOW}brew upgrade${COLOR_NONE}"
+  brew upgrade
+  echo -e "${COLOR_YELLOW}brew cleanup${COLOR_NONE}"
+  brew cleanup
+  echo -e "${COLOR_YELLOW}brew doctor${COLOR_NONE}"
+  brew doctor
+  echo "Done."
+}
+
+# apt upgrade
+_aptautoupgrade() {
+  _headline "Upgrading apt"
+  echo "Upgrading packages..."
+  echo -e "${COLOR_YELLOW}apt update${COLOR_NONE}"
+  sudo apt update
+  echo -e "${COLOR_YELLOW}apt upgrade${COLOR_NONE}"
+  sudo apt upgrade -y
+  echo -e "${COLOR_YELLOW}apt autoremove${COLOR_NONE}"
+  sudo apt autoremove -y
+  echo -e "${COLOR_YELLOW}apt clean${COLOR_NONE}"
+  sudo apt clean -y
+  echo "Done."
+}
+
+# mas upgrade
+_masautoupgrade() {
+  _headline "Upgrading mas"
+  echo "Upgrading apps..."
+  echo -e "${COLOR_BLUE}mas outdated${COLOR_NONE}"
+  mas outdated
+  echo -e "${COLOR_BLUE}mas upgrade${COLOR_NONE}"
+  mas upgrade
+  echo "Done."
+}
+
+# Auto upgrade
+_autoupgrade() {
+  if [[ ! $OS = "darwin" ]]; then
+    _aptautoupgrade
+  fi
+  _brewautoupgrade
+  if [[ $OS = "darwin" ]]; then
+    _masautoupgrade
+  fi
 }
 
 #################################  ZSH INIT  #################################
@@ -241,75 +317,13 @@ if [[ $OS = "darwin" ]]; then
   alias masx='mas uninstall'
 fi
 
-#################################  FUNCTIONS  #################################
-
-_headline() {
-  echo -e "\n${COLOR_GRAY}==============================${COLOR_NONE}"
-  echo -e "${COLOR_PURPLE}$1${COLOR_NONE}"
-  echo -e "${COLOR_GRAY}==============================${COLOR_NONE}\n"
-}
-
-# Delete mac stores
+# function
 alias dsstore='find . -name '.DS_Store' -type f -ls -delete'
 alias delds='find . -name ".DS_Store" -type f -ls -delete'
-
-function _delstores () {
-  sudo find $1 \( -name '.DS_Store' -or -name '._*' -or -name 'Thumbs.db' -or -name 'Desktop.ini' \) -delete -print;
-}
 alias delstores=_delstores
-
-# brew upgrade
-_brewautoupgrade() {
-  _headline "Upgrading brew"
-  echo "Upgrading brew formulas..."
-  echo -e "${COLOR_YELLOW}brew update${COLOR_NONE}"
-  brew update
-  echo -e "${COLOR_YELLOW}brew upgrade${COLOR_NONE}"
-  brew upgrade
-  echo -e "${COLOR_YELLOW}brew cleanup${COLOR_NONE}"
-  brew cleanup
-  echo -e "${COLOR_YELLOW}brew doctor${COLOR_NONE}"
-  brew doctor
-  echo "Done."
-}
-
-# apt upgrade
-_aptautoupgrade() {
-  _headline "Upgrading apt"
-  echo "Upgrading packages..."
-  echo -e "${COLOR_YELLOW}apt update${COLOR_NONE}"
-  sudo apt update
-  echo -e "${COLOR_YELLOW}apt upgrade${COLOR_NONE}"
-  sudo apt upgrade -y
-  echo -e "${COLOR_YELLOW}apt autoremove${COLOR_NONE}"
-  sudo apt autoremove -y
-  echo -e "${COLOR_YELLOW}apt clean${COLOR_NONE}"
-  sudo apt clean -y
-  echo "Done."
-}
-
-# mas upgrade
-_masautoupgrade() {
-  _headline "Upgrading mas"
-  echo "Upgrading apps..."
-  echo -e "${COLOR_BLUE}mas outdated${COLOR_NONE}"
-  mas outdated
-  echo -e "${COLOR_BLUE}mas upgrade${COLOR_NONE}"
-  mas upgrade
-  echo "Done."
-}
-
-# Auto upgrade
-_autoupgrade() {
-  if [[ ! $OS = "darwin" ]]; then
-    _aptautoupgrade
-  fi
-  _brewautoupgrade
-  if [[ $OS = "darwin" ]]; then
-    _masautoupgrade
-  fi
-}
 alias au='_autoupgrade'
 
 # Starship init
 eval "$(starship init zsh)"
+
+headline "Welcome Zsh!"
