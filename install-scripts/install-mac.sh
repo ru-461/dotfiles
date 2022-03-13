@@ -3,98 +3,93 @@
 set -ue
 
 # Architecture determination
-if [[ $(uname -m) == 'arm64' ]]; then
+if [[ $(uname -m) == "arm64" ]]; then
   # Install command line tools
   if ! has "git"; then
-    echo "Installing Command line tools..."
+    headline "Command line tools"
+    info "Installing Command line tools..."
     xcode-select --install
     # Install Rosetta2 for M1 Mac
-    echo "Installing Rosetta2."
+    headline "Rosetta2"
+    info "Installing Rosetta2."
     /usr/sbin/softwareupdate --install-rosetta --agree-to-license
   else
-    echo "Skip the command line tools as they are already installed."
+    success "Skip the command line tools as they are already installed."
   fi
 else
-  echo "This script is not compatible with this architecture."
+  error "This script is not compatible with this architecture."
   exit 1
 fi
-echo ""
 
 # Install Homebrew
+headline "Homebrew"
 if ! has "brew"; then
-  echo "Installing Homebrew..."
+  info "Installing Homebrew..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  echo "Done."
 else
-  echo "Homebrew is already installed."
+  success "Homebrew is already installed."
 fi
-echo ""
 
 # Brewfile
+headline "Brew bundle"
 if [ -f $HOME/dotfiles/Brewfile ]; then
-  echo "Installing the formulas from Brewfile..."
+  info "Installing the formulas from Brewfile..."
   brew tap "homebrew/bundle"
-  brew bundle --file '~/dotfiles/Brewfile'
-  echo "Done."
+  brew bundle --file "~/dotfiles/Brewfile"
 fi
-echo ""
 
 # Install anyenv
+headline "anyenv"
 if ! has "anyenv"; then
-    echo "Installing anyenv..."
-    git clone https://github.com/anyenv/anyenv ~/.anyenv
-    ~/.anyenv/bin/anyenv install --init
-    echo "Setting anyenv plugins..."
-    mkdir -p ~/.anyenv/plugins
-    git clone https://github.com/znz/anyenv-update.git ~/.anyenv/plugins/anyenv-update
+  info "Installing anyenv..."
+  git clone https://github.com/anyenv/anyenv ~/.anyenv
+  ~/.anyenv/bin/anyenv install --init
+  info "Setting anyenv plugin..."
+  mkdir -p ~/.anyenv/plugins
+  git clone https://github.com/znz/anyenv-update.git ~/.anyenv/plugins/anyenv-update
 else
-  echo "anyenv is already installed."
+  success "anyenv is already installed."
 fi
-echo ""
 
 # Install Volta
+headline "Volta"
 if ! has "volta"; then
-  echo "Installing Volta..."
+  info "Installing Volta..."
   curl https://get.volta.sh | bash -s -- --skip-setup
 else
-  echo "Volta is already installed."
+  success "Volta is already installed."
 fi
-echo ""
 
 #################################  DEFAULTS  #################################
 
-echo "Start Setting defaults..."
-echo ""
+headline "Config"
+info "Start Setting defaults..."
 
 #  Apprerance
-echo "Setting Apprerance..."
+info "Setting Apprerance..."
 defaults delete .GlobalPreferences AppleInterfaceStyleSwitchesAutomatically > /dev/null 2>&1
 # Theme
 defaults write .GlobalPreferences AppleInterfaceStyle -string "Dark"
 # Dock
 defaults delete com.apple.dock orientation
-echo ""
 
-echo "Setting File System..."
+info "Setting File System..."
 # DS_Store
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 # Show Hidden Files
 defaults write com.apple.finder AppleShowAllFiles true
-echo ""
 
-echo "Setting AppStore..."
+info "Setting AppStore..."
 # Enable Auto Update Check
 defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
 # Enable Auto Update
 defaults write com.apple.commerce AutoUpdate -bool false
-echo ""
 
-echo "Setting Screenshot..."
+info "Setting Screenshot..."
 # Location
 defaults write com.apple.screencapture location -string "$HOME/Downloads"
 # Format - png
 defaults write com.apple.screencapture type -string "png"
 # Disable Shadow
 defaults write com.apple.screencapture disable-shadow -bool true
-echo ""
