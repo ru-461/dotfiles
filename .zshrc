@@ -20,18 +20,22 @@ esac
 
 #################################  FUNCTIONS  #################################
 
-success() {
-  echo -e "${COLOR_GREEN}$1${COLOR_NONE}\n"
+headline() {
+  echo -e "\n${COLOR_GRAY}==============================${COLOR_NONE}"
+  echo -e "${COLOR_BLUE}$1${COLOR_NONE}"
+  echo -e "${COLOR_GRAY}==============================${COLOR_NONE}"
+}
+
+run() {
+  echo -e "\n${COLOR_BLUE}▶ $1${COLOR_NONE}"
 }
 
 info() {
   echo -e "${COLOR_BLUE}Info: ${COLOR_NONE}$1"
 }
 
-headline() {
-  echo -e "\n${COLOR_GRAY}==============================${COLOR_NONE}"
-  echo -e "${COLOR_BLUE}$1${COLOR_NONE}"
-  echo -e "${COLOR_GRAY}==============================${COLOR_NONE}"
+success() {
+  echo -e "${COLOR_GREEN}$1${COLOR_NONE}\n"
 }
 
 warning() {
@@ -51,49 +55,50 @@ _delstores () {
   sudo find $1 \( -name '.DS_Store' -or -name '._*' -or -name 'Thumbs.db' -or -name 'Desktop.ini' \) -delete -print;
 }
 
-# brew upgrade
-_brewautoupgrade() {
-  _headline "Upgrading brew"
-  echo "Upgrading brew formulas..."
-  echo -e "${COLOR_YELLOW}brew update${COLOR_NONE}"
-  brew update
-  echo -e "${COLOR_YELLOW}brew upgrade${COLOR_NONE}"
-  brew upgrade
-  echo -e "${COLOR_YELLOW}brew cleanup${COLOR_NONE}"
-  brew cleanup
-  echo -e "${COLOR_YELLOW}brew doctor${COLOR_NONE}"
-  brew doctor
-  echo "Done."
-}
-
 # apt upgrade
 _aptautoupgrade() {
-  _headline "Upgrading apt"
-  echo "Upgrading packages..."
-  echo -e "${COLOR_YELLOW}apt update${COLOR_NONE}"
+  headline "apt"
+  info "Upgrading packages..."
+  run "apt update"
   sudo apt update
-  echo -e "${COLOR_YELLOW}apt upgrade${COLOR_NONE}"
+  run "apt upgrade"
   sudo apt upgrade -y
-  echo -e "${COLOR_YELLOW}apt autoremove${COLOR_NONE}"
+  run "apt autoremove"
   sudo apt autoremove -y
-  echo -e "${COLOR_YELLOW}apt clean${COLOR_NONE}"
+  run "apt clean"
   sudo apt clean -y
-  echo "Done."
+  info "Upgrading Done."
+}
+
+# brew upgrade
+_brewautoupgrade() {
+  headline "Homebrew"
+  info "Upgrading brew formulas..."
+  run "brew update"
+  brew update
+  run "brew upgrade"
+  brew upgrade
+  run "brew cleanup"
+  brew cleanup
+  run "brew doctor"
+  brew doctor
+  info "Upgrading Done."
 }
 
 # mas upgrade
 _masautoupgrade() {
-  _headline "Upgrading mas"
-  echo "Upgrading apps..."
-  echo -e "${COLOR_BLUE}mas outdated${COLOR_NONE}"
+  headline "mas"
+  info "Upgrading apps..."
+  run "mas outdated"
   mas outdated
-  echo -e "${COLOR_BLUE}mas upgrade${COLOR_NONE}"
+  run "mas upgrade"
   mas upgrade
-  echo "Done."
+  info "Upgrading Done."
 }
 
 # Auto upgrade
 _autoupgrade() {
+  info "Auto package upgrading..."
   if [[ ! $OS = "darwin" ]]; then
     _aptautoupgrade
   fi
