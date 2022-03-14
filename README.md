@@ -5,7 +5,7 @@ Configuration scripts that can be used anywhere.
 
 # Support OS
 
-- macOS（Only arm64）
+- macOS（Apple Silicon）
 - Ubuntu（x64）
 
 # How to use
