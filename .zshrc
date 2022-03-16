@@ -134,18 +134,22 @@ _autoupgrade() {
 
 # Completion
 zstyle ":completion:*:commands" rehash 1
-zstyle ":completion:*" matcher-list "m:{a-z}={A-Z}"
 zstyle ":completion:*:default" list-colors ${(s.:.)LS_COLORS}
-zstyle ":completion:*" list-colors ''
+zstyle ":completion:*" matcher-list "m:{a-z}={A-Z}"
+zstyle ":completion:*" menu select
+zstyle ":completion:*" group-name ""
+zstyle ":completion:*:*:*:*:descriptions" format "%F{green}-- %d --%f"
 
 # Cd
 setopt auto_cd
+setopt correct
 
 # Lang
 export LANG=ja_JP.UTF-8
 setopt print_eight_bit
 
 # Zsh history
+setopt HIST_IGNORE_DUPS
 HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.zsh_history
