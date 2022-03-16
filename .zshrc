@@ -133,7 +133,9 @@ _autoupgrade() {
 #################################  ZSH INIT  #################################
 
 # Completion
+zstyle ":completion:*" verbose yes
 zstyle ":completion:*:commands" rehash 1
+zstyle ":completion:*" completer _extensions _complete _approximate
 zstyle ":completion:*:default" list-colors ${(s.:.)LS_COLORS}
 zstyle ":completion:*" matcher-list "m:{a-z}={A-Z}"
 zstyle ":completion:*" menu select
