@@ -302,6 +302,7 @@ alias mpl="multipass list"
 alias mpre="multipass restart"
 
 # Docker
+if has "docker"; then
 alias d="docker"
 alias dp="docker ps"
 alias dpls="docker ps --latest"
@@ -320,6 +321,7 @@ alias dcd="docker-compose down"
 alias dcr="docker-compose restart"
 alias dnls="docker network ls --all --latest"
 alias drm="docker system prune"
+fi
 
 # Starship
 alias ship="code ~/.config/starship.toml"
