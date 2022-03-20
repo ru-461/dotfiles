@@ -71,7 +71,7 @@ if [[ ! -d $HOME/dotfiles ]]; then
     git clone $DOT_REMOTE
   else
     curl -fsSLo $HOME/dotfiles.tar.gz $DOT_TARBALL
-    tar -zxf $HOME/dotfiles.tar.gz --strip-components 1 -C $HOME/dotfiles
+    tar -xvf $HOME/dotfiles.tar.gz --strip-components 1 -C $HOME/dotfiles
     rm -f $HOME/dotfiles.tar.gz
   fi
 fi
