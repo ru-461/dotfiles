@@ -41,14 +41,14 @@ DOT_BASE=$HOME/dotfiles
 DOT_TARBALL=https://github.com/ryu-461/dotfiles/tarball/main
 DOT_REMOTE=https://github.com/ryu-461/dotfiles.git
 
-headline "Welcome dotfiles installation!"
+headline "Welcome dotfiles bootstrap!!"
 read -p "This script will install and deploy the various packages. Are you sure you want to continue? [y/N] " -n 1 -r
 echo ""
 if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-  info "The installation has been canceled. There is nothing to do. "
+  info "The process has been canceled. There is nothing to do. "
   exit 1
 fi
-info "Start Installation."
+info "Setup start."
 cd $HOME
 if [[ -d $HOME/dotfiles ]]; then
   read -p "The dotfiles already exists. Do you want to update them? [y/N] " -n 1 -r
@@ -82,26 +82,26 @@ cd $DOT_BASE
 source $HOME/dotfiles/deploy.sh
 
 if [[ $(uname) == "Darwin" ]]; then
-  headline "Installation for macOS"
-  # Run install script
-  source $DOT_BASE/install/mac.sh
+  headline "macOS Setup"
+  # Run setup script
+  source $DOT_BASE/setup/mac.sh
 elif [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
-  headline "Installation for Windows Subsystem for Linux."
-  # Run install script
-  source $DOT_BASE/install/install-wsl.sh
+  headline "Windows Subsystem for Linux Setup"
+  # Run setup script
+  source $DOT_BASE/setup/wsl.sh
 elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
   if [[ $(uname -o) == "Android" ]]; then
-    headline "Installation for Termux."
-    # Run install script
-    source $DOT_BASE/install/termux.sh
+    headline "Termux Setup"
+    # Run setup script
+    source $DOT_BASE/setup/termux.sh
   else
-    headline "Installation for Linux."
-    # Run install script
-    source $DOT_BASE/install/linux.sh
+    headline "Linux Setup"
+    # Run setup script
+    source $DOT_BASE/setup/linux.sh
   fi
 else
   exit 1
 fi
-success "Installation complete."
+success "Setup complete."
 
-success "Done. Happy Hacking!!"
+success "Happy Hacking!!"
