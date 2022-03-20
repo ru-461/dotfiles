@@ -84,20 +84,20 @@ source $HOME/dotfiles/deploy.sh
 if [[ $(uname) == "Darwin" ]]; then
   headline "Installation for macOS"
   # Run install script
-  source $DOT_BASE/install-scripts/install-mac.sh
+  source $DOT_BASE/install/mac.sh
 elif [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
   headline "Installation for Windows Subsystem for Linux."
   # Run install script
-  source $DOT_BASE/install-scripts/install-wsl.sh
+  source $DOT_BASE/install/install-wsl.sh
 elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
   if [[ $(uname -o) == "Android" ]]; then
     headline "Installation for Termux."
     # Run install script
-    source $DOT_BASE/install-scripts/install-termux.sh
+    source $DOT_BASE/install/termux.sh
   else
     headline "Installation for Linux."
     # Run install script
-    source $DOT_BASE/install-scripts/install-linux.sh
+    source $DOT_BASE/install/linux.sh
   fi
 else
   exit 1
