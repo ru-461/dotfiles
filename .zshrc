@@ -354,7 +354,6 @@ if [[ $OS = "darwin" ]]; then
 fi
 
 # function
-alias dsstore="find . -name '.DS_Store' -type f -ls -delete"
 alias delds="find . -name '.DS_Store' -type f -ls -delete"
 alias delstores=_delstores
 alias au="_autoupgrade"
