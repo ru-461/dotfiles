@@ -100,6 +100,8 @@ path=(
   /Users/$USER/dev/flutter/bin(N-/)
   /opt/homebrew/opt/php@8.0/bin(N-/)
   /opt/homebrew/opt/php@8.0/sbin(N-/)
+  /home/linuxbrew/.linuxbrew/opt/php@8.0/bin(N-/)
+  /home/linuxbrew/.linuxbrew/opt/php@8.0/sbin(N-/)
   /data/data/com.termux/files/usr/bin(N-/)
   /usr/bin(N-/)
   /usr/sbin(N-/)
@@ -141,8 +143,13 @@ if has "pyenv"; then
 fi
 
 # php
-export LDFLAGS="-L/opt/homebrew/opt/php@8.0/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/php@8.0/include"
+if [[ $OS = "linux" ]]; then
+  export LDFLAGS="-L/opt/homebrew/opt/php@8.0/lib"
+  export CPPFLAGS="-I/opt/homebrew/opt/php@8.0/include"
+else
+  export LDFLAGS="-L/home/linuxbrew/.linuxbrew/opt/php@8.0/lib"
+  export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/php@8.0/include"
+fi
 
 # GitHub CLI
 if has "gh"; then
