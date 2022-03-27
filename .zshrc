@@ -98,6 +98,8 @@ path=(
   ~/.anyenv/envs/pyenv/bin(N-/)
   ~/.volta/bin(N-/)
   /Users/$USER/dev/flutter/bin(N-/)
+  /opt/homebrew/opt/php@8.0/bin(N-/)
+  /opt/homebrew/opt/php@8.0/sbin(N-/)
   /data/data/com.termux/files/usr/bin(N-/)
   /usr/bin(N-/)
   /usr/sbin(N-/)
@@ -114,7 +116,7 @@ path=(
 if [[ $OS = "linux" ]]; then
   eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 else
-  alias brew="PATH=/opt/homebrew/bin:/opt/homebrew/sbin brew"
+  alias brew="env PATH=${PATH/\/Users\/${USER}\/\.anyenv\/envs\/pyenv\/shims:/} brew"
 fi
 
 # Enable completion & Autosuggestions
@@ -137,6 +139,10 @@ fi
 if has "pyenv"; then
   eval "$(pyenv init --path)"
 fi
+
+# php
+export LDFLAGS="-L/opt/homebrew/opt/php@8.0/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/php@8.0/include"
 
 # GitHub CLI
 if has "gh"; then
@@ -364,4 +370,4 @@ alias au="_autoupgrade"
 # Starship init
 eval "$(starship init zsh)"
 
-headline "Welcome Zsh!"
+headline "Welcome Zsh!"export PATH="/opt/homebrew/opt/php@8.0/sbin:$PATH"
