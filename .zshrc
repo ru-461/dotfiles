@@ -58,77 +58,6 @@ _delstores () {
   sudo find $1 \( -name ".DS_Store" -or -name "._*" -or -name "Thumbs.db" -or -name "Desktop.ini" \) -delete -print;
 }
 
-# apt upgrade
-_aptautoupgrade() {
-  headline "apt"
-  info "Upgrading packages..."
-  run "apt update"
-  sudo apt update
-  run "apt upgrade"
-  sudo apt upgrade -y
-  run "apt autoremove"
-  sudo apt autoremove -y
-  run "apt clean"
-  sudo apt clean -y
-  info "Upgrading Done."
-}
-
-# brew upgrade
-_brewautoupgrade() {
-  headline "Homebrew"
-  info "Upgrading brew formulas..."
-  run "brew update"
-  brew update
-  run "brew upgrade"
-  brew upgrade
-  run "brew cleanup"
-  brew cleanup
-  run "brew doctor"
-  brew doctor
-  info "Upgrading Done."
-}
-
-# mas upgrade
-_masautoupgrade() {
-  headline "mas"
-  info "Upgrading apps..."
-  run "mas outdated"
-  mas outdated
-  run "mas upgrade"
-  mas upgrade
-  info "Upgrading Done."
-}
-
-# pkg upgrade
-_pkgautoupgrade() {
-  headline "pkg"
-  info "Upgrading packages..."
-  run "pkg update"
-  pkg update
-  run "pkg upgrade"
-  pkg upgrade -y
-  run "pkg autoclean"
-  pkg autoclean
-  run "pkg clean"
-  pkg clean
-  info "Upgrading Done."
-}
-
-# Auto upgrade
-_autoupgrade() {
-  info "Auto package upgrading..."
-  if [[ ! $OS = "linux-android" ]]; then
-    if [[ ! $OS = "darwin" ]]; then
-      _aptautoupgrade
-    fi
-    _brewautoupgrade
-    if [[ $OS = "darwin" ]]; then
-      _masautoupgrade
-    fi
-  else
-    _pkgautoupgrade
-  fi
-}
 
 #################################  ZSH INIT  #################################
 
@@ -220,6 +149,80 @@ if has "rg"; then
 else
   alias ag"$1"="alias | grep $1"
 fi
+
+#################################  UPGRADE FUNCTION  #################################
+
+# apt upgrade
+_aptautoupgrade() {
+  headline "apt"
+  info "Upgrading packages..."
+  run "apt update"
+  sudo apt update
+  run "apt upgrade"
+  sudo apt upgrade -y
+  run "apt autoremove"
+  sudo apt autoremove -y
+  run "apt clean"
+  sudo apt clean -y
+  info "Upgrading Done."
+}
+
+# brew upgrade
+_brewautoupgrade() {
+  headline "Homebrew"
+  info "Upgrading brew formulas..."
+  run "brew update"
+  brew update
+  run "brew upgrade"
+  brew upgrade
+  run "brew cleanup"
+  brew cleanup
+  run "brew doctor"
+  brew doctor
+  info "Upgrading Done."
+}
+
+# mas upgrade
+_masautoupgrade() {
+  headline "mas"
+  info "Upgrading apps..."
+  run "mas outdated"
+  mas outdated
+  run "mas upgrade"
+  mas upgrade
+  info "Upgrading Done."
+}
+
+# pkg upgrade
+_pkgautoupgrade() {
+  headline "pkg"
+  info "Upgrading packages..."
+  run "pkg update"
+  pkg update
+  run "pkg upgrade"
+  pkg upgrade -y
+  run "pkg autoclean"
+  pkg autoclean
+  run "pkg clean"
+  pkg clean
+  info "Upgrading Done."
+}
+
+# Auto upgrade
+_autoupgrade() {
+  info "Auto package upgrading..."
+  if [[ ! $OS = "linux-android" ]]; then
+    if [[ $OS = "linux" ]]; then
+      _aptautoupgrade
+    fi
+    _brewautoupgrade
+    if [[ $OS = "darwin" ]]; then
+      _masautoupgrade
+    fi
+  else
+    _pkgautoupgrade
+  fi
+}
 
 #################################  ALIASES  #################################
 
