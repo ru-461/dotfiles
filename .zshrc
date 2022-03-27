@@ -370,4 +370,4 @@ alias au="_autoupgrade"
 # Starship init
 eval "$(starship init zsh)"
 
-headline "Welcome Zsh!"export PATH="/opt/homebrew/opt/php@8.0/sbin:$PATH"
+headline "Welcome Zsh!"
