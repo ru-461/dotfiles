@@ -93,9 +93,9 @@ typeset -U path PATH
 path=(
   /opt/homebrew/bin(N-/)
   /opt/homebrew/sbin(N-/)
-  ~/.anyenv/bin(N-/)
-  ~/.anyenv/envs/pyenv/bin(N-/)
-  ~/.volta/bin(N-/)
+  $HOME/.anyenv/bin(N-/)
+  $HOME/.anyenv/envs/pyenv/bin(N-/)
+  $HOME/.volta/bin(N-/)
   /Users/$USER/dev/flutter/bin(N-/)
   /opt/homebrew/opt/php@8.0/bin(N-/)
   /opt/homebrew/opt/php@8.0/sbin(N-/)
