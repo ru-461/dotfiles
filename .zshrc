@@ -164,7 +164,7 @@ fi
 
 #################################  UPGRADE FUNCTION  #################################
 
-# apt upgrade
+# Auto Upgrade apt
 _aptautoupgrade() {
   headline "apt"
   info "Upgrading packages..."
@@ -179,7 +179,7 @@ _aptautoupgrade() {
   info "Upgrading Done."
 }
 
-# brew upgrade
+# Auto Upgrade brew
 _brewautoupgrade() {
   headline "Homebrew"
   info "Upgrading brew formulas..."
@@ -194,7 +194,7 @@ _brewautoupgrade() {
   info "Upgrading Done."
 }
 
-# mas upgrade
+# Auto Upgrade mas
 _masautoupgrade() {
   headline "mas"
   info "Upgrading apps..."
@@ -205,7 +205,7 @@ _masautoupgrade() {
   info "Upgrading Done."
 }
 
-# pkg upgrade
+# Auto Upgrade pkg
 _pkgautoupgrade() {
   headline "pkg"
   info "Upgrading packages..."
@@ -368,7 +368,7 @@ if [[ $OS = "darwin" ]]; then
   alias masx="mas uninstall"
 fi
 
-# function
+# Function
 alias delds="find . -name '.DS_Store' -type f -ls -delete"
 alias delstores=_delstores
 alias au="_autoupgrade"
