@@ -3,40 +3,41 @@
   "rules": [
     {
       "description": "かなキーを補助キー（Option）に設定",
-      "manipulators": [{
-        "from": {
-          "key_code": "japanese_kana",
-          "modifiers": {
-            "optional": [
-              "any"
-            ]
-          }
-        },
-        "to": [{
-          "key_code": "right_option"
-        }],
-        "to_if_alone": [{
-          "key_code": "japanese_kana"
-        }],
-        "type": "basic"
-      }
-    ]
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "japanese_kana",
+            "modifiers": {
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_option"
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "japanese_kana"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
     },
     {
       "description": "かな + J / K  = ページスクロール",
-      "manipulators": [{
+      "manipulators": [
+        {
           "from": {
             "key_code": "j",
             "modifiers": {
-              "mandatory": [
-                "right_option"
-              ],
-              "optional": [
-                "any"
-              ]
+              "mandatory": ["right_option"],
+              "optional": ["any"]
             }
           },
-          "to": [{
+          "to": [
+            {
               "key_code": "page_down"
             },
             {
@@ -50,64 +51,59 @@
           "from": {
             "key_code": "k",
             "modifiers": {
-              "mandatory": [
-                "right_option"
-              ],
-              "optional": [
-                "any"
-              ]
+              "mandatory": ["right_option"],
+              "optional": ["any"]
             }
           },
-          "to": [{
-            "key_code": "page_up"
-          },
-          {
-            "key_code": "page_up",
-            "modifiers": "right_option"
-          }
-        ],
-        "type": "basic"
-      }]
+          "to": [
+            {
+              "key_code": "page_up"
+            },
+            {
+              "key_code": "page_up",
+              "modifiers": "right_option"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
     },
-      {
-        "description": "かな + H / L = ⌘ ↔",
-        "manipulators": [{
-            "from": {
-              "key_code": "h",
-              "modifiers": {
-                "mandatory": [
-                  "right_option"
-                ],
-                "optional": [
-                  "any"
-                ]
-              }
-            },
-            "to": [{
-              "key_code": "right_arrow",
-              "modifiers": "right_command"
-            }],
-            "type": "basic"
+    {
+      "description": "かな + H / L = ⌘ ↔",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "h",
+            "modifiers": {
+              "mandatory": ["right_option"],
+              "optional": ["any"]
+            }
           },
-          {
-            "from": {
-              "key_code": "l",
-              "modifiers": {
-                "mandatory": [
-                  "right_option"
-                ],
-                "optional": [
-                  "any"
-                ]
-              }
-            },
-            "to": [{
+          "to": [
+            {
               "key_code": "right_arrow",
               "modifiers": "right_command"
-            }],
-            "type": "basic"
-          }
-        ]
-      }
-    ]
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "l",
+            "modifiers": {
+              "mandatory": ["right_option"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_arrow",
+              "modifiers": "right_command"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+  ]
 }
