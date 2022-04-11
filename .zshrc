@@ -339,7 +339,7 @@ alias drm="docker system prune"
 fi
 
 # Starship
-alias ship="code ~/.config/starship.toml"
+alias ship="code $HOME/.config/starship.toml"
 
 # Homebrew
 alias brewa="_brewautoupgrade"
