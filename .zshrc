@@ -89,7 +89,6 @@ setopt no_beep
 setopt nolistbeep
 
 # Configure path
-typeset -U path PATH
 path=(
   /opt/homebrew/bin(N-/)
   /opt/homebrew/sbin(N-/)
@@ -109,6 +108,7 @@ path=(
   /usr/local/bin(N-/)
   /usr/local/sbin(N-/)
   /Library/Apple/usr/bin(N-/)
+  $path
 )
 
 #################################  TOOL INIT  #################################
