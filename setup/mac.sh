@@ -62,6 +62,10 @@ else
   success "Volta is already installed."
 fi
 
+# Setup SSH
+mkdir $HOME/.ssh
+touch $HOME/.ssh/config
+
 #################################  DEFAULTS  #################################
 
 headline "Config"
