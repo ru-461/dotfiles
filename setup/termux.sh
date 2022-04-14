@@ -53,3 +53,7 @@ if ! has "volta"; then
 else
   success "Volta is already installed."
 fi
+
+# Setup SSH
+mkdir $HOME/.ssh
+touch $HOME/.ssh/config
