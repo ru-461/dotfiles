@@ -277,13 +277,13 @@ fi
 alias g="git"
 
 # .zshrc
-alias czsh="code ~/.zshrc"
-alias szsh="source ~/.zshrc"
+alias czsh="code $HOME/.zshrc"
+alias szsh="source $HOME/.zshrc"
 
 # ZennCLI
-alias zenna="cd ~/Documents/zenn-articles"
-alias zennb="cd ~/Documents/zenn-books"
-alias zennop="zenna && code ~/Documents/my-zenn-contents && yarn zenn preview --open"
+alias zenna="cd $HOME/Documents/zenn-articles"
+alias zennb="cd $HOME/Documents/zenn-books"
+alias zennop="zenna && code $HOME/Documents/my-zenn-contents && yarn zenn preview --open"
 alias zennna="zenna && yarn zenn new:article"
 alias zennnas="zenna && yarn zenn new:article --slug"
 alias zennnb="zenna && yarn zenn new:book"
