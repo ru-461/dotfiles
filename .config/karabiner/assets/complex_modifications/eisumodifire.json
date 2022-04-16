@@ -34,7 +34,7 @@
       ]
     },
     {
-      "description": "【Cursor】Eisuu + H/J/K/L",
+      "description": "【Cursor】Eisuu + H / J / K / L",
       "manipulators": [
         {
           "type": "basic",
@@ -175,7 +175,7 @@
       ]
     },
     {
-      "description": "【Home/End】Eisuu + A/E",
+      "description": "【Home / End】Eisuu + A / E",
       "manipulators": [
         {
           "type": "basic",
@@ -209,6 +209,105 @@
           "to": [
             {
               "key_code": "end"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "eisuu",
+              "value": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "【BackSpace】Eisuu + U",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "u",
+            "modifiers": {
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "delete_or_backspace"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "eisuu",
+              "value": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "【Enter】Eisuu + O",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "o",
+            "modifiers": {
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "return_or_enter"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "eisuu",
+              "value": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "【Page】Eisuu + F / B",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "f",
+            "modifiers": {
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "page_down"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "eisuu",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "b",
+            "modifiers": {
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "page_up"
             }
           ],
           "conditions": [
