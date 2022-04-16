@@ -175,7 +175,7 @@
       ]
     },
     {
-      "description": "【Home / End】Eisuu + A / E",
+      "description": "【⌃ + A / ⌃ + E】Eisuu + A / E",
       "manipulators": [
         {
           "type": "basic",
