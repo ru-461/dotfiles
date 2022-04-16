@@ -187,7 +187,8 @@
           },
           "to": [
             {
-              "key_code": "home"
+              "key_code": "left_control",
+              "modifiers": "left_arrow"
             }
           ],
           "conditions": [
@@ -208,7 +209,8 @@
           },
           "to": [
             {
-              "key_code": "end"
+              "key_code": "right_control",
+              "modifires": "right_arrow"
             }
           ],
           "conditions": [
