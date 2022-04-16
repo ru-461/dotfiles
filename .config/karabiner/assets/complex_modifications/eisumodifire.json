@@ -276,19 +276,19 @@
       ]
     },
     {
-      "description": "【Page】Eisuu + F / B",
+      "description": "【Page Up / Down】Eisuu + B / F",
       "manipulators": [
         {
           "type": "basic",
           "from": {
-            "key_code": "f",
+            "key_code": "b",
             "modifiers": {
               "optional": ["any"]
             }
           },
           "to": [
             {
-              "key_code": "page_down"
+              "key_code": "page_up"
             }
           ],
           "conditions": [
@@ -302,14 +302,14 @@
         {
           "type": "basic",
           "from": {
-            "key_code": "b",
+            "key_code": "f",
             "modifiers": {
               "optional": ["any"]
             }
           },
           "to": [
             {
-              "key_code": "page_up"
+              "key_code": "page_down"
             }
           ],
           "conditions": [

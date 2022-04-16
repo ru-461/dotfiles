@@ -34,19 +34,19 @@
       ]
     },
     {
-      "description": "【Page Down / Up】Japanese_kana + K / J",
+      "description": "【Page Up / Down】Japanese_kana + K / J",
       "manipulators": [
         {
           "type": "basic",
           "from": {
-            "key_code": "j",
+            "key_code": "k",
             "modifiers": {
               "optional": ["any"]
             }
           },
           "to": [
             {
-              "key_code": "page_down"
+              "key_code": "page_up"
             }
           ],
           "conditions": [
@@ -60,14 +60,14 @@
         {
           "type": "basic",
           "from": {
-            "key_code": "k",
+            "key_code": "j",
             "modifiers": {
               "optional": ["any"]
             }
           },
           "to": [
             {
-              "key_code": "page_up"
+              "key_code": "page_down"
             }
           ],
           "conditions": [
