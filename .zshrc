@@ -239,9 +239,9 @@ _autoupgrade() {
 #################################  ALIASES  #################################
 
 # dotfiles
-alias dot="code ~/dotfiles"
+alias dot="code $HOME/dotfiles"
 # System
-alias re="source ~/.zshrc"
+alias re="source $HOME/.zshrc"
 alias c="clear"
 alias cls="clear"
 alias q="exit"
