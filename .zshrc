@@ -248,7 +248,9 @@ alias q="exit"
 alias a="alias"
 alias h="history"
 alias ps="procs"
-alias f="open ."
+if [[ $OS = "darwin" ]]; then
+  alias f="open ."
+fi
 
 # cd
 alias ..="cd .."
