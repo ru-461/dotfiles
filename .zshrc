@@ -240,6 +240,8 @@ _autoupgrade() {
 
 # dotfiles
 alias dot="code $HOME/dotfiles"
+alias cdot="cd $HOME/dotfiles"
+
 # System
 alias re="source $HOME/.zshrc"
 alias c="clear"
