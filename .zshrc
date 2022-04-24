@@ -297,9 +297,11 @@ alias zennv="zenna && yarn zenn --version"
 alias zennup="zenna && yarn upgrade zenn-cli"
 
 # anyenv
-alias aganyenv="alias | rg anyenv"
 alias ae="anyenv"
 alias aeu="anyenv update"
+
+# Volta
+alias voltaup="curl https://get.volta.sh | bash -s -- --skip-setup"
 
 # Yarn
 alias y="yarn"
