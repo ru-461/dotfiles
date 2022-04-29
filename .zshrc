@@ -114,7 +114,7 @@ path=(
 #################################  TOOL INIT  #################################
 
 # Brew
-if [[ $OS = "linux" ]]; then
+if [[ $OS != "darwin" ]]; then
   eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 else
   alias brew="env PATH=${PATH/\/Users\/${USER}\/\.anyenv\/envs\/pyenv\/shims:/} brew"
