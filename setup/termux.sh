@@ -45,15 +45,6 @@ else
   success "anyenv is already installed."
 fi
 
-# Install Volta
-headline "Volta"
-if ! has "volta"; then
-  info "Installing Volta..."
-  curl https://get.volta.sh | bash -s -- --skip-setup
-else
-  success "Volta is already installed."
-fi
-
 # Setup SSH
 mkdir $HOME/.ssh
 touch $HOME/.ssh/config
