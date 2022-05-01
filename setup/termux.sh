@@ -13,7 +13,7 @@ fi
 headline "Packages"
 info "Updating the packages to the latest..."
 pkg update
-pkg install curl exa fd git proot procs screenfetch screenfetch starship tree vim wget -y
+pkg install bat curl exa fd git jq proot procs screenfetch screenfetch starship tree vim wget -y
 
 # Install Zsh
 headline "Zsh"
