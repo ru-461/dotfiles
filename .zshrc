@@ -302,7 +302,7 @@ alias aeu="anyenv update"
 # Volta
 alias voltaup="curl https://get.volta.sh | bash -s -- --skip-setup"
 
-# Yarn
+# yarn
 alias y="yarn"
 alias ygl="yarn global list --depth=0"
 alias yal="yarn list --depth=0"
