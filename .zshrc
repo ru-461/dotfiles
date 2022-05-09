@@ -302,6 +302,12 @@ alias aeu="anyenv update"
 # Volta
 alias voltaup="curl https://get.volta.sh | bash -s -- --skip-setup"
 
+# npx
+alias npsort="npx sort-package-json"
+alias npserve="npx serve"
+alias npfast="npx fast-cli"
+alias npcheck="npx npm-check-updates"
+
 # yarn
 alias y="yarn"
 alias ygl="yarn global list --depth=0"
