@@ -5,8 +5,8 @@ Configuration scripts that can be used anywhere.
 
 # Support OS
 
-- macOS（only Apple Silicon）
-- Ubuntu（only x64）
+- macOS （only Apple Silicon）
+- Ubuntu （only x64）
 
 # How to use
 
