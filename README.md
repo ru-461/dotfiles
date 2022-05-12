@@ -10,7 +10,7 @@ Configuration scripts that can be used anywhere.
 
 # How to use
 
-Run bootstrap.sh !
+Run bootstrap.sh.
 Just run this one liner!!
 
 ```shell
