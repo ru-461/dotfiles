@@ -140,6 +140,9 @@ if has "pyenv"; then
   eval "$(pyenv init --path)"
 fi
 
+# pipenv
+export PIPENV_VENV_IN_PROJECT=true
+
 # php
 if [[ $OS = "linux" ]]; then
   export LDFLAGS="-L/opt/homebrew/opt/php@8.0/lib"
