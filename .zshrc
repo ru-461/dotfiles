@@ -322,6 +322,12 @@ alias yrun="yarn run"
 alias ysrun="yarn -s run"
 alias ydev="yarn dev"
 
+# pip
+alias p="pip"
+
+# pipenv
+alias pe="pipenv"
+
 # Multipass
 alias mp="multipass"
 alias mpl="multipass list"
