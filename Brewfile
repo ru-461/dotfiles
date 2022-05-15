@@ -26,14 +26,17 @@ brew "bat"
 brew "bzip2"
 brew "pkg-config"
 brew "cmatrix"
+brew "curl"
+brew "composer"
 brew "coreutils"
 brew "curl"
 brew "exa"
 brew "fd"
 brew "icu4c"
 brew "gh"
+brew "git"
 brew "git-filter-repo"
-brew "httpd"
+brew "httpd", restart_service: true
 brew "hub"
 brew "oniguruma"
 brew "jq"
@@ -42,7 +45,8 @@ brew "libxml2"
 brew "libzip"
 brew "peco"
 brew "tidy-html5"
-brew "php@8.0"
+brew "php@8.0", restart_service: true
+brew "pipenv"
 brew "procs"
 brew "re2c"
 brew "ripgrep"
@@ -50,6 +54,7 @@ brew "screenfetch"
 brew "sl"
 brew "starship"
 brew "t-rec"
+brew "terminal-notifier"
 brew "translate-shell"
 brew "tree"
 brew "vim"
@@ -109,7 +114,6 @@ cask "zoom"
 mas "Bitwarden", id: 1352778147
 mas "DaisyDisk", id: 411643860
 mas "Developer", id: 640199958
-mas "G App Launcher", id: 1543803459
 mas "GarageBand", id: 682658836
 mas "Hidden Bar", id: 1452453066
 mas "iMovie", id: 408981434
