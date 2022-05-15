@@ -15,6 +15,7 @@ if OS.mac?
   brew "ffmpeg"
   brew "libiconv"
   brew "mas"
+  brew "openssl@3"
 end
 
 tap "teamookla/speedtest"
