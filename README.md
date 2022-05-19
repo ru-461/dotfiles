@@ -38,4 +38,4 @@ Run bootstrap.sh in container.
 bash bootstrap.sh
 ```
 
-Happy Hacking!!
+Happy Hacking!
