@@ -6,15 +6,15 @@ scan_timeout = 12
 disabled = true
 
 [character]
-success_symbol = "[▶](bold green)"
 error_symbol = "[▶](bold red)"
+success_symbol = "[▶](bold green)"
 
 [package]
 disabled = true
 
 [cmd_duration]
-min_time = 500
 format = "🕛 [$duration](bold yellow)"
+min_time = 500
 
 [docker_context]
 format = "via [🐋 $context](blue bold) "
