@@ -3,10 +3,10 @@
 Any more dotfiles.
 Configuration scripts that can be used anywhere.
 
-# Supported OS
+# Support OS
 
-- macOS （only Apple Silicon）
-- Ubuntu （only x64）
+- macOS （Only Apple Silicon）
+- Ubuntu （Only x64）
 
 # How to use
 
