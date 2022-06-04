@@ -8,7 +8,7 @@ COLOR_RED="\033[1;31m"
 COLOR_YELLOW="\033[1;33m"
 COLOR_NONE="\033[0m"
 
-# OS judgment
+# OS
 case ${OSTYPE} in
   linux-android*)
     OS=linux-android
@@ -60,7 +60,7 @@ _delstores () {
 
 #################################  ZSH INIT  #################################
 
-# Completion
+# Completions
 zstyle ":completion:*" verbose yes
 zstyle ":completion:*:commands" rehash 1
 zstyle ":completion:*" completer _extensions _complete _approximate
