@@ -398,4 +398,4 @@ alias au="_autoupgrade"
 # Starship init
 eval "$(starship init zsh)"
 
-headline "Welcome Zsh!"
+headline "Welcome Zsh"
