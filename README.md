@@ -1,6 +1,6 @@
 # dotfiles
 
-Any more dotfiles.
+Any more dotfile.
 Configuration scripts that can be used anywhere.
 
 # Support OS
