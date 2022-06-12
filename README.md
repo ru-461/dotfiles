@@ -9,7 +9,7 @@ Configuration scripts that can be used anywhere.
 - Ubuntu （Only x64）
 - Android（only Termu x64）
 
-# How to use
+# Installation
 
 Run bootstrap.sh.
 Just run this one liner!
