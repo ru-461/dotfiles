@@ -12,7 +12,7 @@ Configuration scripts that can be used anywhere.
 # Installation
 
 Run bootstrap.sh.
-Just run this one liner!
+Just run this one liner！
 
 ```shell
 bash <(curl -fsSL raw.githubusercontent.com/ryu-461/dotfiles/main/bootstrap.sh)
@@ -39,4 +39,4 @@ Run bootstrap.sh in container.
 bash bootstrap.sh
 ```
 
-Happy Hacking!
+Happy Hacking！
