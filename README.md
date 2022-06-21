@@ -7,7 +7,7 @@ Configuration scripts that can be used anywhere.
 
 - macOS （Only Apple Silicon）
 - Ubuntu （Only x64）
-- Android（only Termux x64）
+- Android（only [Termux](https://github.com/termux) x64）
 
 # Installation
 
