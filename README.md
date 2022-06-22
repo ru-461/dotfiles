@@ -5,7 +5,7 @@ Configuration scripts that can be used anywhere.
 
 # Support OS
 
-- macOS （Only Apple Silicon）
+- macOS （Only [Apple Silicon](https://support.apple.com/en-us/HT211814)）
 - Ubuntu （Only x64）
 - Android（only [Termux](https://github.com/termux) x64）
 
