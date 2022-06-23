@@ -11,7 +11,7 @@ Configuration scripts that can be used anywhere.
 
 # Installation
 
-Run bootstrap.sh.
+Run ./bootstrap.sh.
 Just run this one liner！
 
 ```shell
