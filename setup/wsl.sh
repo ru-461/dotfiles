@@ -21,7 +21,6 @@ if ! has "zsh"; then
   if has "apt"; then
     sudo apt install zsh -y
   fi
-
   if has "yum"; then
     sudo yum install zsh -y
   fi

@@ -21,7 +21,6 @@ if ! has "zsh"; then
   if has "apt"; then
     sudo apt install zsh -y
   fi
-
   if has "yum"; then
     sudo yum install zsh -y
   fi
@@ -40,7 +39,7 @@ headline "Config"
 if has "timedatectl"; then
   info "Setting the time zone..."
   sudo timedatectl set-timezone Asia/Tokyo
-  success "Success"
+  success "The time zone has been set correctly."
 else
   warning "timedatectl is required to set the time zone."
 fi
