@@ -82,7 +82,7 @@ setopt print_eight_bit
 setopt HIST_IGNORE_DUPS
 HISTSIZE=1000
 SAVEHIST=1000
-HISTFILE=~/.zsh_history
+HISTFILE=$HOME/.zsh_history
 
 # Beep
 setopt no_beep
