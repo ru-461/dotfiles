@@ -336,6 +336,9 @@ alias mp="multipass"
 alias mpl="multipass list"
 alias mpre="multipass restart"
 
+# scrcpy
+alias sc="scrcpy"
+
 # Docker
 if has "docker"; then
   alias d="docker"
