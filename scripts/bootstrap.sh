@@ -82,25 +82,25 @@ fi
 # Create symlinks
 headline "Symlinks"
 cd $DOT_BASE
-source $HOME/dotfiles/deploy.sh
+source $HOME/dotfiles/scripts/deploy.sh
 
 if [[ $(uname) == "Darwin" ]]; then
   headline "macOS Setup"
   # Run setup script
-  source $DOT_BASE/setup/mac.sh
+  source $DOT_BASE/scripts/mac.sh
 elif [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
   headline "Windows Subsystem for Linux Setup"
   # Run setup script
-  source $DOT_BASE/setup/wsl.sh
+  source $DOT_BASE/scripts/wsl.sh
 elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
   if [[ $(uname -o) == "Android" ]]; then
     headline "Termux Setup"
     # Run setup script
-    source $DOT_BASE/setup/termux.sh
+    source $DOT_BASE/scripts/termux.sh
   else
     headline "Linux Setup"
     # Run setup script
-    source $DOT_BASE/setup/linux.sh
+    source $DOT_BASE/scripts/linux.sh
   fi
 else
   exit 1
