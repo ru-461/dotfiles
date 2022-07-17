@@ -1,19 +1,17 @@
 #!/usr/bin/env bash
 
-set -ue
+DOT_BASE=$HOME/dotfiles
 
-if [[ -d $HOME/dotfiles ]]; then
-  DOT_BASE=$HOME/dotfiles
-  echo -e "\033[1;34minfo: \033[0mStart to deploy symlink."
-else
-  echo -e "\033[1;31mDotfiles is missing.\033[1;31m"
+if [[ ! -d $HOME/dotfiles ]]; then
+  error "Dotfiles is missing."
   exit 1
 fi
 
+info "Start to deploy"
 echo "----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
 echo ""
 if [[ $(uname) == "Darwin" ]]; then
-  for FILE in $(find . -not -path "*.git/*" -not -path "*.DS_Store" -path "*/.*" -type f -print | cut -b3-)
+  for FILE in $(find .. -not -path "*.git/*" -not -path "*.DS_Store" -path "*/.*" -type f -print | cut -b3-)
   do
     mkdir -p "$HOME/$(dirname "$FILE")"
     if [ -L "$HOME/$FILE" ]; then
@@ -23,7 +21,7 @@ if [[ $(uname) == "Darwin" ]]; then
     fi
   done
 else
-  for FILE in $(find . -not -path "*.git/*" -not -path "*.DS_Store" -not -path "*karabiner*" -path "*/.*" -type f -print | cut -b3-)
+  for FILE in $(find .. -not -path "*.git/*" -not -path "*.DS_Store" -not -path "*karabiner*" -path "*/.*" -type f -print | cut -b3-)
   do
     mkdir -p "$HOME/$(dirname "$FILE")"
     if [ -L "$HOME/$FILE" ]; then
@@ -35,4 +33,4 @@ else
 fi
 echo ""
 echo "----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-echo -e "\033[1;32mEnd of symlink expansion.\033[1;32m\n"
+success "End of symlink expansion."
