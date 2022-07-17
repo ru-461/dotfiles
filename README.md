@@ -15,7 +15,7 @@ Run ./bootstrap.sh.
 Just run this one liner.
 
 ```shell
-bash <(curl -fsSL https://raw.githubusercontent.com/ryu-461/dotfiles/main/scripts/bootstrap.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/ryu-461/dotfiles/main/bootstrap.sh)
 ```
 
 # Try using Docker
