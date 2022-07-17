@@ -1,12 +1,9 @@
 #################################  COMMON  #################################
 
-# Colors
-COLOR_GRAY="\033[1;38;5;243m"
-COLOR_BLUE="\033[1;34m"
-COLOR_GREEN="\033[1;32m"
-COLOR_RED="\033[1;31m"
-COLOR_YELLOW="\033[1;33m"
-COLOR_NONE="\033[0m"
+# Load functions
+for function in $HOME/dotfiles/functions/*.sh; do
+  source $function
+done
 
 # OS
 case ${OSTYPE} in
@@ -20,43 +17,6 @@ case ${OSTYPE} in
     OS=linux
   ;;
 esac
-
-#################################  FUNCTIONS  #################################
-
-headline() {
-  echo -e "\n${COLOR_GRAY}==============================${COLOR_NONE}"
-  echo -e "${COLOR_BLUE}$1${COLOR_NONE}"
-  echo -e "${COLOR_GRAY}==============================${COLOR_NONE}"
-}
-
-run() {
-  echo -e "\n${COLOR_BLUE}▶ $1${COLOR_NONE}"
-}
-
-info() {
-  echo -e "${COLOR_BLUE}Info: ${COLOR_NONE}$1"
-}
-
-success() {
-  echo -e "${COLOR_GREEN}$1${COLOR_NONE}\n"
-}
-
-warning() {
-  echo -e "${COLOR_YELLOW}Warning: ${COLOR_NONE}$1\n"
-}
-
-error() {
-  echo -e "${COLOR_RED}Error: ${COLOR_NONE}$1"
-  exit 1
-}
-
-has() {
-  type "$1" > /dev/null 2>&1
-}
-
-_delstores () {
-  sudo find $1 \( -name ".DS_Store" -or -name "._*" -or -name "Thumbs.db" -or -name "Desktop.ini" \) -delete -print;
-}
 
 #################################  ZSH INIT  #################################
 
@@ -162,80 +122,6 @@ if has "rg"; then
 else
   alias ag"$1"="alias | grep $1"
 fi
-
-#################################  UPGRADE FUNCTION  #################################
-
-# Auto Upgrade apt
-_aptautoupgrade() {
-  headline "apt"
-  info "Upgrading packages..."
-  run "apt update"
-  sudo apt update
-  run "apt upgrade"
-  sudo apt upgrade -y
-  run "apt autoremove"
-  sudo apt autoremove -y
-  run "apt clean"
-  sudo apt clean -y
-  info "Upgrading Done."
-}
-
-# Auto Upgrade brew
-_brewautoupgrade() {
-  headline "Homebrew"
-  info "Upgrading brew formulas..."
-  run "brew update"
-  brew update
-  run "brew upgrade"
-  brew upgrade
-  run "brew cleanup"
-  brew cleanup
-  run "brew doctor"
-  brew doctor
-  info "Upgrading Done."
-}
-
-# Auto Upgrade mas
-_masautoupgrade() {
-  headline "mas"
-  info "Upgrading apps..."
-  run "mas outdated"
-  mas outdated
-  run "mas upgrade"
-  mas upgrade
-  info "Upgrading Done."
-}
-
-# Auto Upgrade pkg
-_pkgautoupgrade() {
-  headline "pkg"
-  info "Upgrading packages..."
-  run "pkg update"
-  pkg update
-  run "pkg upgrade"
-  pkg upgrade -y
-  run "pkg autoclean"
-  pkg autoclean
-  run "pkg clean"
-  pkg clean
-  info "Upgrading Done."
-}
-
-# Auto upgrade
-_autoupgrade() {
-  info "Auto package upgrading..."
-  if [[ ! $OS = "linux-android" ]]; then
-    if [[ $OS = "linux" ]]; then
-      _aptautoupgrade
-    fi
-    _brewautoupgrade
-    if [[ $OS = "darwin" ]]; then
-      _masautoupgrade
-    fi
-  else
-    _pkgautoupgrade
-  fi
-}
 
 #################################  ALIASES  #################################
 
@@ -368,7 +254,6 @@ fi
 alias ship="code $HOME/.config/starship.toml"
 
 # Homebrew
-alias brewa="_brewautoupgrade"
 alias brewL="brew leaves"
 alias brewc="brew cleanup"
 alias brewd="brew doctor"
@@ -385,7 +270,6 @@ fi
 
 # mas-cli
 if [[ $OS = "darwin" ]]; then
-  alias masa="_masautoupgrade"
   alias masi="mas install"
   alias masl="mas list"
   alias maso="mas outdated"
@@ -394,10 +278,9 @@ if [[ $OS = "darwin" ]]; then
   alias masx="mas uninstall"
 fi
 
-# Function
-alias delds="find . -name '.DS_Store' -type f -ls -delete"
-alias delstores=_delstores
-alias au="_autoupgrade"
+# Call functions
+alias au=_auto_upgrade
+alias dss=_delete_stores
 
 # Starship init
 eval "$(starship init zsh)"
