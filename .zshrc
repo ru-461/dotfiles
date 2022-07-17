@@ -278,10 +278,6 @@ if [[ $OS = "darwin" ]]; then
   alias masx="mas uninstall"
 fi
 
-# Call functions
-alias au=_auto_upgrade
-alias dss=_delete_stores
-
 # Starship init
 eval "$(starship init zsh)"
 
