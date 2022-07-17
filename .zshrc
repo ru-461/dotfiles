@@ -95,7 +95,6 @@ path=(
   $HOME/.anyenv/bin(N-/)
   $HOME/.anyenv/envs/pyenv/bin(N-/)
   $HOME/.volta/bin(N-/)
-  /Users/$USER/dev/flutter/bin(N-/)
   /opt/homebrew/opt/php@8.0/bin(N-/)
   /opt/homebrew/opt/php@8.0/sbin(N-/)
   /home/linuxbrew/.linuxbrew/opt/php@8.0/bin(N-/)
