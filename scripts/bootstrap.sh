@@ -36,6 +36,10 @@ success() {
   echo -e "${COLOR_GREEN}$1${COLOR_NONE}\n"
 }
 
+has() {
+  type "$1" > /dev/null 2>&1
+}
+
 DOT_BASE=$HOME/dotfiles
 DOT_TARBALL=https://github.com/ryu-461/dotfiles/tarball/main
 DOT_REMOTE=https://github.com/ryu-461/dotfiles.git
