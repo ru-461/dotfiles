@@ -6,7 +6,7 @@ for function in $HOME/dotfiles/functions/*.sh; do
 done
 
 # OS
-case ${OSTYPE} in
+case $OSTYPE in
   linux-android*)
     OS=linux-android
   ;;
