@@ -44,7 +44,7 @@ DOT_BASE=$HOME/dotfiles
 DOT_TARBALL=https://github.com/ryu-461/dotfiles/tarball/main
 DOT_REMOTE=https://github.com/ryu-461/dotfiles.git
 
-headline "Welcome dotfiles bootstrap!!"
+headline "Welcome to dotfiles !"
 read -p "This script will install and deploy the various packages. Are you sure you want to continue? [y/N] " -n 1 -r
 echo ""
 if [[ ! $REPLY =~ ^[Yy]$ ]]; then
