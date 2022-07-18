@@ -84,6 +84,11 @@ headline "Symlinks"
 cd $DOT_BASE
 source $HOME/dotfiles/deploy.sh
 
+# Load functions
+for function in $HOME/dotfiles/functions/*.sh; do
+  source $function
+done
+
 if [[ $(uname) == "Darwin" ]]; then
   headline "macOS Setup"
   # Run setup script
