@@ -22,45 +22,16 @@ else
 fi
 
 # Install Homebrew
-headline "Homebrew"
-if ! has "brew"; then
-  info "Installing Homebrew..."
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-else
-  success "Homebrew is already installed."
-fi
+_brew
 
 # Brewfile
-headline "Brew bundle"
-if [ -f $HOME/dotfiles/Brewfile ]; then
-  info "Installing the formulas from Brewfile..."
-  brew tap "homebrew/bundle"
-  brew bundle --file "~/dotfiles/Brewfile"
-fi
+_bundle_brew
 
 # Install anyenv
-headline "anyenv"
-if ! has "anyenv"; then
-  info "Installing anyenv..."
-  if [[ ! -d $HOME/.anyenv ]]; then
-    git clone https://github.com/anyenv/anyenv ~/.anyenv
-  fi
-  ~/.anyenv/bin/anyenv install --init
-  info "Setting anyenv plugin..."
-  mkdir -p ~/.anyenv/plugins
-  git clone https://github.com/znz/anyenv-update.git ~/.anyenv/plugins/anyenv-update
-else
-  success "anyenv is already installed."
-fi
+_anyenv
 
 # Install Volta
-headline "Volta"
-if ! has "volta"; then
-  info "Installing Volta..."
-  curl https://get.volta.sh | bash -s -- --skip-setup
-else
-  success "Volta is already installed."
-fi
+_volta
 
 #################################  DEFAULTS  #################################
 
