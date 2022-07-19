@@ -129,7 +129,7 @@ fi
 # dotfiles
 alias dot="code ${HOME}/dotfiles"
 alias cdot="cd ${HOME}/dotfiles"
-alias clodot="git clone git@github.com:ryu-461/dotfiles.git ${HOME}"
+alias clodot="git clone git@github.com:ryu-461/dotfiles.git ${HOME}/dotfiles"
 
 # System
 alias re="exec ${SHELL} -l"
