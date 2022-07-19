@@ -131,7 +131,7 @@ alias dot="code ${HOME}/dotfiles"
 alias cdot="cd ${HOME}/dotfiles"
 
 # System
-alias re="source ${HOME}/.zshrc"
+alias re="exec $SHELL -l"
 alias c="clear"
 alias cls="clear"
 alias q="exit"
