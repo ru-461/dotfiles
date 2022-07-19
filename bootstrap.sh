@@ -40,25 +40,25 @@ has() {
   type "$1" > /dev/null 2>&1
 }
 
-DOT_BASE=$HOME/dotfiles
+DOT_BASE=${HOME}/dotfiles
 DOT_TARBALL=https://github.com/ryu-461/dotfiles/tarball/main
 DOT_REMOTE=https://github.com/ryu-461/dotfiles.git
 
 headline "Welcome to dotfiles !"
 read -p "This script will install and deploy the various packages. Are you sure you want to continue? [y/N] " -n 1 -r
 echo ""
-if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+if [[ ! ${REPLY} =~ ^[Yy]$ ]]; then
   info "The process has been canceled. There is nothing to do. "
   exit 1
 fi
 info "Setup start."
-cd $HOME
-if [[ -d $HOME/dotfiles ]]; then
+cd ${HOME}
+if [[ -d ${HOME}/dotfiles ]]; then
   read -p "The dotfiles already exists. Do you want to update them? [y/N] " -n 1 -r
   echo ""
-  if [[ $REPLY =~ ^[Yy]$ ]]; then
+  if [[ ${REPLY} =~ ^[Yy]$ ]]; then
     info "Updating the dotfiles..."
-    cd $DOT_BASE
+    cd ${DOT_BASE}
     git pull origin main
   else
     info "There is nothing to do."
@@ -67,45 +67,45 @@ if [[ -d $HOME/dotfiles ]]; then
 fi
 
 # Clone dotfile repository locally
-if [[ ! -d $HOME/dotfiles ]]; then
+if [[ ! -d ${HOME}/dotfiles ]]; then
   headline "Clone dotfiles"
   if has "git"; then
     info "Cloning the dotfiles repository..."
-    git clone $DOT_REMOTE
+    git clone ${DOT_REMOTE}
   else
-    curl -fsSLo $HOME/dotfiles.tar.gz $DOT_TARBALL
-    tar -xvf $HOME/dotfiles.tar.gz --strip-components 1 -C $HOME/dotfiles
-    rm -f $HOME/dotfiles.tar.gz
+    curl -fsSLo ${HOME}/dotfiles.tar.gz ${DOT_TARBALL}
+    tar -xvf ${HOME}/dotfiles.tar.gz --strip-components 1 -C ${HOME}/dotfiles
+    rm -f ${HOME}/dotfiles.tar.gz
   fi
 fi
 
 # Create symlinks
 headline "Symlinks"
-cd $DOT_BASE
-source $HOME/dotfiles/deploy.sh
+cd ${DOT_BASE}
+source ${HOME}/dotfiles/deploy.sh
 
 # Load functions
-for function in $HOME/dotfiles/functions/*.sh; do
-  source $function
+for FUNCTION in ${HOME}/dotfiles/functions/*.sh; do
+  source ${FUNCTION}
 done
 
 if [[ $(uname) == "Darwin" ]]; then
   headline "macOS Setup"
   # Run setup script
-  source $DOT_BASE/install/mac.sh
+  source ${DOT_BASE}/install/mac.sh
 elif [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
   headline "Windows Subsystem for Linux Setup"
   # Run setup script
-  source $DOT_BASE/install-scripts/wsl.sh
+  source ${DOT_BASE}/install-scripts/wsl.sh
 elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
   if [[ $(uname -o) == "Android" ]]; then
     headline "Termux Setup"
     # Run setup script
-    source $DOT_BASE/install/termux.sh
+    source ${DOT_BASE}/install/termux.sh
   else
     headline "Linux Setup"
     # Run setup script
-    source $DOT_BASE/install/linux.sh
+    source ${DOT_BASE}/install/linux.sh
   fi
 else
   exit 1

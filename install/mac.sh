@@ -61,7 +61,7 @@ defaults write com.apple.commerce AutoUpdate -bool false
 
 info "Setting Screenshot..."
 # Location
-defaults write com.apple.screencapture location -string "$HOME/Downloads"
+defaults write com.apple.screencapture location -string "${HOME}/Downloads"
 # Format - png
 defaults write com.apple.screencapture type -string "png"
 # Disable Shadow
