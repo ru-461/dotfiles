@@ -1,7 +1,7 @@
 _auto_upgrade() {
   info "Auto package upgrading..."
-  if [[ ! $OS = "linux-android" ]]; then
-    if [[ $OS = "linux" ]]; then
+  if [[ ! ${OS} = "linux-android" ]]; then
+    if [[ ${OS} = "linux" ]]; then
       headline "apt"
       info "Upgrading packages..."
       run "apt update"
@@ -25,7 +25,7 @@ _auto_upgrade() {
     run "brew doctor"
     brew doctor
     info "Upgrading Done."
-    if [[ $OS = "darwin" ]]; then
+    if [[ ${OS} = "darwin" ]]; then
       headline "mas"
       info "Upgrading apps..."
       run "mas outdated"

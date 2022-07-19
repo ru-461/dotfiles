@@ -10,7 +10,7 @@ _zsh() {
       sudo yum install zsh -y
     fi
     info "Setting default..."
-    if [[ "$SHELL" != $(which zsh) ]]; then
+    if [[ "${SHELL}" != $(which zsh) ]]; then
         chsh -s $(which zsh)
         info "Default shell changed to Zsh."
     fi
