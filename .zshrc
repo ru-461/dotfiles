@@ -1,12 +1,13 @@
 #################################  COMMON  #################################
 
+
 # Load functions
-for function in $HOME/dotfiles/functions/*.sh; do
-  source $function
+for FUNCTION in ${HOME}/dotfiles/functions/*.sh; do
+  source ${FUNCTION}
 done
 
 # OS
-case $OSTYPE in
+case ${OSTYPE} in
   linux-android*)
     OS=linux-android
   ;;
@@ -42,7 +43,7 @@ setopt print_eight_bit
 setopt HIST_IGNORE_DUPS
 HISTSIZE=1000
 SAVEHIST=1000
-HISTFILE=$HOME/.zsh_history
+HISTFILE=${HOME}/.zsh_history
 
 # Beep
 setopt no_beep
@@ -52,9 +53,9 @@ setopt nolistbeep
 path=(
   /opt/homebrew/bin(N-/)
   /opt/homebrew/sbin(N-/)
-  $HOME/.anyenv/bin(N-/)
-  $HOME/.anyenv/envs/pyenv/bin(N-/)
-  $HOME/.volta/bin(N-/)
+  ${HOME}/.anyenv/bin(N-/)
+  ${HOME}/.anyenv/envs/pyenv/bin(N-/)
+  ${HOME}/.volta/bin(N-/)
   /opt/homebrew/opt/php@8.0/bin(N-/)
   /opt/homebrew/opt/php@8.0/sbin(N-/)
   /home/linuxbrew/.linuxbrew/opt/php@8.0/bin(N-/)
@@ -67,20 +68,20 @@ path=(
   /usr/local/bin(N-/)
   /usr/local/sbin(N-/)
   /Library/Apple/usr/bin(N-/)
-  $path
+  ${path}
 )
 
 #################################  TOOL INIT  #################################
 
 # Brew
-if [[ ! $OS = "darwin" && ! $OS = "linux-android" ]]; then
+if [[ ! ${OS} = "darwin" && ! ${OS} = "linux-android" ]]; then
   eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 fi
 
 # Enable completion & Autosuggestions
 if has "brew"; then
-    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-  if [[ $OS = "darwin" ]]; then
+    FPATH=$(brew --prefix)/share/zsh-completions:${FPATH}
+  if [[ ${OS} = "darwin" ]]; then
     alias brew="env PATH=${PATH/\/Users\/${USER}\/\.anyenv\/envs\/pyenv\/shims:/} brew"
     source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
   else
@@ -103,7 +104,7 @@ fi
 export PIPENV_VENV_IN_PROJECT=true
 
 # php
-if [[ $OS = "linux" ]]; then
+if [[ ${OS} = "linux" ]]; then
   export LDFLAGS="-L/opt/homebrew/opt/php@8.0/lib"
   export CPPFLAGS="-I/opt/homebrew/opt/php@8.0/include"
 else
@@ -126,18 +127,18 @@ fi
 #################################  ALIASES  #################################
 
 # dotfiles
-alias dot="code $HOME/dotfiles"
-alias cdot="cd $HOME/dotfiles"
+alias dot="code ${HOME}/dotfiles"
+alias cdot="cd ${HOME}/dotfiles"
 
 # System
-alias re="source $HOME/.zshrc"
+alias re="source ${HOME}/.zshrc"
 alias c="clear"
 alias cls="clear"
 alias q="exit"
 alias a="alias"
 alias h="history"
 alias ps="procs"
-if [[ $OS = "darwin" ]]; then
+if [[ ${OS} = "darwin" ]]; then
   alias f="open ."
 fi
 
@@ -168,13 +169,13 @@ fi
 alias g="git"
 
 # .zshrc
-alias czsh="code $HOME/.zshrc"
-alias szsh="source $HOME/.zshrc"
+alias czsh="code ${HOME}/.zshrc"
+alias szsh="source ${HOME}/.zshrc"
 
 # ZennCLI
-alias zenna="cd $HOME/Documents/zenn-articles"
-alias zennb="cd $HOME/Documents/zenn-books"
-alias zennop="zenna && code $HOME/Documents/my-zenn-contents && yarn zenn preview --open"
+alias zenna="cd ${HOME}/Documents/zenn-articles"
+alias zennb="cd ${HOME}/Documents/zenn-books"
+alias zennop="zenna && code ${HOME}/Documents/my-zenn-contents && yarn zenn preview --open"
 alias zennna="zenna && yarn zenn new:article"
 alias zennnas="zenna && yarn zenn new:article --slug"
 alias zennnb="zenna && yarn zenn new:book"
@@ -251,7 +252,7 @@ if has "docker"; then
 fi
 
 # Starship
-alias ship="code $HOME/.config/starship.toml"
+alias ship="code ${HOME}/.config/starship.toml"
 
 # Homebrew
 alias brewL="brew leaves"
@@ -269,7 +270,7 @@ if has "brew bundle"; then
 fi
 
 # mas-cli
-if [[ $OS = "darwin" ]]; then
+if [[ ${OS} = "darwin" ]]; then
   alias masi="mas install"
   alias masl="mas list"
   alias maso="mas outdated"
