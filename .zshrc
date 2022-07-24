@@ -226,7 +226,7 @@ alias mpre="multipass restart"
 # scrcpy
 alias sc="scrcpy"
 alias sctop="scrcpy -S --always-on-top --window-x 2200 --window-y 50 -m 1080"
-alias scfull="scrcpy -S -f"
+alias scfull="scrcpy -S --fullscreen"
 
 # Docker
 if has "docker"; then
