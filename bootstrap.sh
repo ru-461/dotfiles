@@ -96,7 +96,7 @@ if [[ $(uname) == "Darwin" ]]; then
 elif [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
   headline "Windows Subsystem for Linux Setup"
   # Run setup script
-  source ${DOT_BASE}/install-scripts/wsl.sh
+  source ${DOT_BASE}/install/wsl.sh
 elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
   if [[ $(uname -o) == "Android" ]]; then
     headline "Termux Setup"
