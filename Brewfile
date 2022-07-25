@@ -16,9 +16,9 @@ if OS.mac?
   brew "libiconv"
   brew "mas"
   brew "openssl@3"
+  brew "t-rec"
 end
 
-tap "teamookla/speedtest"
 brew "jpeg"
 brew "libpng"
 brew "openssl@1.1"
@@ -54,7 +54,6 @@ brew "ripgrep"
 brew "screenfetch"
 brew "sl"
 brew "starship"
-brew "t-rec"
 brew "terminal-notifier"
 brew "translate-shell"
 brew "tree"
