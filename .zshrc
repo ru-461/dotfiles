@@ -1,6 +1,5 @@
 #################################  COMMON  #################################
 
-
 # Load functions
 for FUNCTION in ${HOME}/dotfiles/functions/*.sh; do
   source ${FUNCTION}
