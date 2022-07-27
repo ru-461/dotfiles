@@ -1,8 +1,13 @@
 #################################  COMMON  #################################
 
+# Load common functions
+source ${HOME}/dotfiles/functions/_init.sh
+
 # Load functions
 for FUNCTION in ${HOME}/dotfiles/functions/*.sh; do
-  source ${FUNCTION}
+  if [[ ${FUNCTION} != "${HOME}/dotfiles/functions/_init.sh" ]]; then
+    source ${FUNCTION}
+  fi
 done
 
 # OS
@@ -281,5 +286,3 @@ fi
 
 # Starship init
 eval "$(starship init zsh)"
-
-headline "Welcome Zsh"
