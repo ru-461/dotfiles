@@ -89,22 +89,19 @@ for FUNCTION in ${HOME}/dotfiles/functions/*.sh; do
   source ${FUNCTION}
 done
 
+# Run setup script
 if [[ $(uname) == "Darwin" ]]; then
   headline "macOS Setup"
-  # Run setup script
   source ${DOT_BASE}/install/mac.sh
 elif [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
   headline "Windows Subsystem for Linux Setup"
-  # Run setup script
   source ${DOT_BASE}/install/wsl.sh
 elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
   if [[ $(uname -o) == "Android" ]]; then
     headline "Termux Setup"
-    # Run setup script
     source ${DOT_BASE}/install/termux.sh
   else
     headline "Linux Setup"
-    # Run setup script
     source ${DOT_BASE}/install/linux.sh
   fi
 else
