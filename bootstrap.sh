@@ -2,6 +2,7 @@
 
 set -ue
 
+# Define colors
 COLOR_NONE="\033[0m"
 COLOR_RED="\033[1;31m"
 COLOR_GRAY="\033[1;38;5;243m"
@@ -9,6 +10,7 @@ COLOR_BLUE="\033[1;34m"
 COLOR_YELLOW="\033[1;33m"
 COLOR_GREEN="\033[1;32m"
 
+# Define functions
 headline() {
   echo -e "\n${COLOR_GRAY}==============================${COLOR_NONE}"
   echo -e "${COLOR_BLUE}$1${COLOR_NONE}"
