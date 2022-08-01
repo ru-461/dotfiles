@@ -18,7 +18,7 @@ Just run this one liner.
 bash <(curl -fsSL https://raw.githubusercontent.com/ryu-461/dotfiles/main/bootstrap.sh)
 ```
 
-# Try using Docker
+# Try Docker
 
 Try dotfiles easily using Docker.
 Build images in a locally cloned dotfiles repository.
