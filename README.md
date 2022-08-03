@@ -3,6 +3,12 @@
 Any more dotfile.
 Configuration scripts that can be used anywhere.
 
+# Features
+
+- Identifies OS and platform and makes only appropriate settings
+- Easy to try with docker
+- Easy to deploy
+
 # Support OS
 
 - macOS  （Only [Apple Silicon](https://support.apple.com/en-us/HT211814)）
