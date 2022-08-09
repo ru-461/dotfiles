@@ -9,7 +9,7 @@ if [[ $(uname -m) == "arm64" ]]; then
     headline "Command line tools"
     info "Installing Command line tools..."
     xcode-select --install
-    # Install Rosetta2 for M1 Mac
+    # Install Rosetta2 for Apple Silicon.
     headline "Rosetta2"
     info "Installing Rosetta2."
     /usr/sbin/softwareupdate --install-rosetta --agree-to-license
