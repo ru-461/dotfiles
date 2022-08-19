@@ -82,6 +82,11 @@ if [[ ! ${OS} = "darwin" && ! ${OS} = "linux-android" ]]; then
   eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 fi
 
+# iTerm2
+if [[ ! ${OS} = "darwin" ]]; then
+  test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+fi
+
 # Enable completion & Autosuggestions
 if has "brew"; then
     FPATH=$(brew --prefix)/share/zsh-completions:${FPATH}
