@@ -38,7 +38,7 @@ The latest Ubuntu-based container will be launched.
 docker run -it --rm dotfiles
 ```
 
-Run bootstrap.sh in container.
+Run bootstrap.sh in docker container.
 
 ```shell
 bash bootstrap.sh
