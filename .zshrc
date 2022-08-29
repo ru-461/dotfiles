@@ -157,7 +157,7 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
-# ls - exa
+# exa
 if has "exa"; then
   alias e="exa --icons --git"
   alias l=e
