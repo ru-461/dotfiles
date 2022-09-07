@@ -17,7 +17,6 @@ if [[ $(uname) == "Darwin" ]]; then
     if [ -L "${HOME}/${FILE}" ]; then
       ln -sfv "${DOT_BASE}/${FILE}" "${HOME}/${FILE}"
     else
-    echo "no"
       ln -sniv "${DOT_BASE}/${FILE}" "${HOME}/${FILE}"
     fi
   done
