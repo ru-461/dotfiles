@@ -3,7 +3,7 @@
 DOT_BASE=${HOME}/dotfiles
 
 if [[ ! -d ${HOME}/dotfiles ]]; then
-  error "Dotfiles is missing."
+  error "dotfiles is missing."
   exit 1
 fi
 
