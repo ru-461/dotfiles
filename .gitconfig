@@ -3,9 +3,9 @@ path = ~/.gitconfig.local
 
 [core]
 quotepath  = false
-autocrlf   = false
+autocrlf = false
 ignorecase = false
-editor     = vim
+editor = vim
 
 [init]
 defaultBranch = main
