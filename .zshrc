@@ -192,7 +192,6 @@ alias zennnb="zenna && yarn zenn new:book"
 alias zennnbs="zenna && yarn zenn new:book --slug "
 alias zennpr="zenna && yarn zenn preview --open"
 alias zennv="zenna && yarn zenn --version"
-alias zennup="zenna && yarn upgrade zenn-cli"
 
 # anyenv
 alias ae="anyenv"
