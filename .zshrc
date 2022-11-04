@@ -54,6 +54,7 @@ setopt no_beep
 setopt nolistbeep
 
 # Configure path
+typeset -U path PATH
 path=(
   /opt/homebrew/bin(N-/)
   /opt/homebrew/sbin(N-/)
