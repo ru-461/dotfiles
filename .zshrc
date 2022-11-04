@@ -89,13 +89,11 @@ fi
 
 # Enable completion & Autosuggestions
 if has "brew"; then
-    FPATH=$(brew --prefix)/share/zsh-completions:${FPATH}
   if [[ ${OS} = "darwin" ]]; then
     alias brew="env PATH=${PATH/\/Users\/${USER}\/\.anyenv\/envs\/pyenv\/shims:/} brew"
-    source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-  else
-    source /home/linuxbrew/.linuxbrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
   fi
+  source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  FPATH=$(brew --prefix)/share/zsh-completions:${FPATH}
   autoload -Uz compinit && compinit
 fi
 
