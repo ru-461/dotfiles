@@ -259,6 +259,9 @@ if has "docker"; then
   alias drm="docker system prune"
 fi
 
+# laravel sail
+alias sail="./vendor/bin/sail up"
+
 # Starship
 alias ship="code ${HOME}/.config/starship.toml"
 
