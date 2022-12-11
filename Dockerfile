@@ -28,6 +28,6 @@ USER $USERNAME
 WORKDIR /home/$USERNAME/
 
 # Copy bootstrap script.
-COPY --chown=$USERNAME:$USERNAME scripts/bootstrap.sh .
+COPY --chown=$USERNAME:$USERNAME bootstrap.sh .
 
 CMD [ "/usr/bin/bash" ]
