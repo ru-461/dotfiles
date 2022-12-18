@@ -23,11 +23,12 @@ RUN groupadd -g $GID $GROUPNAME && \
   echo $USERNAME:$PASSWORD | chpasswd && \
   echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
+# Set user data.
 USER $USERNAME
-
 WORKDIR /home/$USERNAME/
 
 # Copy bootstrap script.
 COPY --chown=$USERNAME:$USERNAME bootstrap.sh .
 
+# Run bash.
 CMD [ "/usr/bin/bash" ]
