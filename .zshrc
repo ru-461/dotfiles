@@ -58,8 +58,6 @@ typeset -U path PATH
 path=(
   /opt/homebrew/bin(N-/)
   /opt/homebrew/sbin(N-/)
-  ${HOME}/.anyenv/bin(N-/)
-  ${HOME}/.anyenv/envs/pyenv/bin(N-/)
   ${HOME}/.volta/bin(N-/)
   /opt/homebrew/opt/php@8.0/bin(N-/)
   /opt/homebrew/opt/php@8.0/sbin(N-/)
@@ -90,22 +88,9 @@ fi
 
 # Enable completion & Autosuggestions
 if has "brew"; then
-  if [[ ${OS} = "darwin" ]]; then
-    alias brew="env PATH=${PATH/\/Users\/${USER}\/\.anyenv\/envs\/pyenv\/shims:/} brew"
-  fi
   source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
   FPATH=$(brew --prefix)/share/zsh-completions:${FPATH}
   autoload -Uz compinit && compinit
-fi
-
-# anyenv
-if has "anyenv"; then
-  eval "$(anyenv init - no--rehash)"
-fi
-
-# pyenv
-if has "pyenv"; then
-  eval "$(pyenv init --path)"
 fi
 
 # pipenv
@@ -191,10 +176,6 @@ alias zennnb="zenna && yarn zenn new:book"
 alias zennnbs="zenna && yarn zenn new:book --slug "
 alias zennpr="zenna && yarn zenn preview --open"
 alias zennv="zenna && yarn zenn --version"
-
-# anyenv
-alias ae="anyenv"
-alias aeu="anyenv update"
 
 # Volta
 alias voltaup="curl https://get.volta.sh | bash -s -- --skip-setup"
