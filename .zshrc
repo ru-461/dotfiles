@@ -243,7 +243,6 @@ fi
 # Laravel Sail
 alias sail="[ -f sail ] && sh sail || sh vendor/bin/sail"
 
-
 # Starship
 alias ship="code ${HOME}/.config/starship.toml"
 
