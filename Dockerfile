@@ -9,7 +9,10 @@ RUN apt-get update &&  \
   curl \
   file \
   zsh  \
-  sudo
+  sudo \
+  && apt-get autoremove -y \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
 
 # Add user for testing Brew installation.
 ARG USERNAME=docker
