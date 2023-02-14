@@ -49,7 +49,7 @@ HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=${HOME}/.zsh_history
 
-# Beep
+# Setting beep
 setopt no_beep
 setopt nolistbeep
 
