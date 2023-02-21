@@ -30,7 +30,7 @@ RUN groupadd -g $GID $GROUPNAME && \
 USER $USERNAME
 WORKDIR /home/$USERNAME/
 
-# Copy bootstrap script.
+# Copy bootstrap script to container.
 COPY --chown=$USERNAME:$USERNAME bootstrap.sh .
 
 # Run bash.
