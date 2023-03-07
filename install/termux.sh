@@ -17,6 +17,3 @@ pkg install bat curl exa fd git jq proot procs screenfetch screenfetch starship 
 
 # Install Zsh
 _zsh
-
-# Install anyenv
-_anyenv
