@@ -2,7 +2,7 @@
 
 set -ue
 
-# Define colors
+# colors
 COLOR_NONE="\033[0m"
 COLOR_RED="\033[1;31m"
 COLOR_GRAY="\033[1;38;5;243m"
@@ -10,7 +10,12 @@ COLOR_BLUE="\033[1;34m"
 COLOR_YELLOW="\033[1;33m"
 COLOR_GREEN="\033[1;32m"
 
-# Define functions
+# consts
+DOT_BASE=${HOME}/dotfiles
+DOT_TARBALL=https://github.com/ryu-461/dotfiles/tarball/main
+DOT_REMOTE=https://github.com/ryu-461/dotfiles.git
+
+# functions
 headline() {
   echo -e "\n${COLOR_GRAY}==============================${COLOR_NONE}"
   echo -e "${COLOR_BLUE}$1${COLOR_NONE}"
@@ -41,10 +46,6 @@ success() {
 has() {
   type "$1" > /dev/null 2>&1
 }
-
-DOT_BASE=${HOME}/dotfiles
-DOT_TARBALL=https://github.com/ryu-461/dotfiles/tarball/main
-DOT_REMOTE=https://github.com/ryu-461/dotfiles.git
 
 headline "Welcome to dotfiles !"
 read -p "This script will install and deploy the various packages. Are you sure you want to continue? [y/N] " -n 1 -r
