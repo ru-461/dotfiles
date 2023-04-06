@@ -49,4 +49,4 @@ You can test with the following users.
 - User： docker
 - Password： docker
 
-Happy Hacking！
+Happy Hacking.
