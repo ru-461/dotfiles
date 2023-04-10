@@ -10,8 +10,8 @@ RUN apt-get update &&  \
   file \
   zsh  \
   sudo \
-  && apt-get autoremove -y \
   && apt-get clean \
+  && apt-get autoremove -y \
   && rm -rf /var/lib/apt/lists/*
 
 # Add user for testing Brew installation.
