@@ -102,6 +102,11 @@ else
   export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/php@8.0/include"
 fi
 
+# flutter
+if [[ ${OS} = "darwin" ]]; then
+  export PATH="$PATH:${HOME}/src/flutter/bin"
+fi
+
 # GitHub CLI
 if has "gh"; then
   eval "$(gh completion -s zsh)"
