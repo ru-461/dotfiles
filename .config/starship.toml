@@ -11,11 +11,11 @@ format = "🕛 [$duration](bold yellow)"
 min_time = 500
 
 [directory.substitutions]
-"Dropbox" = " Dropbox"
-"Google Drive" = " Google Drive"
-"zenn-articles" = " Articles"
+"Developments" = " Developments"
+"Dropbox" = " Dropbox"
+"zenn-articles" = "󱀈 Articles"
 "zenn-books" = " Books"
-"~" = " ~"
+"~" = " Home"
 
 [package]
 disabled = true
