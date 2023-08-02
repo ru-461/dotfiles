@@ -107,7 +107,7 @@ if [[ ${OS} = "darwin" ]]; then
   export PATH="$PATH:${HOME}/src/flutter/bin"
 fi
 
-# Volta
+# Volta support pnpm
 export VOLTA_FEATURE_PNPM=1
 
 # GitHub CLI
@@ -115,14 +115,18 @@ if has "gh"; then
   eval "$(gh completion -s zsh)"
 fi
 
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
+
+#################################  ALIASES  #################################
+
 # Replace grep with rg
 if has "rg"; then
   alias ag"$1"="alias | rg $1"
 else
   alias ag"$1"="alias | grep $1"
 fi
-
-#################################  ALIASES  #################################
 
 # dotfiles
 alias dot="code ${HOME}/dotfiles"
