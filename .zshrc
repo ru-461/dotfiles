@@ -93,7 +93,7 @@ if has "brew"; then
   autoload -Uz compinit && compinit
 fi
 
-# php
+# PHP
 if [[ ${OS} = "linux" ]]; then
   export LDFLAGS="-L/opt/homebrew/opt/php@8.0/lib"
   export CPPFLAGS="-I/opt/homebrew/opt/php@8.0/include"
@@ -102,10 +102,13 @@ else
   export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/php@8.0/include"
 fi
 
-# flutter
+# Flutter
 if [[ ${OS} = "darwin" ]]; then
   export PATH="$PATH:${HOME}/src/flutter/bin"
 fi
+
+# Volta
+export VOLTA_FEATURE_PNPM=1
 
 # GitHub CLI
 if has "gh"; then
@@ -202,11 +205,11 @@ alias yrun="yarn run"
 alias ysrun="yarn -s run"
 alias ydev="yarn dev"
 
+# pnpm
+alias pn="pnpm"
+
 # pip
 alias p="pip"
-
-# pipenv
-alias pe="pipenv"
 
 # Multipass
 alias mp="multipass"
