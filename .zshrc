@@ -195,7 +195,7 @@ alias npserve="npx serve"
 alias npfast="npx fast-cli"
 alias npcheck="npx npm-check-updates"
 
-# yarn
+# Yarn
 alias y="yarn"
 alias ygl="yarn global list --depth=0"
 alias yal="yarn list --depth=0"
@@ -214,6 +214,9 @@ alias pn="pnpm"
 
 # pip
 alias p="pip"
+
+# venv
+alias va="source .venv/bin/activate"
 
 # Multipass
 alias mp="multipass"
