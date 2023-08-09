@@ -58,7 +58,6 @@ typeset -U path PATH
 path=(
   /opt/homebrew/bin(N-/)
   /opt/homebrew/sbin(N-/)
-  ${HOME}/.volta/bin(N-/)
   /opt/homebrew/opt/php@8.0/bin(N-/)
   /opt/homebrew/opt/php@8.0/sbin(N-/)
   /home/linuxbrew/.linuxbrew/opt/php@8.0/bin(N-/)
@@ -107,8 +106,12 @@ if [[ ${OS} = "darwin" ]]; then
   export PATH="$PATH:${HOME}/src/flutter/bin"
 fi
 
-# Volta support pnpm
-export VOLTA_FEATURE_PNPM=1
+# Volta
+if has "volta"; then
+  export VOLTA_HOME="$HOME/.volta"
+  export PATH="$VOLTA_HOME/bin:$PATH"
+  export VOLTA_FEATURE_PNP=1
+fi
 
 # GitHub CLI
 if has "gh"; then
@@ -185,9 +188,6 @@ alias zennnb="zenna && yarn zenn new:book"
 alias zennnbs="zenna && yarn zenn new:book --slug "
 alias zennpr="zenna && yarn zenn preview --open"
 alias zennv="zenna && yarn zenn --version"
-
-# Volta
-alias voltaup="curl https://get.volta.sh | bash -s -- --skip-setup"
 
 # npx
 alias npsort="npx sort-package-json"
