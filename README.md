@@ -3,19 +3,19 @@
 Any more dotfiles...
 Configuration scripts that can be used anywhere.
 
-# Features
+## Features
 
 - Identifies OS and platform and makes only appropriate settings
 - Easy to try with docker
 - Easy to deploy
 
-# Support OS
+## Support OS
 
 - macOS  （Only [Apple Silicon](https://support.apple.com/en-us/HT211814)）
 - Ubuntu （Only x64）
 - Android（only [Termux](https://github.com/termux) x64）
 
-# Installation
+## Installation
 
 Just run this one liner.
 
@@ -23,7 +23,7 @@ Just run this one liner.
 bash <(curl -fsSL https://raw.githubusercontent.com/ryu-461/dotfiles/main/bootstrap.sh)
 ```
 
-# Try Docker
+## Try Docker
 
 Try dotfiles easily using Docker.
 Build images in a locally cloned dotfiles repository.
