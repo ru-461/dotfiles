@@ -20,7 +20,7 @@ Configuration scripts that can be used anywhere.
 Just run this one liner.
 
 ```shell
-bash <(curl -fsSL https://raw.githubusercontent.com/ryu-461/dotfiles/main/bootstrap.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/ru-461/dotfiles/main/bootstrap.sh)
 ```
 
 ## Try Docker
