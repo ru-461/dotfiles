@@ -113,6 +113,13 @@ if has "volta"; then
   export VOLTA_FEATURE_PNP=1
 fi
 
+# pyenv
+if has "pyenv"; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+fi
+
 # GitHub CLI
 if has "gh"; then
   eval "$(gh completion -s zsh)"
