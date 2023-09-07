@@ -120,6 +120,11 @@ if has "pyenv"; then
   eval "$(pyenv init -)"
 fi
 
+# Rye
+if has "rye"; then
+  source "$HOME/.rye/env"
+fi
+
 # GitHub CLI
 if has "gh"; then
   eval "$(gh completion -s zsh)"
