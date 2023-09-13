@@ -30,5 +30,5 @@ if has "timedatectl"; then
   sudo timedatectl set-timezone Asia/Tokyo
   success "The time zone has been set correctly."
 else
-  warning "timedatectl is required to set the time zone."
+  warning "'timedatectl' is required to set the time zone."
 fi
