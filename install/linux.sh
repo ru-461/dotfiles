@@ -23,12 +23,6 @@ _brew
 # Bundle Brewfile
 _bundle_brew
 
-# Install anyenv
-_anyenv
-
-# Install Volta
-_volta
-
 # Setting System
 headline "Config"
 if has "timedatectl"; then
