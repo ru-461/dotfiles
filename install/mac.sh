@@ -27,12 +27,6 @@ _brew
 # Brewfile
 _bundle_brew
 
-# Install anyenv
-_anyenv
-
-# Install Volta
-_volta
-
 #################################  DEFAULTS  #################################
 
 headline "Config"
