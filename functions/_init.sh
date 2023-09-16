@@ -5,4 +5,4 @@ _init () {
 }
 _init
 
-headline "Welcome Zsh!"
+headline "Welcome to Zsh!"
