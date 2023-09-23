@@ -44,10 +44,10 @@ export LANG=ja_JP.UTF-8
 setopt print_eight_bit
 
 # Zsh history
-setopt HIST_IGNORE_DUPS
-HISTSIZE=1000
-SAVEHIST=1000
 HISTFILE=${HOME}/.zsh_history
+export HISTSIZE=10000
+export SAVEHIST=10000
+setopt HIST_IGNORE_DUPS
 
 # Setting beep
 setopt no_beep
