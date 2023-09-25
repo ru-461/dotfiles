@@ -200,7 +200,7 @@ alias zennv="zenna && yarn zenn --version"
 alias bxsort="bunx sort-package-json"
 alias bxserve="bunx serve"
 alias bxfast="bunx fast-cli"
-alias check="bunx npm-check-updates"
+alias bxcheck="bunx npm-check-updates"
 
 # Yarn
 alias y="yarn"
