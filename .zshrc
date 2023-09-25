@@ -196,11 +196,11 @@ alias zennnbs="zenna && yarn zenn new:book --slug "
 alias zennpr="zenna && yarn zenn preview --open"
 alias zennv="zenna && yarn zenn --version"
 
-# npx
-alias npsort="npx sort-package-json"
-alias npserve="npx serve"
-alias npfast="npx fast-cli"
-alias npcheck="npx npm-check-updates"
+# bunx
+alias bxsort="bunx sort-package-json"
+alias bxserve="bunx serve"
+alias bxfast="bunx fast-cli"
+alias check="bunx npm-check-updates"
 
 # Yarn
 alias y="yarn"
