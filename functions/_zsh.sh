@@ -11,8 +11,8 @@ _zsh() {
     fi
     info "Setting default..."
     if [[ "${SHELL}" != $(which zsh) ]]; then
-        chsh -s $(which zsh)
-        info "Default shell changed to Zsh."
+      chsh -s $(which zsh)
+      info "Default shell changed to Zsh."
     fi
     warning "Zsh will be enabled after the re-login."
   else
