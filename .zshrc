@@ -196,7 +196,7 @@ alias zennnbs="zenna && yarn zenn new:book --slug "
 alias zennpr="zenna && yarn zenn preview --open"
 alias zennv="zenna && yarn zenn --version"
 
-# bunx
+# Bun
 alias bxsort="bunx sort-package-json"
 alias bxserve="bunx serve"
 alias bxfast="bunx fast-cli"
