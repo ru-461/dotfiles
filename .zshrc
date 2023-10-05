@@ -160,18 +160,17 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
-# exa
-if has "exa"; then
-  alias e="exa --icons --git"
-  alias l=e
-  alias ls=e
-  alias ea="exa -a --icons --git"
+# eza
+if has "eza"; then
+  alias ei="eza --icons --git"
+  alias ea="eza -a --icons --git"
+  alias ee="eza -aahl --icons --git"
+  alias et="eza -T -L 3 -a -I 'node_modules|.git|.cache' --icons"
+  alias eta="eza -T -a -I 'node_modules|.git|.cache' --color=always --icons | less -r"
+  alias ls=ei
   alias la=ea
-  alias ee="exa -aahl --icons --git"
   alias ll=ee
-  alias et="exa -T -L 3 -a -I 'node_modules|.git|.cache' --icons"
   alias lt=et
-  alias eta="exa -T -a -I 'node_modules|.git|.cache' --color=always --icons | less -r"
   alias lta=eta
   alias l="clear && ls"
 else
