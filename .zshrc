@@ -106,6 +106,11 @@ if [[ ${OS} = "darwin" ]]; then
   export PATH="$PATH:${HOME}/src/flutter/bin"
 fi
 
+# Rust
+if [[ -f "$HOME/.cargo/env" ]]; then
+  source $HOME/.cargo/env
+fi
+
 # Volta
 if has "volta"; then
   export VOLTA_HOME="$HOME/.volta"
