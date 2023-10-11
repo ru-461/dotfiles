@@ -102,7 +102,7 @@ else
 fi
 
 # Flutter
-if [[ ${OS} = "darwin" ]]; then
+if [[ -d $HOME/src/flutter/bin ]]; then
   export PATH="$PATH:${HOME}/src/flutter/bin"
 fi
 
