@@ -11,16 +11,19 @@ for FUNCTION in ${HOME}/dotfiles/functions/*.sh; do
 done
 
 # OS
-case ${OSTYPE} in
+case $OSTYPE in
   linux-android*)
     OS=linux-android
-  ;;
+    ;;
   darwin*)
     OS=darwin
-  ;;
+    ;;
   linux*)
     OS=linux
-  ;;
+    ;;
+  *)
+    OS=unknown
+    ;;
 esac
 
 #################################  ZSH INIT  #################################
