@@ -3,10 +3,11 @@
 # Load common functions
 source ${HOME}/dotfiles/functions/_init.sh
 
+FUNCTIONS_DIR="${HOME}/dotfiles/functions"
 # Load functions
-for FUNCTION in ${HOME}/dotfiles/functions/*.sh; do
-  if [[ ${FUNCTION} != "${HOME}/dotfiles/functions/_init.sh" ]]; then
-    source ${FUNCTION}
+for FUNCTION in "${FUNCTIONS_DIR}"/*.sh; do
+  if [ "${FUNCTION}" != "${FUNCTIONS_DIR}/_init.sh" ]; then
+    source "${FUNCTION}"
   fi
 done
 
