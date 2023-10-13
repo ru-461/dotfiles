@@ -79,14 +79,15 @@ path=(
 
 #################################  TOOL INIT  #################################
 
+# iTerm2
+if [[ ! ${OS} = "darwin" ]]; then
+  test -e "${HOME}/.iterm2_shell_integration.zsh"
+  source "${HOME}/.iterm2_shell_integration.zsh"
+fi
+
 # Brew
 if [[ ! ${OS} = "darwin" && ! ${OS} = "linux-android" ]]; then
   eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-fi
-
-# iTerm2
-if [[ ! ${OS} = "darwin" ]]; then
-  test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 fi
 
 # Enable completion & Autosuggestions
@@ -94,25 +95,6 @@ if has "brew"; then
   source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
   FPATH=$(brew --prefix)/share/zsh-completions:${FPATH}
   autoload -Uz compinit && compinit
-fi
-
-# PHP
-if [[ ${OS} = "linux" ]]; then
-  export LDFLAGS="-L/opt/homebrew/opt/php@8.0/lib"
-  export CPPFLAGS="-I/opt/homebrew/opt/php@8.0/include"
-else
-  export LDFLAGS="-L/home/linuxbrew/.linuxbrew/opt/php@8.0/lib"
-  export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/php@8.0/include"
-fi
-
-# Flutter
-if [[ -d $HOME/src/flutter/bin ]]; then
-  export PATH="$PATH:${HOME}/src/flutter/bin"
-fi
-
-# Rust
-if [[ -f "$HOME/.cargo/env" ]]; then
-  source $HOME/.cargo/env
 fi
 
 # Volta
@@ -134,9 +116,24 @@ if has "gh"; then
   eval "$(gh completion -s zsh)"
 fi
 
+# Flutter
+[[ -d $HOME/src/flutter/bin ]] && export PATH="$PATH:${HOME}/src/flutter/bin"
+
+# Rust
+[[ -f "$HOME/.cargo/env" ]] && source $HOME/.cargo/env
+
+# PHP
+if [[ ${OS} = "linux" ]]; then
+  export LDFLAGS="-L/opt/homebrew/opt/php@8.0/lib"
+  export CPPFLAGS="-I/opt/homebrew/opt/php@8.0/include"
+else
+  export LDFLAGS="-L/home/linuxbrew/.linuxbrew/opt/php@8.0/lib"
+  export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/php@8.0/include"
+fi
+
 # tabtab source for packages
 # uninstall by removing these lines
-[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
+[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh
 
 #################################  ALIASES  #################################
 
