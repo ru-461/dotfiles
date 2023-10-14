@@ -27,6 +27,7 @@ case $OSTYPE in
     ;;
 esac
 
+
 #################################  ZSH INIT  #################################
 
 # Completions
@@ -76,6 +77,7 @@ path=(
   /Library/Apple/usr/bin(N-/)
   ${path}
 )
+
 
 #################################  TOOL INIT  #################################
 
@@ -134,6 +136,7 @@ fi
 # tabtab source for packages
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh
+
 
 #################################  ALIASES  #################################
 
