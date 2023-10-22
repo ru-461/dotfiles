@@ -21,6 +21,7 @@ default = current
 ui = true
 
 [alias]
+# Basic
 a = add
 b = branch
 c = commit
@@ -34,17 +35,23 @@ p = pull
 s = status
 w = whatchanged
 
+# add
 aa = add --all
 
+# commit
 ci = commit --interactive
 cm = commit --message
 
+# checkout
 co = checkout
 cob = checkout -b
+
+# branch
 ba = branch -a
 bm = branch --merged
 bn = branch --no-merged
 
+# log
 hist = log --pretty=format:\"%Cgreen%h %Creset%cd %Cblue[%cn] %Creset%s%C(yellow)%d%C(reset)\" --graph --date=relative --decorate --all
 llog = log --graph --name-status --pretty=format:\"%C(red)%h %C(reset)(%cd) %C(green)%an %Creset%s %C(yellow)%d%Creset\" --date=relative
 logo = log --oneline
