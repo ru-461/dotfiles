@@ -44,6 +44,7 @@ au = add --update
 ba = branch -a
 bm = branch --merged
 bn = branch --no-merged
+bv = branch --verbose
 
 # commit
 ci = commit --interactive
