@@ -45,6 +45,7 @@ ba = branch -a
 bm = branch --merged
 bn = branch --no-merged
 bv = branch --verbose
+bvv = branch --verbose --verbose
 
 # commit
 ci = commit --interactive
