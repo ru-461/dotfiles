@@ -37,6 +37,8 @@ w = whatchanged
 
 # add
 aa = add --all
+ap = add --patch
+au = add --update
 
 # commit
 ci = commit --interactive
