@@ -99,6 +99,9 @@ if has "brew"; then
   autoload -Uz compinit && compinit
 fi
 
+# asdf
+source $(brew --prefix asdf)/libexec/asdf.sh
+
 # Volta
 if has "volta"; then
   export VOLTA_HOME="$HOME/.volta"
