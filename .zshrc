@@ -81,6 +81,18 @@ path=(
 
 #################################  TOOL INIT  #################################
 
+# Android
+if [[ ${OS} = "darwin" ]]; then
+  export ANDROID_HOME=~/Library/Android/sdk
+  
+  if [[ -d ${ANDROID_HOME} ]]; then
+    export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
+    export PATH=$PATH:$ANDROID_HOME/platform-tools
+    export PATH=$PATH:$ANDROID_HOME/emulator
+    export PATH=$PATH:$ANDROID_HOME/tools
+  fi 
+fi
+
 # iTerm2
 if [[ ! ${OS} = "darwin" ]]; then
   test -e "${HOME}/.iterm2_shell_integration.zsh"
