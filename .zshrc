@@ -112,7 +112,7 @@ if has "brew"; then
 fi
 
 # asdf
-source $(brew --prefix asdf)/libexec/asdf.sh
+[[ -f $(brew --prefix asdf)/libexec/asdf.sh ]] && source $(brew --prefix asdf)/libexec/asdf.sh
 
 # Volta
 if has "volta"; then
