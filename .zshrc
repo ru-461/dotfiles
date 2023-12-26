@@ -235,6 +235,11 @@ alias yrun="yarn run"
 alias ysrun="yarn -s run"
 alias ydev="yarn dev"
 
+# fvm
+alias f="fvm flutter"
+alias d="fvm dart"
+alias fv=".fvm/flutter_sdk/bin/flutter"
+
 # pnpm
 alias pn="pnpm"
 
