@@ -75,6 +75,7 @@ path=(
   /usr/local/bin(N-/)
   /usr/local/sbin(N-/)
   /Library/Apple/usr/bin(N-/)
+  $HOME/fvm/default/bin(N-/)
   ${path}
 )
 
