@@ -133,9 +133,6 @@ if has "gh"; then
   eval "$(gh completion -s zsh)"
 fi
 
-# Flutter
-[[ -d $HOME/src/flutter/bin ]] && export PATH="$PATH:${HOME}/src/flutter/bin"
-
 # Rust
 [[ -f "$HOME/.cargo/env" ]] && source $HOME/.cargo/env
 
