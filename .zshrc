@@ -172,9 +172,7 @@ alias q="exit"
 alias a="alias"
 alias h="history"
 alias ps="procs"
-if [[ ${OS} = "darwin" ]]; then
-  alias o="open ."
-fi
+[[ ${OS} = "darwin" ]] && alias o="open ."
 
 # cd
 alias ..="cd .."
