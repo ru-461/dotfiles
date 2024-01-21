@@ -122,6 +122,12 @@ if has "volta"; then
   export VOLTA_FEATURE_PNP=1
 fi
 
+# Bun
+if has "Bun"; then
+  export BUN_INSTALL="$HOME/.bun"
+  export PATH="$BUN_INSTALL/bin:$PATH"
+fi
+
 # pyenv
 if has "pyenv"; then
   export PYENV_ROOT="$HOME/.pyenv"
@@ -316,3 +322,4 @@ fi
 
 # Starship init
 eval "$(starship init zsh)"
+
