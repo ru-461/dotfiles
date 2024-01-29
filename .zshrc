@@ -209,6 +209,9 @@ alias g="git"
 alias czsh="code ${HOME}/.zshrc"
 alias szsh="source ${HOME}/.zshrc"
 
+# VSCode
+alias codeinit="mkdir -p ./vscode && touch ./vscode/settings.json"
+
 # ZennCLI
 alias zenna="cd ${HOME}/Documents/zenn-articles"
 alias zennb="cd ${HOME}/Documents/zenn-books"
