@@ -115,24 +115,10 @@ fi
 # asdf
 [[ -f $(brew --prefix asdf)/libexec/asdf.sh ]] && source $(brew --prefix asdf)/libexec/asdf.sh
 
-# Volta
-if has "volta"; then
-  export VOLTA_HOME="$HOME/.volta"
-  export PATH="$VOLTA_HOME/bin:$PATH"
-  export VOLTA_FEATURE_PNP=1
-fi
-
 # Bun
 if has "Bun"; then
   export BUN_INSTALL="$HOME/.bun"
   export PATH="$BUN_INSTALL/bin:$PATH"
-fi
-
-# pyenv
-if has "pyenv"; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init -)"
 fi
 
 # GitHub CLI
