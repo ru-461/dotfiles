@@ -40,7 +40,6 @@ zstyle ":completion:*" menu select
 zstyle ":completion:*" group-name ""
 zstyle ":completion:*:*:*:*:descriptions" format "%F{green}-- %d --%f"
 
-# Cd
 setopt auto_cd
 setopt correct
 
@@ -112,9 +111,6 @@ if has "brew"; then
   autoload -Uz compinit && compinit
 fi
 
-# asdf
-[[ -f $(brew --prefix asdf)/libexec/asdf.sh ]] && source $(brew --prefix asdf)/libexec/asdf.sh
-
 # Bun
 if has "Bun"; then
   export BUN_INSTALL="$HOME/.bun"
@@ -166,7 +162,7 @@ alias h="history"
 alias ps="procs"
 [[ ${OS} = "darwin" ]] && alias o="open ."
 
-# cd
+# Cd
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
