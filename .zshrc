@@ -84,6 +84,7 @@ path=(
 # Android
 if [[ ${OS} = "darwin" ]]; then
   export ANDROID_HOME=~/Library/Android/sdk
+  export NDK_HOME=$ANDROID_HOME/ndk/25.0.8775105
   
   if [[ -d ${ANDROID_HOME} ]]; then
     export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
@@ -210,6 +211,7 @@ alias bxsort="bunx sort-package-json"
 alias bxserve="bunx serve"
 alias bxfast="bunx fast-cli"
 alias bxcheck="bunx npm-check-updates"
+alias bunx="bun x"
 
 # Yarn
 alias y="yarn"
