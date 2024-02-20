@@ -12,8 +12,8 @@ COLOR_GREEN="\033[1;32m"
 
 # consts
 DOT_BASE=${HOME}/dotfiles
-DOT_TARBALL=https://github.com/ryu-461/dotfiles/tarball/main
-DOT_REMOTE=https://github.com/ryu-461/dotfiles.git
+DOT_TARBALL=https://github.com/ru-461/dotfiles/tarball/main
+DOT_REMOTE=https://github.com/ru-461/dotfiles.git
 
 # functions
 headline() {
