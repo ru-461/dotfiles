@@ -118,6 +118,9 @@ if has "Bun"; then
   export PATH="$BUN_INSTALL/bin:$PATH"
 fi
 
+# Rye
+[[ -f "$HOME/.rye/env" ]] && source "$HOME/.rye/env"
+
 # GitHub CLI
 if has "gh"; then
   eval "$(gh completion -s zsh)"
