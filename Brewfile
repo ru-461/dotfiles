@@ -120,21 +120,17 @@ if OS.mac?
   mas "Hidden Bar", id: 1452453066
   mas "iMovie", id: 408981434
   mas "Keynote", id: 409183694
-  mas "Lightshot Screenshot", id: 526298438
+  mas "Kindle", id: 302584613
   mas "LINE", id: 539883307
   mas "Microsoft Remote Desktop", id: 1295203466
   mas "Notion Web Clipper", id: 1559269364
   mas "Numbers", id: 409203825
   mas "Pages", id: 409201541
   mas "PopClip", id: 445189367
-  mas "Prime Video", id: 545519333
   mas "Reeder", id: 1529448980
   mas "RunCat", id: 1429033973
-  mas "Skitch", id: 425955336
-  mas "Spark", id: 1176895641
-  mas "TweetDeck", id: 485812721
-  mas "Twitter", id: 1482454543
+  mas "Spark Desktop", id: 6445813049
+  mas "TestFlight", id: 899247664
   mas "Xcode", id: 497799835
-  mas "xSearch", id: 1579902068
   mas "Yoink", id: 457622435
 end
