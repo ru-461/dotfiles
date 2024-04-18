@@ -86,14 +86,14 @@ if [[ ${OS} = "darwin" ]]; then
   export ANDROID_HOME=~/Library/Android/sdk
   export ANDROID_SDK_ROOT=$ANDROID_HOME
   export NDK_HOME=$ANDROID_HOME/ndk/25.0.8775105
-  
+
   if [[ -d ${ANDROID_HOME} ]]; then
     export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
     export PATH=$PATH:$ANDROID_HOME/platform-tools
     export PATH=$PATH:$ANDROID_HOME/emulator
     export PATH=$PATH:$ANDROID_HOME/tools
     export PATH=$PATH:$ANDROID_HOME/build-tools
-  fi 
+  fi
 fi
 
 # iTerm2
