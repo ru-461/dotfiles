@@ -97,7 +97,7 @@ if [[ ${OS} = "darwin" ]]; then
 fi
 
 # iTerm2
-if [[ ! ${OS} = "darwin" ]]; then
+if [[ ${OS} = "darwin" ]]; then
   test -e "${HOME}/.iterm2_shell_integration.zsh"
   source "${HOME}/.iterm2_shell_integration.zsh"
 fi
