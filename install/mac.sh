@@ -27,6 +27,9 @@ _brew
 # Brewfile
 _bundle_brew
 
+# iTerm2
+_item2
+
 #################################  DEFAULTS  #################################
 
 headline "Config"
