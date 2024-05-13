@@ -9,5 +9,3 @@ _item2() {
     success "iTerm2 Shell Integration is already installed."
   fi
 }
-
-_item2
