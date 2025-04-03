@@ -320,3 +320,6 @@ eval "$(mise activate zsh)"
 
 # uv
 eval "$(uv generate-shell-completion zsh)"
+
+# uvx
+eval "$(uvx --generate-shell-completion zsh)"
