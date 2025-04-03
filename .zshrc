@@ -317,3 +317,6 @@ eval "$(starship init zsh)"
 
 # mise
 eval "$(mise activate zsh)"
+
+# uv
+eval "$(uv generate-shell-completion zsh)"
