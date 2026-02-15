@@ -96,12 +96,6 @@ if [[ ${OS} = "darwin" ]]; then
   fi
 fi
 
-# iTerm2
-if [[ ${OS} = "darwin" ]]; then
-  test -e "${HOME}/.iterm2_shell_integration.zsh"
-  source "${HOME}/.iterm2_shell_integration.zsh"
-fi
-
 # Brew
 if [[ ! ${OS} = "darwin" && ! ${OS} = "linux-android" ]]; then
   eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
@@ -323,3 +317,8 @@ eval "$(uv generate-shell-completion zsh)"
 
 # uvx
 eval "$(uvx --generate-shell-completion zsh)"
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=($HOME/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
