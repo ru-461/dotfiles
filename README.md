@@ -13,7 +13,7 @@ Configuration scripts that can be used anywhere.
 
 - macOS  （Only [Apple Silicon](https://support.apple.com/en-us/HT211814)）
 - Ubuntu （Only x64）
-- Android（only [Termux](https://github.com/termux) x64）
+- Android（Only [Termux](https://github.com/termux) x64）
 
 ## Installation
 
