@@ -15,8 +15,24 @@ DOT_BASE=${HOME}/dotfiles
 DOT_TARBALL=https://github.com/ru-461/dotfiles/tarball/main
 DOT_REMOTE=https://github.com/ru-461/dotfiles.git
 
-# Load common functions.
-source ${DOT_BASE}/functions/_common.sh
+# Bootstrap helpers must work before dotfiles are cloned.
+headline() {
+  echo -e "\n${COLOR_GRAY}==============================${COLOR_NONE}"
+  echo -e "${COLOR_BLUE}$1${COLOR_NONE}"
+  echo -e "${COLOR_GRAY}==============================${COLOR_NONE}"
+}
+
+info() {
+  echo -e "${COLOR_BLUE}Info: ${COLOR_NONE}$1"
+}
+
+success() {
+  echo -e "${COLOR_GREEN}$1${COLOR_NONE}\n"
+}
+
+has() {
+  command -v "$1" > /dev/null 2>&1
+}
 
 headline "Welcome to dotfiles !"
 read -p "This script will install and deploy the various packages. Are you sure you want to continue? [y/N] " -n 1 -r
@@ -37,7 +53,7 @@ if [[ -d ${HOME}/dotfiles ]]; then
   else
     info "There is nothing to do."
   fi
-  exit 1
+  exit 0
 fi
 
 # Clone dotfile repository locally
@@ -45,22 +61,25 @@ if [[ ! -d ${HOME}/dotfiles ]]; then
   headline "Clone dotfiles"
   if has "git"; then
     info "Cloning the dotfiles repository..."
-    git clone ${DOT_REMOTE}
+    git clone "${DOT_REMOTE}" "${DOT_BASE}"
   else
-    curl -fsSLo ${HOME}/dotfiles.tar.gz ${DOT_TARBALL}
-    tar -xvf ${HOME}/dotfiles.tar.gz --strip-components 1 -C ${HOME}/dotfiles
-    rm -f ${HOME}/dotfiles.tar.gz
+    curl -fsSLo "${HOME}/dotfiles.tar.gz" "${DOT_TARBALL}"
+    mkdir -p "${DOT_BASE}"
+    tar -xvf "${HOME}/dotfiles.tar.gz" --strip-components 1 -C "${DOT_BASE}"
+    rm -f "${HOME}/dotfiles.tar.gz"
   fi
 fi
 
 # Create symlinks
 headline "Symlinks"
 cd ${DOT_BASE}
-source ${HOME}/dotfiles/deploy.sh
+source "${HOME}/dotfiles/deploy.sh"
 
 # Load functions
-for FUNCTION in ${HOME}/dotfiles/functions/*.sh; do
-  source ${FUNCTION}
+for FUNCTION in "${HOME}/dotfiles/functions/"*.sh; do
+  if [[ "${FUNCTION}" != "${HOME}/dotfiles/functions/_init.sh" ]]; then
+    source "${FUNCTION}"
+  fi
 done
 
 # Run setup script
