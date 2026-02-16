@@ -103,13 +103,14 @@ fi
 
 # Enable completion & Autosuggestions
 if has "brew"; then
-  source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  ZSH_AUTOSUGGESTIONS_FILE="$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+  [[ -f "${ZSH_AUTOSUGGESTIONS_FILE}" ]] && source "${ZSH_AUTOSUGGESTIONS_FILE}"
   FPATH=$(brew --prefix)/share/zsh-completions:${FPATH}
   autoload -Uz compinit && compinit
 fi
 
 # Bun
-if has "Bun"; then
+if has "bun"; then
   export BUN_INSTALL="$HOME/.bun"
   export PATH="$BUN_INSTALL/bin:$PATH"
 fi
@@ -127,11 +128,11 @@ fi
 
 # PHP
 if [[ ${OS} = "linux" ]]; then
-  export LDFLAGS="-L/opt/homebrew/opt/php@8.0/lib"
-  export CPPFLAGS="-I/opt/homebrew/opt/php@8.0/include"
-else
   export LDFLAGS="-L/home/linuxbrew/.linuxbrew/opt/php@8.0/lib"
   export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/php@8.0/include"
+else
+  export LDFLAGS="-L/opt/homebrew/opt/php@8.0/lib"
+  export CPPFLAGS="-I/opt/homebrew/opt/php@8.0/include"
 fi
 
 # tabtab source for packages
@@ -140,12 +141,14 @@ fi
 
 #################################  ALIASES  #################################
 
-# Replace grep with rg
-if has "rg"; then
-  alias ag"$1"="alias | rg $1"
-else
-  alias ag"$1"="alias | grep $1"
-fi
+# Search aliases by keyword.
+ag() {
+  if has "rg"; then
+    alias | rg -- "${1:-}"
+  else
+    alias | grep -- "${1:-}"
+  fi
+}
 
 # dotfiles
 alias dot="code ${HOME}/dotfiles"
@@ -292,8 +295,8 @@ alias brews="brew search"
 alias brewu="brew upgrade"
 alias brewx="brew uninstall"
 # Brew Bundle
-if has "brew bundle"; then
-  alias brewbnd="brew bundle --file '~/dotfiles/Brewfile'"
+if has "brew"; then
+  alias brewbnd="brew bundle --file ${HOME}/dotfiles/Brewfile"
 fi
 
 # mas-cli
@@ -307,16 +310,24 @@ if [[ ${OS} = "darwin" ]]; then
 fi
 
 # Starship init
-eval "$(starship init zsh)"
+if has "starship"; then
+  eval "$(starship init zsh)"
+fi
 
 # mise
-eval "$(mise activate zsh)"
+if has "mise"; then
+  eval "$(mise activate zsh)"
+fi
 
 # uv
-eval "$(uv generate-shell-completion zsh)"
+if has "uv"; then
+  eval "$(uv generate-shell-completion zsh)"
+fi
 
 # uvx
-eval "$(uvx --generate-shell-completion zsh)"
+if has "uvx"; then
+  eval "$(uvx --generate-shell-completion zsh)"
+fi
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
 fpath=($HOME/.docker/completions $fpath)
 autoload -Uz compinit
