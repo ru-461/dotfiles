@@ -1,15 +1,34 @@
 #################################  COMMON  #################################
 
-# Load common functions
-source ${HOME}/dotfiles/functions/_init.sh
+# Resolve dotfiles source directory for both legacy and chezmoi flows.
+DOTFILES_DIR="${HOME}/dotfiles"
+if [[ ! -d "${DOTFILES_DIR}" && -d "${HOME}/.local/share/chezmoi" ]]; then
+  DOTFILES_DIR="${HOME}/.local/share/chezmoi"
+fi
+if command -v chezmoi > /dev/null 2>&1; then
+  CHEZMOI_SOURCE_DIR="$(chezmoi source-path 2> /dev/null || true)"
+  [[ -n "${CHEZMOI_SOURCE_DIR}" && -d "${CHEZMOI_SOURCE_DIR}" ]] && DOTFILES_DIR="${CHEZMOI_SOURCE_DIR}"
+fi
 
-FUNCTIONS_DIR="${HOME}/dotfiles/functions"
-# Load functions
-for FUNCTION in "${FUNCTIONS_DIR}"/*.sh; do
-  if [ "${FUNCTION}" != "${FUNCTIONS_DIR}/_init.sh" ]; then
-    source "${FUNCTION}"
-  fi
-done
+FUNCTIONS_DIR="${DOTFILES_DIR}/functions"
+if [[ -f "${FUNCTIONS_DIR}/_init.sh" ]]; then
+  source "${FUNCTIONS_DIR}/_init.sh"
+fi
+
+# Load helper functions.
+if [[ -d "${FUNCTIONS_DIR}" ]]; then
+  for FUNCTION in "${FUNCTIONS_DIR}"/*.sh(N); do
+    if [[ "${FUNCTION}" != "${FUNCTIONS_DIR}/_init.sh" && -f "${FUNCTION}" ]]; then
+      source "${FUNCTION}"
+    fi
+  done
+fi
+
+if ! typeset -f has > /dev/null 2>&1; then
+  has() {
+    command -v "$1" > /dev/null 2>&1
+  }
+fi
 
 # OS
 case $OSTYPE in
@@ -151,8 +170,8 @@ ag() {
 }
 
 # dotfiles
-alias dot="code ${HOME}/dotfiles"
-alias cdot="cd ${HOME}/dotfiles"
+alias dot="code ${DOTFILES_DIR}"
+alias cdot="cd ${DOTFILES_DIR}"
 alias clodot="git clone git@github.com:ru-461/dotfiles.git ${HOME}/dotfiles"
 
 # System
@@ -296,7 +315,7 @@ alias brewu="brew upgrade"
 alias brewx="brew uninstall"
 # Brew Bundle
 if has "brew"; then
-  alias brewbnd="brew bundle --file ${HOME}/dotfiles/Brewfile"
+  alias brewbnd="brew bundle --file ${DOTFILES_DIR}/Brewfile"
 fi
 
 # mas-cli

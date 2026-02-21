@@ -1,36 +1,19 @@
 #!/usr/bin/env bash
 
-DOT_BASE=${HOME}/dotfiles
+set -eu
 
-if [[ ! -d ${DOT_BASE} ]]; then
-  error "dotfiles is missing."
+info() {
+  printf '%s\n' "[INFO] $1"
+}
+
+fail() {
+  printf '%s\n' "[ERROR] $1" >&2
   exit 1
+}
+
+if ! command -v chezmoi > /dev/null 2>&1; then
+  fail "chezmoi is not installed. Run: sh -c \"\$(curl -fsLS get.chezmoi.io)\" -- init --apply ru-461"
 fi
 
-info "Start to deploy."
-echo "----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-echo ""
-if [[ $(uname) == "Darwin" ]]; then
-  while IFS= read -r -d '' FILE; do
-    FILE=${FILE#./}
-    mkdir -p "${HOME}/$(dirname "${FILE}")"
-    if [ -L "${HOME}/${FILE}" ]; then
-      ln -sfv "${DOT_BASE}/${FILE}" "${HOME}/${FILE}"
-    else
-      ln -sniv "${DOT_BASE}/${FILE}" "${HOME}/${FILE}"
-    fi
-  done < <(find . -not -path "*.git/*" -not -path "*.DS_Store" -path "*/.*" -type f -print0)
-else
-  while IFS= read -r -d '' FILE; do
-    FILE=${FILE#./}
-    mkdir -p "${HOME}/$(dirname "${FILE}")"
-    if [ -L "${HOME}/${FILE}" ]; then
-      ln -sfv "${DOT_BASE}/${FILE}" "${HOME}/${FILE}"
-    else
-      ln -sniv "${DOT_BASE}/${FILE}" "${HOME}/${FILE}"
-    fi
-  done < <(find . -not -path "*.git/*" -not -path "*.DS_Store" -not -path "*karabiner*" -path "*/.*" -type f -print0)
-fi
-echo ""
-echo "----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-success "End of symlink expansion."
+info "Legacy deploy entrypoint. Running chezmoi apply."
+exec chezmoi apply
