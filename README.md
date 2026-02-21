@@ -76,23 +76,29 @@ Run them manually when needed.
 
 ## Try Docker
 
-Try dotfiles easily using Docker.
-Build images in a locally cloned dotfiles repository.
+Try dotfiles in a reproducible Ubuntu container.
+Build the image from a locally cloned dotfiles repository.
 
 ```shell
 docker build -t dotfiles --force-rm .
 ```
 
-The latest Ubuntu-based container will be launched.
+### Option 1: Reproduce the current local repository (Recommended)
 
 ```shell
-docker run -it --rm dotfiles
+docker run -it --rm -v "$PWD":/workspace/dotfiles dotfiles
 ```
 
 After entering the container, run:
 
 ```shell
-chezmoi init --apply ru-461
+chezmoi init --apply --source=/workspace/dotfiles
+```
+
+### Option 2: Reproduce from the remote `ru-461` repository
+
+```shell
+docker run -it --rm dotfiles /usr/bin/bash -lc "/workspace/dotfiles/bootstrap.sh && exec /usr/bin/bash"
 ```
 
 Happy Hacking.

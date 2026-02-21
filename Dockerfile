@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 
 # Install the minimum required packages.
-RUN apt-get update &&  \
+RUN apt-get update && \
   apt-get install -y --no-install-recommends \
   build-essential \
   ca-certificates \
@@ -13,6 +13,10 @@ RUN apt-get update &&  \
   && apt-get clean \
   && apt-get autoremove -y \
   && rm -rf /var/lib/apt/lists/*
+
+# Install chezmoi so README commands work inside the container.
+RUN sh -c "$(curl -fsLS https://get.chezmoi.io)" -- -b /usr/local/bin && \
+  chezmoi --version
 
 # Add user for testing Brew installation.
 ARG USERNAME=docker
@@ -26,12 +30,16 @@ RUN groupadd -g $GID $GROUPNAME && \
   echo $USERNAME:$PASSWORD | chpasswd && \
   echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
+# Prepare a shared workspace path before dropping privileges.
+RUN mkdir -p /workspace/dotfiles && \
+  chown -R $USERNAME:$GROUPNAME /workspace
+
 # Set user data.
 USER $USERNAME
 WORKDIR /home/$USERNAME/
 
-# Copy bootstrap script to container.
-COPY --chown=$USERNAME:$USERNAME bootstrap.sh .
+# Keep a full copy of the repository for local-source testing.
+COPY --chown=$USERNAME:$USERNAME . /workspace/dotfiles
 
 # Run bash.
 CMD [ "/usr/bin/bash" ]
