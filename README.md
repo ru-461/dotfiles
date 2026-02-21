@@ -67,7 +67,18 @@ recipient = "age1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
 Dotfile deployment is handled by chezmoi.
 Package and OS provisioning scripts remain under `install/*.sh` and `functions/*.sh`.
-Run them manually when needed.
+Use `install/run.sh` as the stable entrypoint.
+
+```shell
+bash "$(chezmoi source-path)/install/run.sh" --mode check
+bash "$(chezmoi source-path)/install/run.sh" --target auto
+```
+
+Run only selected steps when needed:
+
+```shell
+bash "$(chezmoi source-path)/install/run.sh" --target auto --only zsh,brew,bundle
+```
 
 ## Notes on OS-specific Files
 
