@@ -31,20 +31,6 @@ chezmoi apply
 chezmoi update
 ```
 
-## Legacy Compatibility Entrypoints
-
-The old scripts are still available as compatibility wrappers:
-
-```shell
-bash <(curl -fsSL https://raw.githubusercontent.com/ru-461/dotfiles/main/bootstrap.sh)
-```
-
-```shell
-bash deploy.sh
-```
-
-Both wrappers delegate to chezmoi internally.
-
 ## age Setup (Foundation Only)
 
 This repository prepares only the age foundation in this phase.
@@ -109,7 +95,7 @@ chezmoi init --apply --source=/workspace/dotfiles
 ### Option 2: Reproduce from the remote `ru-461` repository
 
 ```shell
-docker run -it --rm dotfiles /usr/bin/bash -lc "/workspace/dotfiles/bootstrap.sh && exec /usr/bin/bash"
+docker run -it --rm dotfiles /usr/bin/bash -lc "chezmoi init --apply ru-461 && exec /usr/bin/bash"
 ```
 
 Happy Hacking.

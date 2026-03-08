@@ -1,6 +1,8 @@
 Brewfile.lock.json
 automatic_backups
 .DS_Store
+.claude/
+.serena/
 *.swp
 *.swo
 *.swn
