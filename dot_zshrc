@@ -282,10 +282,10 @@ if has "docker"; then
   alias dr="docker container run"
   alias ds="docker container stop"
   alias dx="docker exec --interactive --tty"
-  alias dcrm="docker container rm --force $(docker ps --all --quiet)"
+  alias dcrm='docker container rm --force $(docker ps --all --quiet)'
   alias di="docker image"
   alias dila="docker image ls --all"
-  alias dirm="docker rmi -f $(docker images --quiet)"
+  alias dirm='docker rmi -f $(docker images --quiet)'
   alias dn="docker network"
   alias dnls="docker network ls --all --latest"
   alias dc="docker compose"
