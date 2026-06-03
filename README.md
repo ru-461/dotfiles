@@ -1,7 +1,7 @@
 # dotfiles
 
-Any more dotfiles...
-Configuration scripts that can be used anywhere.
+Yet another dotfiles repository.
+Configuration files you can carry anywhere.
 
 ## Features
 
@@ -9,10 +9,11 @@ Configuration scripts that can be used anywhere.
 - Keep OS-specific files explicit (`karabiner` is only for macOS)
 - Keep setup scripts (`install/*.sh`) as optional package/bootstrap helpers
 
-## Support OS
+## Supported OS
 
 - macOS (Only [Apple Silicon](https://support.apple.com/en-us/HT211814))
 - Ubuntu (Only x64)
+- WSL (Ubuntu x64)
 - Android (Only [Termux](https://github.com/termux) x64)
 
 ## Installation (Recommended)
@@ -20,7 +21,7 @@ Configuration scripts that can be used anywhere.
 Use the official chezmoi entrypoint:
 
 ```shell
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply ru-461
+sh -c "$(curl -fsLS https://get.chezmoi.io)" -- init --apply ru-461
 ```
 
 ## Daily Operations
@@ -31,10 +32,10 @@ chezmoi apply
 chezmoi update
 ```
 
-## age Setup (Foundation Only)
+## age Encryption Setup
 
-This repository prepares only the age foundation in this phase.
-No encrypted target files are added yet.
+age encryption can be configured when needed, but is not used yet.
+No encrypted files are tracked yet.
 
 1. Generate an age key pair:
 
@@ -49,7 +50,7 @@ chezmoi age keygen
 recipient = "age1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 ```
 
-## Package Setup Scripts (Separate Responsibility)
+## Package Setup Scripts
 
 Dotfile deployment is handled by chezmoi.
 Package and OS provisioning scripts remain under `install/*.sh` and `functions/*.sh`.
