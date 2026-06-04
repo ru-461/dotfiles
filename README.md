@@ -16,13 +16,28 @@ Configuration files you can carry anywhere.
 - WSL (Ubuntu x64)
 - Android (Only [Termux](https://github.com/termux) x64)
 
-## Installation (Recommended)
+## Quick Start
 
-Use the official chezmoi entrypoint:
+Bootstrap a fresh machine with the official chezmoi entrypoint.
+It installs chezmoi if missing, clones this repository, and applies every dotfile in one command:
 
 ```shell
 sh -c "$(curl -fsLS https://get.chezmoi.io)" -- init --apply ru-461
 ```
+
+Reload your shell so the new configuration takes effect:
+
+```shell
+exec zsh
+```
+
+(Optional) Install development tools and packages via the bootstrap scripts:
+
+```shell
+bash "$(chezmoi source-path)/install/run.sh" --target auto
+```
+
+That's it. See [Daily Operations](#daily-operations) for editing and updating your dotfiles afterward.
 
 ## Daily Operations
 
