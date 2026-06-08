@@ -29,3 +29,6 @@ use_12hr = true
 show_always = false
 style_root = "black bold"
 style_user = "white bold"
+
+[gcloud]
+disabled = true
