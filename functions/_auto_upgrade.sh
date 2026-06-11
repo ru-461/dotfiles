@@ -1,16 +1,16 @@
+_au_run() {
+  run "$*"
+  if "$@"; then
+    success "  Done"
+  else
+    warning "  Failed: $*"
+    ((_au_errors++)) || true
+  fi
+}
+
 _auto_upgrade() {
   local _au_errors=0
   local _au_start=$SECONDS
-
-  _au_run() {
-    run "$*"
-    if eval "$@" 2>&1; then
-      success "  Done"
-    else
-      warning "  Failed: $*"
-      ((_au_errors++)) || true
-    fi
-  }
 
   headline "Auto Upgrade"
   info "Starting package upgrade..."
@@ -19,6 +19,8 @@ _auto_upgrade() {
   if [[ ! ${OS} = "linux-android" ]]; then
     if [[ ${OS} = "linux" ]]; then
       headline "apt"
+      # Cache sudo credentials up front so prompts don't interrupt mid-flow.
+      sudo -v
       _au_run sudo apt update
       _au_run sudo apt upgrade -y
       _au_run sudo apt autoremove -y
@@ -29,11 +31,15 @@ _auto_upgrade() {
       _au_run brew update
       _au_run brew upgrade
       _au_run brew cleanup
-      _au_run "brew doctor || true"
+      # Informational only: doctor warnings shouldn't count as failures.
+      run "brew doctor"
+      brew doctor || true
     fi
     if [[ ${OS} = "darwin" ]] && command -v mas &>/dev/null; then
       headline "Mac App Store"
-      _au_run mas outdated
+      # Informational only: just lists pending updates.
+      run "mas outdated"
+      mas outdated || true
       _au_run mas upgrade
     fi
   else
@@ -52,7 +58,5 @@ _auto_upgrade() {
   else
     warning "$_au_errors command(s) failed (${_au_elapsed}s)"
   fi
-
-  unset -f _au_run
 }
 alias au=_auto_upgrade
