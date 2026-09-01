@@ -66,6 +66,9 @@ setopt correct
 export LANG=ja_JP.UTF-8
 setopt print_eight_bit
 
+# Homebrew
+export HOMEBREW_NO_UPGRADE_AUTO_UPDATES_CASKS=1
+
 # Zsh history
 HISTFILE=${HOME}/.zsh_history
 export HISTSIZE=10000
@@ -361,3 +364,5 @@ fpath=($HOME/.docker/completions $fpath)
 autoload -Uz compinit
 compinit
 # End of Docker CLI completions
+
+fpath+=~/.zfunc; autoload -Uz compinit; compinit
