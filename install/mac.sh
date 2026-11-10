@@ -17,8 +17,7 @@ if [[ $(uname -m) == "arm64" ]]; then
     success "Skip the command line tools as they are already installed."
   fi
 else
-  error "This script is not compatible with this architecture."
-  exit 1
+  die "This script is not compatible with this architecture."
 fi
 
 # Install Homebrew

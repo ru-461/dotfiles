@@ -141,7 +141,7 @@ run_selected_steps() {
       bundle) _bundle_brew ;;
       "") ;;
       *)
-        error "Unknown step in --only: ${normalized}"
+        die "Unknown step in --only: ${normalized}"
         ;;
     esac
   done
@@ -151,7 +151,7 @@ run_target_script() {
   local resolved_target="$1"
   local target_script="${INSTALL_DIR}/${resolved_target}.sh"
 
-  [[ -f "${target_script}" ]] || error "Target script not found: ${target_script}"
+  [[ -f "${target_script}" ]] || die "Target script not found: ${target_script}"
   # shellcheck source=/dev/null
   source "${target_script}"
 }
@@ -179,7 +179,7 @@ main() {
     if [[ -f "${target_script}" ]]; then
       success "Check OK: ${target_script}"
     else
-      error "Check failed: ${target_script} was not found."
+      die "Check failed: ${target_script} was not found."
     fi
 
     if [[ -n "${ONLY_STEPS}" ]]; then
