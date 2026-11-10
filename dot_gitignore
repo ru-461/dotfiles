@@ -1,7 +1,0 @@
-# Home-level gitignore managed by chezmoi.
-Brewfile.lock.json
-automatic_backups
-.DS_Store
-*.swp
-*.swo
-*.swn

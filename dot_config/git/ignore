@@ -1,0 +1,19 @@
+# Global gitignore, deployed to ~/.config/git/ignore (git's default core.excludesFile).
+
+# macOS
+.DS_Store
+
+# Editors
+*.swp
+*.swo
+*.swn
+
+# Secrets
+.env
+
+# Flutter (FVM version cache)
+.fvm/
+
+# Claude Code local files
+**/.claude/settings.local.json
+**/.claude/.cc-writes/
