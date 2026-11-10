@@ -1,17 +1,8 @@
-tap "dart-lang/dart"
-tap "homebrew/core"
-tap "homebrew/bundle"
-tap "homebrew/services"
-
 # Only on macOS
 if OS.mac?
   tap "buo/cask-upgrade"
   tap "grishka/grishka"
   tap "leoafarias/fvm"
-  tap "homebrew/cask"
-  tap "homebrew/cask-fonts"
-  tap "homebrew/cask-versions"
-  tap "sanemat/font"
   brew "awscli"
   brew "blueutil"
   brew "ios-deploy"
