@@ -33,11 +33,11 @@ info "Start Setting defaults..."
 
 #  Apprerance
 info "Setting Apprerance..."
-defaults delete .GlobalPreferences AppleInterfaceStyleSwitchesAutomatically > /dev/null 2>&1
+defaults delete .GlobalPreferences AppleInterfaceStyleSwitchesAutomatically > /dev/null 2>&1 || true
 # Theme
 defaults write .GlobalPreferences AppleInterfaceStyle -string "Dark"
 # Dock
-defaults delete com.apple.dock orientation
+defaults delete com.apple.dock orientation > /dev/null 2>&1 || true
 
 info "Setting File System..."
 # DS_Store
