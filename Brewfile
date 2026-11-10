@@ -2,7 +2,7 @@
 if OS.mac?
   tap "buo/cask-upgrade"
   tap "grishka/grishka"
-  tap "leoafarias/fvm"
+  tap "btwld/fvm"
   brew "awscli"
   brew "blueutil"
   brew "ios-deploy"
@@ -46,9 +46,7 @@ brew "mise"
 brew "peco"
 brew "poetry"
 brew "procs"
-brew "python-tk@3.11"
 brew "ripgrep"
-brew "rye"
 brew "scrcpy"
 brew "screenfetch"
 brew "sl"
@@ -60,7 +58,7 @@ brew "watchman"
 brew "wget"
 brew "zsh-autosuggestions"
 brew "zsh-completions"
-brew "leoafarias/fvm/fvm"
+brew "btwld/fvm/fvm"
 
 cask "adobe-acrobat-reader"
 cask "android-platform-tools"
@@ -72,7 +70,7 @@ cask "cheatsheet"
 cask "cleanshot"
 cask "devtoys"
 cask "discord"
-cask "docker"
+cask "docker-desktop"
 cask "dropbox"
 cask "duet"
 cask "figma"
@@ -90,7 +88,6 @@ cask "iterm2"
 cask "karabiner-elements"
 cask "keyboardcleantool"
 cask "licecap"
-cask "microsoft-remote-desktop"
 cask "monitorcontrol"
 cask "multipass"
 cask "neardrop"
@@ -104,7 +101,7 @@ cask "spotify"
 cask "steam"
 cask "tableplus"
 cask "visual-studio-code"
-cask "visual-studio-code-insiders"
+cask "visual-studio-code@insiders"
 cask "vivaldi"
 cask "vlc"
 cask "zoom"
@@ -120,7 +117,7 @@ if OS.mac?
   mas "Keynote", id: 409183694
   mas "Kindle", id: 302584613
   mas "LINE", id: 539883307
-  mas "Microsoft Remote Desktop", id: 1295203466
+  mas "Windows App", id: 1295203466
   mas "Notion Web Clipper", id: 1559269364
   mas "Numbers", id: 409203825
   mas "Pages", id: 409201541
