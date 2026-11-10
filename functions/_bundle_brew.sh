@@ -7,15 +7,14 @@ _bundle_brew() {
     return 0
   fi
 
-  dotfiles_dir="${DOTFILES_DIR:-${HOME}/dotfiles}"
-  if [[ ! -f "${dotfiles_dir}/Brewfile" && -f "${HOME}/.local/share/chezmoi/Brewfile" ]]; then
-    dotfiles_dir="${HOME}/.local/share/chezmoi"
+  dotfiles_dir="${DOTFILES_DIR:-}"
+  if [[ -z "${dotfiles_dir}" ]] && has "chezmoi"; then
+    dotfiles_dir="$(chezmoi source-path 2> /dev/null || true)"
   fi
   brewfile_path="${dotfiles_dir}/Brewfile"
 
-  if [ -f "${brewfile_path}" ]; then
+  if [[ -n "${dotfiles_dir}" && -f "${brewfile_path}" ]]; then
     info "Installing the formulas from Brewfile..."
-    brew tap "homebrew/bundle"
     brew bundle --file "${brewfile_path}"
   else
     warning "Skip Brew bundle because Brewfile was not found."
