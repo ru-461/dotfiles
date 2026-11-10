@@ -24,7 +24,12 @@ warning() {
 }
 
 error() {
-  echo -e "${COLOR_RED}Error: ${COLOR_NONE}$1"
+  echo -e "${COLOR_RED}Error: ${COLOR_NONE}$1" >&2
+  return 1
+}
+
+die() {
+  error "$1"
   exit 1
 }
 
