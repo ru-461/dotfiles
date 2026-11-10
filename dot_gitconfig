@@ -30,7 +30,7 @@ m = merge
 o = checkout
 p = pull
 s = status
-w = whatchanged
+w = log --raw --no-merges
 
 # add
 aa = add --all
