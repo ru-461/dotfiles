@@ -95,13 +95,6 @@ for _brew_bin in /opt/homebrew/bin/brew /home/linuxbrew/.linuxbrew/bin/brew "${H
 done
 unset _brew_bin
 
-# herdr: attach to the persistent session on SSH login. HERDR_SKIP=1 to bypass.
-if [[ -n "${SSH_CONNECTION:-}" && -z "${HERDR_ENV:-}" && -z "${HERDR_SKIP:-}" && -t 0 && -t 1 ]] &&
-   has herdr; then
-  herdr session attach works && exit
-  print -u2 "herdr attach failed (exit $?); starting a plain shell instead."
-fi
-
 # Android
 if [[ ${OS} = "darwin" && -d "${HOME}/Library/Android/sdk" ]]; then
   export ANDROID_HOME="${HOME}/Library/Android/sdk"
@@ -128,6 +121,13 @@ export BUN_INSTALL="${HOME}/.bun"
 # mise
 if has "mise"; then
   eval "$(mise activate zsh)"
+fi
+
+# herdr: attach to the persistent session on SSH login. HERDR_SKIP=1 to bypass.
+if [[ -n "${SSH_CONNECTION:-}" && -z "${HERDR_ENV:-}" && -z "${HERDR_SKIP:-}" && -t 0 && -t 1 ]] &&
+   has herdr; then
+  herdr session attach works && exit
+  print -u2 "herdr attach failed (exit $?); starting a plain shell instead."
 fi
 
 #################################  COMPLETION  #################################
