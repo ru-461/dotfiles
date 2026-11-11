@@ -1,34 +1,22 @@
 #################################  COMMON  #################################
 
-# Resolve dotfiles source directory for both legacy and chezmoi flows.
-DOTFILES_DIR="${HOME}/dotfiles"
-if [[ ! -d "${DOTFILES_DIR}" && -d "${HOME}/.local/share/chezmoi" ]]; then
-  DOTFILES_DIR="${HOME}/.local/share/chezmoi"
-fi
-if command -v chezmoi > /dev/null 2>&1; then
-  CHEZMOI_SOURCE_DIR="$(chezmoi source-path 2> /dev/null || true)"
-  [[ -n "${CHEZMOI_SOURCE_DIR}" && -d "${CHEZMOI_SOURCE_DIR}" ]] && DOTFILES_DIR="${CHEZMOI_SOURCE_DIR}"
-fi
-
+# chezmoi source directory, rendered by chezmoi at apply time.
+DOTFILES_DIR="{{ .chezmoi.sourceDir }}"
 FUNCTIONS_DIR="${DOTFILES_DIR}/functions"
-if [[ -f "${FUNCTIONS_DIR}/_init.sh" ]]; then
-  source "${FUNCTIONS_DIR}/_init.sh"
-fi
 
-# Load helper functions.
-if [[ -d "${FUNCTIONS_DIR}" ]]; then
-  for FUNCTION in "${FUNCTIONS_DIR}"/*.sh(N); do
-    if [[ "${FUNCTION}" != "${FUNCTIONS_DIR}/_init.sh" && -f "${FUNCTION}" ]]; then
-      source "${FUNCTION}"
-    fi
-  done
-fi
+# Load interactive helpers only. Installer helpers (_common/_brew/_bundle_brew/_zsh) are bash-only.
+for _fn in _decorate_output.sh _has.sh _auto_upgrade.sh _delete_stores.sh; do
+  [[ -r "${FUNCTIONS_DIR}/${_fn}" ]] && source "${FUNCTIONS_DIR}/${_fn}"
+done
+unset _fn
 
 if ! typeset -f has > /dev/null 2>&1; then
   has() {
     command -v "$1" > /dev/null 2>&1
   }
 fi
+
+typeset -f headline > /dev/null 2>&1 && headline "Welcome to Zsh!"
 
 # OS
 case $OSTYPE in
@@ -63,7 +51,11 @@ setopt auto_cd
 setopt correct
 
 # Lang
-export LANG=ja_JP.UTF-8
+if [[ ${OS} = "darwin" ]] || locale -a 2> /dev/null | grep -qiE '^ja_JP\.utf-?8$'; then
+  export LANG=ja_JP.UTF-8
+else
+  export LANG="${LANG:-C.UTF-8}"
+fi
 setopt print_eight_bit
 
 # Homebrew
@@ -79,15 +71,11 @@ setopt HIST_IGNORE_DUPS
 setopt no_beep
 setopt nolistbeep
 
+#################################  PATH  #################################
+
 # Configure path
 typeset -U path PATH
 path=(
-  /opt/homebrew/bin(N-/)
-  /opt/homebrew/sbin(N-/)
-  /opt/homebrew/opt/php@8.0/bin(N-/)
-  /opt/homebrew/opt/php@8.0/sbin(N-/)
-  /home/linuxbrew/.linuxbrew/opt/php@8.0/bin(N-/)
-  /home/linuxbrew/.linuxbrew/opt/php@8.0/sbin(N-/)
   /data/data/com.termux/files/usr/bin(N-/)
   /usr/bin(N-/)
   /usr/sbin(N-/)
@@ -100,6 +88,45 @@ path=(
   ${path}
 )
 
+# Homebrew (sets HOMEBREW_PREFIX / PATH / MANPATH / INFOPATH)
+for _brew_bin in /opt/homebrew/bin/brew /home/linuxbrew/.linuxbrew/bin/brew "${HOME}/.linuxbrew/bin/brew"; do
+  if [[ -x "${_brew_bin}" ]]; then
+    # Run shellenv with a minimal PATH: Homebrew prints nothing when its bin/sbin already lead PATH
+    # (e.g. in nested shells), which would leave HOMEBREW_PREFIX unset.
+    eval "$(PATH=/usr/bin:/bin "${_brew_bin}" shellenv zsh)"
+    break
+  fi
+done
+unset _brew_bin
+
+# Android
+if [[ ${OS} = "darwin" && -d "${HOME}/Library/Android/sdk" ]]; then
+  export ANDROID_HOME="${HOME}/Library/Android/sdk"
+  export ANDROID_SDK_ROOT="${ANDROID_HOME}"
+  _ndk=( "${ANDROID_HOME}"/ndk/*(N/nOn) )  # newest version first (numeric sort)
+  (( ${#_ndk} )) && export NDK_HOME="${_ndk[1]}"
+  unset _ndk
+  path+=(
+    "${ANDROID_HOME}/cmdline-tools/latest/bin"
+    "${ANDROID_HOME}/platform-tools"
+    "${ANDROID_HOME}/emulator"
+  )
+fi
+
+# Rust
+[[ -f "${HOME}/.cargo/env" ]] && source "${HOME}/.cargo/env"
+
+# Bun
+export BUN_INSTALL="${HOME}/.bun"
+[[ -d "${BUN_INSTALL}/bin" ]] && path=("${BUN_INSTALL}/bin" $path)
+
+#################################  TOOL INIT  #################################
+
+# mise
+if has "mise"; then
+  eval "$(mise activate zsh)"
+fi
+
 # herdr: attach to the persistent session on SSH login. HERDR_SKIP=1 to bypass.
 if [[ -n "${SSH_CONNECTION:-}" && -z "${HERDR_ENV:-}" && -z "${HERDR_SKIP:-}" && -t 0 && -t 1 ]] &&
    has herdr; then
@@ -107,66 +134,41 @@ if [[ -n "${SSH_CONNECTION:-}" && -z "${HERDR_ENV:-}" && -z "${HERDR_SKIP:-}" &&
   print -u2 "herdr attach failed (exit $?); starting a plain shell instead."
 fi
 
+#################################  COMPLETION  #################################
 
-#################################  TOOL INIT  #################################
+ZFUNC_DIR="${HOME}/.zfunc"
+[[ -d "${ZFUNC_DIR}" ]] || mkdir -p "${ZFUNC_DIR}"
 
-# Android
-if [[ ${OS} = "darwin" ]]; then
-  export ANDROID_HOME=~/Library/Android/sdk
-  export ANDROID_SDK_ROOT=$ANDROID_HOME
-  export NDK_HOME=$ANDROID_HOME/ndk/25.0.8775105
-
-  if [[ -d ${ANDROID_HOME} ]]; then
-    export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
-    export PATH=$PATH:$ANDROID_HOME/platform-tools
-    export PATH=$PATH:$ANDROID_HOME/emulator
-    export PATH=$PATH:$ANDROID_HOME/tools
-    export PATH=$PATH:$ANDROID_HOME/build-tools
+# Cache generated completions; regenerate only when the tool binary is newer than the cache.
+_cache_completion() {
+  local name="$1"; shift
+  local out="${ZFUNC_DIR}/_${name}"
+  (( $+commands[$name] )) || return 0
+  if [[ ! -s "${out}" || "${commands[$name]}" -nt "${out}" ]]; then
+    "$@" >| "${out}" 2> /dev/null || rm -f "${out}"
   fi
+}
+_cache_completion gh  gh completion -s zsh
+_cache_completion uv  uv generate-shell-completion zsh
+_cache_completion uvx uvx --generate-shell-completion zsh
+unfunction _cache_completion
+
+typeset -U fpath
+fpath=(
+  "${ZFUNC_DIR}"
+  ${HOMEBREW_PREFIX:+${HOMEBREW_PREFIX}/share/zsh-completions}
+  ${HOME}/.docker/completions(N-/)
+  $fpath
+)
+
+autoload -Uz compinit
+compinit
+
+if [[ -n "${HOMEBREW_PREFIX:-}" && -r "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+  source "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 fi
 
-# Brew
-if [[ ! ${OS} = "darwin" && ! ${OS} = "linux-android" ]]; then
-  if [[ -x /home/linuxbrew/.linuxbrew/bin/brew ]]; then
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-  fi
-fi
-
-# Enable completion & Autosuggestions
-if has "brew"; then
-  ZSH_AUTOSUGGESTIONS_FILE="$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-  [[ -f "${ZSH_AUTOSUGGESTIONS_FILE}" ]] && source "${ZSH_AUTOSUGGESTIONS_FILE}"
-  FPATH=$(brew --prefix)/share/zsh-completions:${FPATH}
-  autoload -Uz compinit && compinit
-fi
-
-# Bun
-if has "bun"; then
-  export BUN_INSTALL="$HOME/.bun"
-  export PATH="$BUN_INSTALL/bin:$PATH"
-fi
-
-# Rye
-[[ -f "$HOME/.rye/env" ]] && source "$HOME/.rye/env"
-
-# GitHub CLI
-if has "gh"; then
-  eval "$(gh completion -s zsh)"
-fi
-
-# Rust
-[[ -f "$HOME/.cargo/env" ]] && source $HOME/.cargo/env
-
-# PHP
-if [[ ${OS} = "linux" ]]; then
-  export LDFLAGS="-L/home/linuxbrew/.linuxbrew/opt/php@8.0/lib"
-  export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/php@8.0/include"
-else
-  export LDFLAGS="-L/opt/homebrew/opt/php@8.0/lib"
-  export CPPFLAGS="-I/opt/homebrew/opt/php@8.0/include"
-fi
-
-# tabtab source for packages
+# tabtab source for packages (uses compdef, so it must come after completion initialization)
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh
 
 
@@ -182,8 +184,8 @@ ag() {
 }
 
 # dotfiles
-alias dot="code ${DOTFILES_DIR}"
-alias cdot="cd ${DOTFILES_DIR}"
+alias dot='code "${DOTFILES_DIR}"'
+alias cdot='cd "${DOTFILES_DIR}"'
 alias clodot="git clone git@github.com:ru-461/dotfiles.git ${HOME}/dotfiles"
 
 # System
@@ -193,7 +195,7 @@ alias cls="clear"
 alias q="exit"
 alias a="alias"
 alias h="history"
-alias ps="procs"
+has "procs" && alias ps="procs"
 [[ ${OS} = "darwin" ]] && alias o="open ."
 
 # Cd
@@ -213,20 +215,18 @@ if has "eza"; then
   alias ll=ee
   alias lt=et
   alias lta=eta
-  alias l="clear && ls"
-else
-  alias l="clear && ls"
 fi
+alias l="clear && ls"
 
 # Git
 alias g="git"
 
 # .zshrc
-alias czsh="code ${HOME}/.zshrc"
-alias szsh="source ${HOME}/.zshrc"
+alias czsh='code "$(chezmoi source-path ~/.zshrc)"'
+alias szsh='source ~/.zshrc'
 
 # VSCode
-alias codeinit="mkdir -p ./vscode && touch ./vscode/settings.json"
+alias codeinit="mkdir -p ./.vscode && touch ./.vscode/settings.json"
 
 # ZennCLI
 alias zenna="cd ${HOME}/Documents/zenn-articles"
@@ -262,7 +262,6 @@ alias ydev="yarn dev"
 
 # fvm
 alias f="fvm flutter"
-alias d="fvm dart"
 alias fv=".fvm/flutter_sdk/bin/flutter"
 
 # pnpm
@@ -297,7 +296,7 @@ if has "docker"; then
   alias dila="docker image ls --all"
   alias dirm='docker rmi -f $(docker images --quiet)'
   alias dn="docker network"
-  alias dnls="docker network ls --all --latest"
+  alias dnls="docker network ls"
   alias dc="docker compose"
   alias dcx="docker compose exec --interactive --tty"
   alias dcb="docker compose build --force-rm"
@@ -305,15 +304,21 @@ if has "docker"; then
   alias dcupb="docker compose up --detach --build"
   alias dcd="docker compose down"
   alias dcre="docker compose restart"
-  alias dnls="docker network ls --all --latest"
   alias drm="docker system prune"
 fi
 
 # Laravel Sail
-alias sail="[ -f sail ] && sh sail || sh vendor/bin/sail"
+unalias sail 2> /dev/null
+function sail {
+  if [[ -f sail ]]; then
+    sh sail "$@"
+  else
+    sh vendor/bin/sail "$@"
+  fi
+}
 
 # Starship
-alias ship="code ${HOME}/.config/starship.toml"
+alias ship='code "$(chezmoi source-path ~/.config/starship.toml)"'
 
 # Homebrew
 alias brewL="brew leaves"
@@ -344,25 +349,3 @@ fi
 if has "starship"; then
   eval "$(starship init zsh)"
 fi
-
-# mise
-if has "mise"; then
-  eval "$(mise activate zsh)"
-fi
-
-# uv
-if has "uv"; then
-  eval "$(uv generate-shell-completion zsh)"
-fi
-
-# uvx
-if has "uvx"; then
-  eval "$(uvx --generate-shell-completion zsh)"
-fi
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=($HOME/.docker/completions $fpath)
-autoload -Uz compinit
-compinit
-# End of Docker CLI completions
-
-fpath+=~/.zfunc; autoload -Uz compinit; compinit
