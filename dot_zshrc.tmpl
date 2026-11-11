@@ -1,34 +1,22 @@
 #################################  COMMON  #################################
 
-# Resolve dotfiles source directory for both legacy and chezmoi flows.
-DOTFILES_DIR="${HOME}/dotfiles"
-if [[ ! -d "${DOTFILES_DIR}" && -d "${HOME}/.local/share/chezmoi" ]]; then
-  DOTFILES_DIR="${HOME}/.local/share/chezmoi"
-fi
-if command -v chezmoi > /dev/null 2>&1; then
-  CHEZMOI_SOURCE_DIR="$(chezmoi source-path 2> /dev/null || true)"
-  [[ -n "${CHEZMOI_SOURCE_DIR}" && -d "${CHEZMOI_SOURCE_DIR}" ]] && DOTFILES_DIR="${CHEZMOI_SOURCE_DIR}"
-fi
-
+# chezmoi source directory, rendered by chezmoi at apply time.
+DOTFILES_DIR="{{ .chezmoi.sourceDir }}"
 FUNCTIONS_DIR="${DOTFILES_DIR}/functions"
-if [[ -f "${FUNCTIONS_DIR}/_init.sh" ]]; then
-  source "${FUNCTIONS_DIR}/_init.sh"
-fi
 
-# Load helper functions.
-if [[ -d "${FUNCTIONS_DIR}" ]]; then
-  for FUNCTION in "${FUNCTIONS_DIR}"/*.sh(N); do
-    if [[ "${FUNCTION}" != "${FUNCTIONS_DIR}/_init.sh" && -f "${FUNCTION}" ]]; then
-      source "${FUNCTION}"
-    fi
-  done
-fi
+# Load interactive helpers only. Installer helpers (_common/_brew/_bundle_brew/_zsh) are bash-only.
+for _fn in _decorate_output.sh _has.sh _auto_upgrade.sh _delete_stores.sh; do
+  [[ -r "${FUNCTIONS_DIR}/${_fn}" ]] && source "${FUNCTIONS_DIR}/${_fn}"
+done
+unset _fn
 
 if ! typeset -f has > /dev/null 2>&1; then
   has() {
     command -v "$1" > /dev/null 2>&1
   }
 fi
+
+typeset -f headline > /dev/null 2>&1 && headline "Welcome to Zsh!"
 
 # OS
 case $OSTYPE in
