@@ -51,7 +51,11 @@ setopt auto_cd
 setopt correct
 
 # Lang
-export LANG=ja_JP.UTF-8
+if [[ ${OS} = "darwin" ]] || locale -a 2> /dev/null | grep -qiE '^ja_JP\.utf-?8$'; then
+  export LANG=ja_JP.UTF-8
+else
+  export LANG="${LANG:-C.UTF-8}"
+fi
 setopt print_eight_bit
 
 # Homebrew
