@@ -67,11 +67,11 @@ setopt HIST_IGNORE_DUPS
 setopt no_beep
 setopt nolistbeep
 
+#################################  PATH  #################################
+
 # Configure path
 typeset -U path PATH
 path=(
-  /opt/homebrew/bin(N-/)
-  /opt/homebrew/sbin(N-/)
   /data/data/com.termux/files/usr/bin(N-/)
   /usr/bin(N-/)
   /usr/sbin(N-/)
@@ -84,15 +84,23 @@ path=(
   ${path}
 )
 
+# Homebrew (sets HOMEBREW_PREFIX / PATH / MANPATH / INFOPATH)
+for _brew_bin in /opt/homebrew/bin/brew /home/linuxbrew/.linuxbrew/bin/brew "${HOME}/.linuxbrew/bin/brew"; do
+  if [[ -x "${_brew_bin}" ]]; then
+    # Run shellenv with a minimal PATH: Homebrew prints nothing when its bin/sbin already lead PATH
+    # (e.g. in nested shells), which would leave HOMEBREW_PREFIX unset.
+    eval "$(PATH=/usr/bin:/bin "${_brew_bin}" shellenv zsh)"
+    break
+  fi
+done
+unset _brew_bin
+
 # herdr: attach to the persistent session on SSH login. HERDR_SKIP=1 to bypass.
 if [[ -n "${SSH_CONNECTION:-}" && -z "${HERDR_ENV:-}" && -z "${HERDR_SKIP:-}" && -t 0 && -t 1 ]] &&
    has herdr; then
   herdr session attach works && exit
   print -u2 "herdr attach failed (exit $?); starting a plain shell instead."
 fi
-
-
-#################################  TOOL INIT  #################################
 
 # Android
 if [[ ${OS} = "darwin" && -d "${HOME}/Library/Android/sdk" ]]; then
@@ -108,34 +116,55 @@ if [[ ${OS} = "darwin" && -d "${HOME}/Library/Android/sdk" ]]; then
   )
 fi
 
-# Brew
-if [[ ! ${OS} = "darwin" && ! ${OS} = "linux-android" ]]; then
-  if [[ -x /home/linuxbrew/.linuxbrew/bin/brew ]]; then
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-  fi
-fi
-
-# Enable completion & Autosuggestions
-if has "brew"; then
-  ZSH_AUTOSUGGESTIONS_FILE="$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-  [[ -f "${ZSH_AUTOSUGGESTIONS_FILE}" ]] && source "${ZSH_AUTOSUGGESTIONS_FILE}"
-  FPATH=$(brew --prefix)/share/zsh-completions:${FPATH}
-  autoload -Uz compinit && compinit
-fi
+# Rust
+[[ -f "${HOME}/.cargo/env" ]] && source "${HOME}/.cargo/env"
 
 # Bun
 export BUN_INSTALL="${HOME}/.bun"
 [[ -d "${BUN_INSTALL}/bin" ]] && path=("${BUN_INSTALL}/bin" $path)
 
-# GitHub CLI
-if has "gh"; then
-  eval "$(gh completion -s zsh)"
+#################################  TOOL INIT  #################################
+
+# mise
+if has "mise"; then
+  eval "$(mise activate zsh)"
 fi
 
-# Rust
-[[ -f "$HOME/.cargo/env" ]] && source $HOME/.cargo/env
+#################################  COMPLETION  #################################
 
-# tabtab source for packages
+ZFUNC_DIR="${HOME}/.zfunc"
+[[ -d "${ZFUNC_DIR}" ]] || mkdir -p "${ZFUNC_DIR}"
+
+# Cache generated completions; regenerate only when the tool binary is newer than the cache.
+_cache_completion() {
+  local name="$1"; shift
+  local out="${ZFUNC_DIR}/_${name}"
+  (( $+commands[$name] )) || return 0
+  if [[ ! -s "${out}" || "${commands[$name]}" -nt "${out}" ]]; then
+    "$@" >| "${out}" 2> /dev/null || rm -f "${out}"
+  fi
+}
+_cache_completion gh  gh completion -s zsh
+_cache_completion uv  uv generate-shell-completion zsh
+_cache_completion uvx uvx --generate-shell-completion zsh
+unfunction _cache_completion
+
+typeset -U fpath
+fpath=(
+  "${ZFUNC_DIR}"
+  ${HOMEBREW_PREFIX:+${HOMEBREW_PREFIX}/share/zsh-completions}
+  ${HOME}/.docker/completions(N-/)
+  $fpath
+)
+
+autoload -Uz compinit
+compinit
+
+if [[ -n "${HOMEBREW_PREFIX:-}" && -r "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+  source "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+fi
+
+# tabtab source for packages (uses compdef, so it must come after completion initialization)
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh
 
 
@@ -316,25 +345,3 @@ fi
 if has "starship"; then
   eval "$(starship init zsh)"
 fi
-
-# mise
-if has "mise"; then
-  eval "$(mise activate zsh)"
-fi
-
-# uv
-if has "uv"; then
-  eval "$(uv generate-shell-completion zsh)"
-fi
-
-# uvx
-if has "uvx"; then
-  eval "$(uvx --generate-shell-completion zsh)"
-fi
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=($HOME/.docker/completions $fpath)
-autoload -Uz compinit
-compinit
-# End of Docker CLI completions
-
-fpath+=~/.zfunc; autoload -Uz compinit; compinit
