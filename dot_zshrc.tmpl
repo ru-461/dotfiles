@@ -72,10 +72,6 @@ typeset -U path PATH
 path=(
   /opt/homebrew/bin(N-/)
   /opt/homebrew/sbin(N-/)
-  /opt/homebrew/opt/php@8.0/bin(N-/)
-  /opt/homebrew/opt/php@8.0/sbin(N-/)
-  /home/linuxbrew/.linuxbrew/opt/php@8.0/bin(N-/)
-  /home/linuxbrew/.linuxbrew/opt/php@8.0/sbin(N-/)
   /data/data/com.termux/files/usr/bin(N-/)
   /usr/bin(N-/)
   /usr/sbin(N-/)
@@ -99,18 +95,17 @@ fi
 #################################  TOOL INIT  #################################
 
 # Android
-if [[ ${OS} = "darwin" ]]; then
-  export ANDROID_HOME=~/Library/Android/sdk
-  export ANDROID_SDK_ROOT=$ANDROID_HOME
-  export NDK_HOME=$ANDROID_HOME/ndk/25.0.8775105
-
-  if [[ -d ${ANDROID_HOME} ]]; then
-    export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
-    export PATH=$PATH:$ANDROID_HOME/platform-tools
-    export PATH=$PATH:$ANDROID_HOME/emulator
-    export PATH=$PATH:$ANDROID_HOME/tools
-    export PATH=$PATH:$ANDROID_HOME/build-tools
-  fi
+if [[ ${OS} = "darwin" && -d "${HOME}/Library/Android/sdk" ]]; then
+  export ANDROID_HOME="${HOME}/Library/Android/sdk"
+  export ANDROID_SDK_ROOT="${ANDROID_HOME}"
+  _ndk=( "${ANDROID_HOME}"/ndk/*(N/nOn) )  # newest version first (numeric sort)
+  (( ${#_ndk} )) && export NDK_HOME="${_ndk[1]}"
+  unset _ndk
+  path+=(
+    "${ANDROID_HOME}/cmdline-tools/latest/bin"
+    "${ANDROID_HOME}/platform-tools"
+    "${ANDROID_HOME}/emulator"
+  )
 fi
 
 # Brew
@@ -134,9 +129,6 @@ if has "bun"; then
   export PATH="$BUN_INSTALL/bin:$PATH"
 fi
 
-# Rye
-[[ -f "$HOME/.rye/env" ]] && source "$HOME/.rye/env"
-
 # GitHub CLI
 if has "gh"; then
   eval "$(gh completion -s zsh)"
@@ -144,15 +136,6 @@ fi
 
 # Rust
 [[ -f "$HOME/.cargo/env" ]] && source $HOME/.cargo/env
-
-# PHP
-if [[ ${OS} = "linux" ]]; then
-  export LDFLAGS="-L/home/linuxbrew/.linuxbrew/opt/php@8.0/lib"
-  export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/php@8.0/include"
-else
-  export LDFLAGS="-L/opt/homebrew/opt/php@8.0/lib"
-  export CPPFLAGS="-I/opt/homebrew/opt/php@8.0/include"
-fi
 
 # tabtab source for packages
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh
