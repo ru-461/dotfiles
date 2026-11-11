@@ -8,3 +8,9 @@ FUNCTIONS_DIR="${FUNCTIONS_DIR:-${DOTFILES_DIR}/functions}"
 
 source "${FUNCTIONS_DIR}/_decorate_output.sh"
 source "${FUNCTIONS_DIR}/_has.sh"
+
+# Abort the installer. Installer-only: never load this into an interactive shell.
+die() {
+  error "$1"
+  exit 1
+}

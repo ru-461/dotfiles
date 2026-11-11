@@ -28,11 +28,6 @@ error() {
   return 1
 }
 
-die() {
-  error "$1"
-  exit 1
-}
-
 success() {
   echo -e "${COLOR_GREEN}$1${COLOR_NONE}\n"
 }
