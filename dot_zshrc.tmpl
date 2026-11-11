@@ -124,10 +124,8 @@ if has "brew"; then
 fi
 
 # Bun
-if has "bun"; then
-  export BUN_INSTALL="$HOME/.bun"
-  export PATH="$BUN_INSTALL/bin:$PATH"
-fi
+export BUN_INSTALL="${HOME}/.bun"
+[[ -d "${BUN_INSTALL}/bin" ]] && path=("${BUN_INSTALL}/bin" $path)
 
 # GitHub CLI
 if has "gh"; then
