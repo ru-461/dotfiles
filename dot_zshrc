@@ -193,7 +193,7 @@ alias cls="clear"
 alias q="exit"
 alias a="alias"
 alias h="history"
-alias ps="procs"
+has "procs" && alias ps="procs"
 [[ ${OS} = "darwin" ]] && alias o="open ."
 
 # Cd
@@ -213,10 +213,8 @@ if has "eza"; then
   alias ll=ee
   alias lt=et
   alias lta=eta
-  alias l="clear && ls"
-else
-  alias l="clear && ls"
 fi
+alias l="clear && ls"
 
 # Git
 alias g="git"
@@ -226,7 +224,7 @@ alias czsh="code ${HOME}/.zshrc"
 alias szsh="source ${HOME}/.zshrc"
 
 # VSCode
-alias codeinit="mkdir -p ./vscode && touch ./vscode/settings.json"
+alias codeinit="mkdir -p ./.vscode && touch ./.vscode/settings.json"
 
 # ZennCLI
 alias zenna="cd ${HOME}/Documents/zenn-articles"
@@ -262,7 +260,6 @@ alias ydev="yarn dev"
 
 # fvm
 alias f="fvm flutter"
-alias d="fvm dart"
 alias fv=".fvm/flutter_sdk/bin/flutter"
 
 # pnpm
@@ -297,7 +294,7 @@ if has "docker"; then
   alias dila="docker image ls --all"
   alias dirm='docker rmi -f $(docker images --quiet)'
   alias dn="docker network"
-  alias dnls="docker network ls --all --latest"
+  alias dnls="docker network ls"
   alias dc="docker compose"
   alias dcx="docker compose exec --interactive --tty"
   alias dcb="docker compose build --force-rm"
@@ -305,12 +302,18 @@ if has "docker"; then
   alias dcupb="docker compose up --detach --build"
   alias dcd="docker compose down"
   alias dcre="docker compose restart"
-  alias dnls="docker network ls --all --latest"
   alias drm="docker system prune"
 fi
 
 # Laravel Sail
-alias sail="[ -f sail ] && sh sail || sh vendor/bin/sail"
+unalias sail 2> /dev/null
+function sail {
+  if [[ -f sail ]]; then
+    sh sail "$@"
+  else
+    sh vendor/bin/sail "$@"
+  fi
+}
 
 # Starship
 alias ship="code ${HOME}/.config/starship.toml"
