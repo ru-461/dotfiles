@@ -170,8 +170,8 @@ ag() {
 }
 
 # dotfiles
-alias dot="code ${DOTFILES_DIR}"
-alias cdot="cd ${DOTFILES_DIR}"
+alias dot='code "${DOTFILES_DIR}"'
+alias cdot='cd "${DOTFILES_DIR}"'
 alias clodot="git clone git@github.com:ru-461/dotfiles.git ${HOME}/dotfiles"
 
 # System
@@ -208,8 +208,8 @@ alias l="clear && ls"
 alias g="git"
 
 # .zshrc
-alias czsh="code ${HOME}/.zshrc"
-alias szsh="source ${HOME}/.zshrc"
+alias czsh='code "$(chezmoi source-path ~/.zshrc)"'
+alias szsh='source ~/.zshrc'
 
 # VSCode
 alias codeinit="mkdir -p ./.vscode && touch ./.vscode/settings.json"
@@ -304,7 +304,7 @@ function sail {
 }
 
 # Starship
-alias ship="code ${HOME}/.config/starship.toml"
+alias ship='code "$(chezmoi source-path ~/.config/starship.toml)"'
 
 # Homebrew
 alias brewL="brew leaves"
