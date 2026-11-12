@@ -14,18 +14,25 @@ Configuration files you can carry anywhere.
 - macOS (Only [Apple Silicon](https://support.apple.com/en-us/HT211814))
 - Ubuntu (Only x64)
 - WSL (Ubuntu x64)
-- Android (Only [Termux](https://github.com/termux) x64)
+- Android (Only [Termux](https://github.com/termux))
 
 ## Quick Start
 
 Bootstrap a fresh machine with the official chezmoi entrypoint.
-It installs chezmoi if missing, clones this repository, and applies every dotfile in one command:
+It installs chezmoi into `~/.local/bin`, clones this repository into `~/.local/share/chezmoi`, and applies every dotfile in one command:
 
 ```shell
-sh -c "$(curl -fsLS https://get.chezmoi.io)" -- init --apply ru-461
+sh -c "$(curl -fsLS https://get.chezmoi.io)" -- -b "$HOME/.local/bin" init --apply ru-461
 ```
 
-Reload your shell so the new configuration takes effect:
+If zsh is not installed yet (for example, on a fresh Ubuntu), install it and make it your login shell:
+
+```shell
+bash ~/.local/share/chezmoi/install/run.sh --only zsh
+```
+
+Reload your shell so the new configuration takes effect.
+`.zshrc` adds `~/.local/bin` to `PATH`, so `chezmoi` is available from here on:
 
 ```shell
 exec zsh
@@ -37,14 +44,40 @@ exec zsh
 bash "$(chezmoi source-path)/install/run.sh" --target auto
 ```
 
+Set your Git identity in `~/.gitconfig.local`.
+It is included at the end of `~/.gitconfig` and is not managed by this repository:
+
+```ini
+[user]
+  name = Your Name
+  email = you@example.com
+```
+
 That's it. See [Daily Operations](#daily-operations) for editing and updating your dotfiles afterward.
 
 ## Daily Operations
 
 ```shell
-chezmoi diff
-chezmoi apply
-chezmoi update
+chezmoi diff    # Preview what would change
+chezmoi apply   # Update the files in your home directory
+chezmoi update  # Pull the latest changes and apply them
+```
+
+Edit the source files, not the deployed copies: `chezmoi apply` overwrites the deployed files.
+For example, to change `.zshrc` (rendered from the template `dot_zshrc.tmpl`):
+
+```shell
+czsh                    # Open the source of ~/.zshrc in VS Code
+chezmoi diff ~/.zshrc
+chezmoi apply ~/.zshrc
+szsh                    # Reload ~/.zshrc
+```
+
+Karabiner-Elements rewrites `~/.config/karabiner/karabiner.json` when you change settings in its UI.
+Copy those changes back into the source:
+
+```shell
+chezmoi re-add ~/.config/karabiner/karabiner.json
 ```
 
 ## age Encryption Setup
@@ -81,6 +114,20 @@ Run only selected steps when needed:
 ```shell
 bash "$(chezmoi source-path)/install/run.sh" --target auto --only zsh,brew,bundle
 ```
+
+Environment variables:
+
+- `NONINTERACTIVE=1` runs the Homebrew installer without prompts (Homebrew's unattended installation).
+- `DOTFILES_TIMEZONE` sets the time zone on Linux and WSL (default: `Asia/Tokyo`).
+
+```shell
+NONINTERACTIVE=1 DOTFILES_TIMEZONE=UTC bash "$(chezmoi source-path)/install/run.sh" --target auto
+```
+
+## Upgrading from Older Versions
+
+- The global gitignore moved from `~/.gitignore` to `~/.config/git/ignore`.
+  chezmoi does not delete files it no longer manages, so check `~/.gitignore` and remove it manually.
 
 ## Notes on OS-specific Files
 

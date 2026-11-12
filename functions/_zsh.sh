@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 _zsh() {
   local zsh_path
 

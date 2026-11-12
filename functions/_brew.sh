@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 _brew_shellenv() {
   local candidate
   for candidate in /opt/homebrew/bin/brew /home/linuxbrew/.linuxbrew/bin/brew "${HOME}/.linuxbrew/bin/brew"; do

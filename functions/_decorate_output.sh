@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 COLOR_NONE="\033[0m"
 COLOR_RED="\033[1;31m"
 COLOR_GRAY="\033[1;38;5;243m"

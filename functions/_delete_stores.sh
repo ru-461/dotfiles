@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 _delete_stores() {
   local target="${1:-}"
   if [[ -z "${target}" || ! -d "${target}" ]]; then

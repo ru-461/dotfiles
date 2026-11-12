@@ -1,0 +1,85 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    # Explicit bash runs steps with -eo pipefail.
+    shell: bash
+
+env:
+  # Keep in sync with CHEZMOI_VERSION in the Dockerfile.
+  CHEZMOI_VERSION: 2.74.1
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Install zsh and chezmoi
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y zsh
+          sh -c "$(curl -fsLS https://get.chezmoi.io)" -- -b "$HOME/.local/bin" -t "v${CHEZMOI_VERSION}"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: ShellCheck
+        run: shellcheck -x install/*.sh functions/*.sh
+
+      - name: zsh syntax
+        run: |
+          chezmoi --source "$GITHUB_WORKSPACE" execute-template < dot_zshrc.tmpl > "$RUNNER_TEMP/zshrc"
+          zsh -n "$RUNNER_TEMP/zshrc"
+          for f in _decorate_output.sh _has.sh _auto_upgrade.sh _delete_stores.sh; do
+            zsh -n "functions/$f"
+          done
+
+      - name: JSON and TOML syntax
+        run: |
+          find dot_config/private_karabiner -name '*.json' -print0 | xargs -0 -n 1 python3 -m json.tool > /dev/null
+          python3 -c 'import sys, tomllib; tomllib.load(open(sys.argv[1], "rb"))' dot_config/starship.toml
+
+      - name: Installer runner check
+        run: bash install/run.sh --mode check
+
+  chezmoi:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Install chezmoi
+        run: |
+          sh -c "$(curl -fsLS https://get.chezmoi.io)" -- -b "$HOME/.local/bin" -t "v${CHEZMOI_VERSION}"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Dry-run apply
+        run: chezmoi --source "$GITHUB_WORKSPACE" --destination "$RUNNER_TEMP/home" apply --dry-run --verbose
+
+      - name: Managed targets
+        run: |
+          chezmoi --source "$GITHUB_WORKSPACE" --destination "$RUNNER_TEMP/home" managed | tee "$RUNNER_TEMP/managed.txt"
+          grep -qx '.zshrc' "$RUNNER_TEMP/managed.txt"
+          if [[ "$RUNNER_OS" == "macOS" ]]; then
+            grep -qx '.config/karabiner/karabiner.json' "$RUNNER_TEMP/managed.txt"
+          elif grep -q '^.config/karabiner' "$RUNNER_TEMP/managed.txt"; then
+            echo "karabiner files must not be managed on ${RUNNER_OS}" >&2
+            exit 1
+          fi
