@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 _au_run() {
   run "$*"
   if "$@"; then

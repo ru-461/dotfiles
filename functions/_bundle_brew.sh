@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 _bundle_brew() {
   local dotfiles_dir brewfile_path
 

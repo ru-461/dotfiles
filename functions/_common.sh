@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck source-path=SCRIPTDIR
 
 # Shared helpers for both shell startup and installer scripts.
 _common_script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
