@@ -12,7 +12,12 @@ ARG USERNAME=docker
 ARG GROUPNAME=docker
 ARG UID=1000
 ARG GID=1000
-ARG PASSWORD=docker
+# chezmoi release to install (without the leading "v").
+ARG CHEZMOI_VERSION=2.74.1
+
+# Keep downloaded packages so the apt cache mounts below are reused across builds.
+RUN rm -f /etc/apt/apt.conf.d/docker-clean \
+    && echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
 
 # Install dependencies, chezmoi, and create the test user in a single layer.
 # Apt cache mounts speed up rebuilds when only COPY changes.
@@ -25,17 +30,19 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
       curl \
       file \
       git \
+      locales \
       sudo \
       zsh \
-    && sh -c "$(curl -fsLS https://get.chezmoi.io)" -- -b /usr/local/bin \
+    && locale-gen ja_JP.UTF-8 \
+    && sh -c "$(curl -fsLS https://get.chezmoi.io)" -- -b /usr/local/bin -t "v${CHEZMOI_VERSION}" \
     && chezmoi --version \
     && groupadd -g "${GID}" "${GROUPNAME}" \
     && useradd -m -s /bin/bash -u "${UID}" -g "${GID}" -G sudo "${USERNAME}" \
-    && echo "${USERNAME}:${PASSWORD}" | chpasswd \
-    && echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers \
+    && echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" > "/etc/sudoers.d/${USERNAME}" \
+    && chmod 0440 "/etc/sudoers.d/${USERNAME}" \
+    && visudo -cf "/etc/sudoers.d/${USERNAME}" \
     && mkdir -p /workspace/dotfiles \
-    && chown -R "${USERNAME}:${GROUPNAME}" /workspace \
-    && rm -rf /var/lib/apt/lists/*
+    && chown -R "${USERNAME}:${GROUPNAME}" /workspace
 
 USER ${USERNAME}
 WORKDIR /home/${USERNAME}
