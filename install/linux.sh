@@ -2,16 +2,15 @@
 
 set -ue
 
-# Update packages
+# Update package indexes (upgrading is left to `au`)
 headline "Packages"
-info "Updating the packages to the latest..."
-# Use apt
-if has "apt"; then
-  sudo apt update
-fi
-# Use yum
-if has "yum"; then
-  sudo yum update
+info "Updating the package index..."
+if has "apt-get"; then
+  sudo apt-get update
+elif has "yum"; then
+  sudo yum makecache -y
+else
+  warning "Skip updating the package index because neither apt-get nor yum was found."
 fi
 
 # Install Zsh
@@ -25,10 +24,15 @@ _bundle_brew
 
 # Setting System
 headline "Config"
-if has "timedatectl"; then
-  info "Setting the time zone..."
-  sudo timedatectl set-timezone Asia/Tokyo
+DOTFILES_TIMEZONE="${DOTFILES_TIMEZONE:-Asia/Tokyo}"
+info "Setting the time zone to ${DOTFILES_TIMEZONE}..."
+if has "timedatectl" && timedatectl > /dev/null 2>&1; then
+  sudo timedatectl set-timezone "${DOTFILES_TIMEZONE}"
+  success "The time zone has been set correctly."
+elif [[ -f "/usr/share/zoneinfo/${DOTFILES_TIMEZONE}" ]]; then
+  sudo ln -sf "/usr/share/zoneinfo/${DOTFILES_TIMEZONE}" /etc/localtime
+  echo "${DOTFILES_TIMEZONE}" | sudo tee /etc/timezone > /dev/null
   success "The time zone has been set correctly."
 else
-  warning "'timedatectl' is required to set the time zone."
+  warning "Skip setting the time zone because timedatectl is unavailable and /usr/share/zoneinfo/${DOTFILES_TIMEZONE} was not found."
 fi

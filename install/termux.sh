@@ -12,8 +12,8 @@ fi
 # Update packages
 headline "Packages"
 info "Updating the packages to the latest..."
-pkg update
-pkg install bat curl exa fd git jq proot procs screenfetch screenfetch starship tree vim wget -y
+pkg update -y
+pkg install -y bat curl eza fd git jq proot procs screenfetch starship tree vim wget
 
 # Install Zsh
 _zsh

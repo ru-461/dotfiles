@@ -17,14 +17,18 @@ _auto_upgrade() {
   echo ""
 
   if [[ ! ${OS} = "linux-android" ]]; then
-    if [[ ${OS} = "linux" ]]; then
+    if [[ ${OS} = "linux" ]] && command -v apt-get &>/dev/null; then
       headline "apt"
       # Cache sudo credentials up front so prompts don't interrupt mid-flow.
-      sudo -v
-      _au_run sudo apt update
-      _au_run sudo apt upgrade -y
-      _au_run sudo apt autoremove -y
-      _au_run sudo apt clean
+      if sudo -v; then
+        _au_run sudo apt-get update
+        _au_run sudo apt-get upgrade -y
+        _au_run sudo apt-get autoremove -y
+        _au_run sudo apt-get clean
+      else
+        warning "  Skipped apt: sudo authentication failed."
+        ((_au_errors++)) || true
+      fi
     fi
     if command -v brew &>/dev/null; then
       headline "Homebrew"
@@ -40,7 +44,13 @@ _auto_upgrade() {
       # Informational only: just lists pending updates.
       run "mas outdated"
       mas outdated || true
-      _au_run mas upgrade
+      # mas upgrade needs root; mas reuses cached sudo credentials, so authenticate up front.
+      if sudo -v; then
+        _au_run mas upgrade
+      else
+        warning "  Skipped mas upgrade: sudo authentication failed."
+        ((_au_errors++)) || true
+      fi
     fi
   else
     headline "pkg (Termux)"
