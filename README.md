@@ -11,10 +11,10 @@ Configuration files you can carry anywhere.
 
 ## Supported OS
 
-- macOS (Only [Apple Silicon](https://support.apple.com/en-us/HT211814))
-- Ubuntu (Only x64)
+- macOS (only [Apple Silicon](https://support.apple.com/en-us/HT211814))
+- Ubuntu (only x64)
 - WSL (Ubuntu x64)
-- Android (Only [Termux](https://github.com/termux))
+- Android (only [Termux](https://github.com/termux))
 
 ## Quick Start
 
@@ -25,7 +25,7 @@ It installs chezmoi into `~/.local/bin`, clones this repository into `~/.local/s
 sh -c "$(curl -fsLS https://get.chezmoi.io)" -- -b "$HOME/.local/bin" init --apply ru-461
 ```
 
-If zsh is not installed yet (for example, on a fresh Ubuntu), install it and make it your login shell:
+If zsh is not installed yet (for example, on a fresh Ubuntu installation), install it and make it your login shell:
 
 ```shell
 bash ~/.local/share/chezmoi/install/run.sh --only zsh
