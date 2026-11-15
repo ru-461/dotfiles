@@ -1,8 +1,10 @@
+# Non-official taps must be trusted explicitly (Homebrew 7+)
+tap "btwld/fvm", trusted: true
+
 # Only on macOS
 if OS.mac?
-  tap "buo/cask-upgrade"
-  tap "grishka/grishka"
-  tap "btwld/fvm"
+  tap "buo/cask-upgrade", trusted: true
+  tap "grishka/grishka", trusted: true
   brew "awscli"
   brew "blueutil"
   brew "ios-deploy"
