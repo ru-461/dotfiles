@@ -44,6 +44,9 @@ exec zsh
 bash "$(chezmoi source-path)/install/run.sh" --target auto
 ```
 
+On Linux and WSL, this also sets zsh as your login shell.
+Close and reopen your terminal afterward for the change to take effect.
+
 Set your Git identity in `~/.gitconfig.local`.
 It is included at the end of `~/.gitconfig` and is not managed by this repository:
 

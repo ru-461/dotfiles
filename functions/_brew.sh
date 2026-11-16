@@ -11,7 +11,7 @@ _brew_shellenv() {
 }
 
 _brew() {
-  headline "brew"
+  headline "Homebrew"
   if has "brew"; then
     success "brew is already installed."
     return 0
