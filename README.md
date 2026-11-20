@@ -39,7 +39,9 @@ This loads `.zshrc`, which adds `~/.local/bin` to `PATH` so you can run `chezmoi
 exec zsh
 ```
 
-(Optional) Install development tools and packages via the bootstrap scripts:
+(Optional) Install development tools and packages via the bootstrap scripts.
+On Linux and WSL, the installer also sets the time zone to `Asia/Tokyo` by default.
+To use a different time zone, set `DOTFILES_TIMEZONE` as shown in [Package Setup Scripts](#package-setup-scripts).
 
 ```shell
 bash "$(chezmoi source-path)/install/run.sh" --target auto
