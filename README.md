@@ -25,14 +25,15 @@ It installs chezmoi into `~/.local/bin`, clones this repository into `~/.local/s
 sh -c "$(curl -fsLS https://get.chezmoi.io)" -- -b "$HOME/.local/bin" init --apply ru-461
 ```
 
-If zsh is not installed yet (for example, on a fresh Ubuntu installation), install it and make it your login shell:
+Run the zsh setup step if zsh is missing or you want to make it your login shell.
 
 ```shell
 bash ~/.local/share/chezmoi/install/run.sh --only zsh
 ```
 
-Reload your shell so the new configuration takes effect.
-`.zshrc` adds `~/.local/bin` to `PATH`, so `chezmoi` is available from here on:
+The login shell change takes effect the next time you log in.
+To use the new configuration immediately, start zsh in your current terminal.
+This loads `.zshrc`, which adds `~/.local/bin` to `PATH` so you can run `chezmoi` by name.
 
 ```shell
 exec zsh
