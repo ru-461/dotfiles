@@ -190,7 +190,8 @@ alias cdot='cd "${DOTFILES_DIR}"'
 alias clodot="git clone git@github.com:ru-461/dotfiles.git ${HOME}/dotfiles"
 
 # System
-alias re="exec ${SHELL} -l"
+# Restart zsh as a login shell. Not $SHELL: it is unset in Docker and stays bash until re-login after chsh.
+alias re="exec zsh -l"
 alias c="clear"
 alias cls="clear"
 alias q="exit"
