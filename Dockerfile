@@ -21,6 +21,9 @@ RUN rm -f /etc/apt/apt.conf.d/docker-clean \
 
 # Install dependencies, chezmoi, and create the test user in a single layer.
 # Apt cache mounts speed up rebuilds when only COPY changes.
+# The user stays out of the sudo group: `sudo -v` (run by the Homebrew installer)
+# skips the password only if every sudoers rule matching the user is NOPASSWD,
+# and the default %sudo rule is not.
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
     apt-get update \
@@ -37,7 +40,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     && sh -c "$(curl -fsLS https://get.chezmoi.io)" -- -b /usr/local/bin -t "v${CHEZMOI_VERSION}" \
     && chezmoi --version \
     && groupadd -g "${GID}" "${GROUPNAME}" \
-    && useradd -m -s /bin/bash -u "${UID}" -g "${GID}" -G sudo "${USERNAME}" \
+    && useradd -m -s /bin/bash -u "${UID}" -g "${GID}" "${USERNAME}" \
     && echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" > "/etc/sudoers.d/${USERNAME}" \
     && chmod 0440 "/etc/sudoers.d/${USERNAME}" \
     && visudo -cf "/etc/sudoers.d/${USERNAME}" \
