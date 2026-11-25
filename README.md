@@ -149,6 +149,9 @@ Build the image from a locally cloned dotfiles repository.
 docker build -t dotfiles --force-rm .
 ```
 
+The optional installer commands below install Linuxbrew and the `Brewfile` packages, so they may take a while.
+Both options remove the container on exit (`--rm`), so the installed packages are discarded.
+
 ### Option 1: Reproduce the current local repository (Recommended)
 
 ```shell
@@ -161,10 +164,22 @@ After entering the container, run:
 chezmoi init --apply --source=/workspace/dotfiles
 ```
 
+To install packages and then load the installed tools in zsh, run this inside the container:
+
+```shell
+bash /workspace/dotfiles/install/run.sh --target linux && exec zsh
+```
+
 ### Option 2: Reproduce from the remote `ru-461` repository
 
 ```shell
 docker run -it --rm dotfiles /usr/bin/bash -lc "chezmoi init --apply ru-461 && exec /usr/bin/bash"
+```
+
+To install packages and then load the installed tools in zsh, run this inside the container:
+
+```shell
+bash ~/.local/share/chezmoi/install/run.sh --target linux && exec zsh
 ```
 
 Happy Hacking.
