@@ -34,7 +34,8 @@ brew "icu4c"
 brew "gh"
 brew "git"
 brew "git-filter-repo"
-brew "httpd", restart_service: true
+# Run httpd as a service only where `brew services` works (macOS, or Linux booted with systemd).
+brew "httpd", restart_service: OS.mac? || File.directory?("/run/systemd/system")
 brew "hub"
 brew "oniguruma"
 brew "jq"
