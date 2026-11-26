@@ -21,6 +21,8 @@ RUN rm -f /etc/apt/apt.conf.d/docker-clean \
 
 # Install dependencies, chezmoi, and create the test user in a single layer.
 # Apt cache mounts speed up rebuilds when only COPY changes.
+# tzdata provides /usr/share/zoneinfo so the installer can set the time zone,
+# since timedatectl (part of systemd) is not available in the container.
 # The user stays out of the sudo group: `sudo -v` (run by the Homebrew installer)
 # skips the password only if every sudoers rule matching the user is NOPASSWD,
 # and the default %sudo rule is not.
@@ -35,6 +37,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
       git \
       locales \
       sudo \
+      tzdata \
       zsh \
     && locale-gen ja_JP.UTF-8 \
     && sh -c "$(curl -fsLS https://get.chezmoi.io)" -- -b /usr/local/bin -t "v${CHEZMOI_VERSION}" \
